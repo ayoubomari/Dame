@@ -4,3 +4,4 @@
 ./Menubar.java
 ./Board.java
 ./Tile.java
+./Sound.java
