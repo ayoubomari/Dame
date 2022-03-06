@@ -28,6 +28,7 @@ public class DefaultVBoard {
         }
     }
 
+    //getters
     public char[][] getDefaultVboad(){
         return VBoard;
     }

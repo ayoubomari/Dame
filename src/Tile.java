@@ -21,7 +21,7 @@ public class Tile{
         label.setIcon(null);
     }
 
-
+    //translate char to piece in the label of the tile
     public void chatToPiece(char pieceName){
         if(pieceName == carrentPieceChar){
             return;
@@ -42,10 +42,12 @@ public class Tile{
         }
     }
 
+    //getting the index of the tile from 0 to 63
     public int getTileIndex(){
         return ((y * 8) + x);
     }
 
+    //check if the tile is empty (the tile did not contain any piece)
     public boolean isEmpty(){
         if(carrentPieceChar == ' '){
             return true;
@@ -53,13 +55,18 @@ public class Tile{
         return false;
     }
 
-    public char getCarrentPieceChar(){
-        return carrentPieceChar;
-    }
-
 
     //getters
     public JLabel getLabel(){
         return label;
+    }
+    public char getCarrentPieceChar(){
+        return carrentPieceChar;
+    }
+    public int getX(){
+        return x;
+    }
+    public int getY(){
+        return y;
     }
 }
