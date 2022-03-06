@@ -21,6 +21,10 @@ public class Tile{
         label.setIcon(null);
     }
 
+    public JLabel getLabel(){
+        return label;
+    }
+
     public void chatToPiece(char pieceName){
         if(pieceName == carrentPieceChar){
             return;
@@ -41,7 +45,7 @@ public class Tile{
         }
     }
 
-    public int getTileNum(){
+    public int getTileIndex(){
         return ((y * 8) + x);
     }
 

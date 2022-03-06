@@ -8,9 +8,9 @@ import com.Dame.GUI.Board;
 import com.Dame.GUI.Menubar;
 
 public class PlayFrame extends JFrame{
-    public boolean son = true;
-    public Menubar menubar = new Menubar();
-    public Board b = new Board();
+    private boolean son = true;
+    private Menubar menubar = new Menubar();
+    private Board b = new Board();
     
     public PlayFrame(){
         //frame title

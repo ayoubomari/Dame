@@ -10,8 +10,8 @@ import com.Dame.GUI.Tile;
 
 public class Board extends JPanel{
     //create cases
-    public Tile[][] tiles = new Tile[8][8];
-    public char[][] VBoard = new DefaultVBoard().VBoard;
+    private Tile[][] tiles = new Tile[8][8];
+    private char[][] VBoard = new DefaultVBoard().getDefaultVboad();
 
     public Board(){
         setLayout(new GridLayout(8, 8));
@@ -24,18 +24,26 @@ public class Board extends JPanel{
 
                 //choose case color
                 if((i + j) % 2 == 0){
-                    tiles[i][j].label.setBackground(Colors.WHITE);
+                    tiles[i][j].getLabel().setBackground(Colors.WHITE);
                 }else {
-                    tiles[i][j].label.setBackground(Colors.BROWN);
+                    tiles[i][j].getLabel().setBackground(Colors.BROWN);
                 }
-                tiles[i][j].label.setOpaque(true);
-                tiles[i][j].label.setSize(75, 75);
+                tiles[i][j].getLabel().setOpaque(true);
+                tiles[i][j].getLabel().setSize(75, 75);
 
                 //choose default piece
                 tiles[i][j].chatToPiece(VBoard[i][j]);
 
                 //add to it the board
-                add(tiles[i][j].label);
+                add(tiles[i][j].getLabel());
+            }
+        } 
+    }
+
+    public void charsToPieces(char[][] boardChars){
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                tiles[i][j].chatToPiece(boardChars[i][j]);
             }
         } 
     }
