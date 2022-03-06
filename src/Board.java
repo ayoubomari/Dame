@@ -32,7 +32,7 @@ public class Board extends JPanel{
                 tiles[i][j].label.setSize(75, 75);
 
                 //choose default piece
-                tiles[i][j].chatToPiece(VBoard.VBoard[i][j]);
+                tiles[i][j].chatToPiece(VBoard[i][j]);
 
                 //add to it the board
                 add(tiles[i][j].label);
