@@ -30,10 +30,10 @@ public class PlayFrame extends JFrame{
 
         //display
         setLayout(new GridLayout(1,1));
-        //setSize();
-        setBounds(100, 100, 630, 630);
+        setSize(630, 630);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 }
