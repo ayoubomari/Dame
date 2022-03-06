@@ -1,5 +1,7 @@
 package com.Dame.Concepts;
 
+import java.util.Map;
+
 import com.Dame.Constances.DefaultVBoard;
 
 public class Game {

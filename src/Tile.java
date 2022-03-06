@@ -27,13 +27,32 @@ public class Tile{
         }
 
         if(pieceName == 'a'){
+            carrentPieceChar = 'a';
             label.setIcon(PieceImage.normalYellow);
         }else if(pieceName == 'b'){
+            carrentPieceChar = 'b';
             label.setIcon(PieceImage.normalBlack);
         }else if(pieceName == 'A'){
+            carrentPieceChar = 'A';
             label.setIcon(PieceImage.kingYellow);
         }else if(pieceName == 'B'){
+            carrentPieceChar = 'B';
             label.setIcon(PieceImage.kingBlack);
         }
+    }
+
+    public int getTileNum(){
+        return ((y * 8) + x);
+    }
+
+    public boolean isEmpty(){
+        if(carrentPieceChar == ' '){
+            return true;
+        }
+        return false;
+    }
+
+    public char getCarrentPieceChar(){
+        return carrentPieceChar;
     }
 }

@@ -56,5 +56,6 @@ public class DefaultVBoard {
                 VBoard[7][i] = ' ';
             }
         }
+        //----------------------------------
     }
 }
