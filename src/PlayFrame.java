@@ -10,7 +10,7 @@ import com.Dame.GUI.Menubar;
 public class PlayFrame extends JFrame{
     private boolean son = true;
     private Menubar menubar = new Menubar();
-    private Board b = new Board();
+    private Board board = new Board();
     
     public PlayFrame(){
         //frame title
@@ -23,7 +23,7 @@ public class PlayFrame extends JFrame{
 
         //set components
         setJMenuBar(menubar);
-        add(b);
+        add(board);
         //-----------------------------------------
 
 
@@ -35,5 +35,22 @@ public class PlayFrame extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+
+    //getters
+    public boolean getSon(){
+        return son;
+    }
+    public Menubar getMenubar(){
+        return menubar;
+    }
+    public Board getBoard(){
+        return board;
+    }
+
+    //setters
+    public void setSon(boolean son){
+        this.son = son;
     }
 }

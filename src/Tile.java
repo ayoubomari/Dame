@@ -21,9 +21,6 @@ public class Tile{
         label.setIcon(null);
     }
 
-    public JLabel getLabel(){
-        return label;
-    }
 
     public void chatToPiece(char pieceName){
         if(pieceName == carrentPieceChar){
@@ -32,16 +29,16 @@ public class Tile{
 
         if(pieceName == 'a'){
             carrentPieceChar = 'a';
-            label.setIcon(PieceImage.normalYellow);
+            label.setIcon(PieceImage.NORMALYELLOW);
         }else if(pieceName == 'b'){
             carrentPieceChar = 'b';
-            label.setIcon(PieceImage.normalBlack);
+            label.setIcon(PieceImage.NORMALBLACK);
         }else if(pieceName == 'A'){
             carrentPieceChar = 'A';
-            label.setIcon(PieceImage.kingYellow);
+            label.setIcon(PieceImage.KINGYELLOW);
         }else if(pieceName == 'B'){
             carrentPieceChar = 'B';
-            label.setIcon(PieceImage.kingBlack);
+            label.setIcon(PieceImage.KINGBLACK);
         }
     }
 
@@ -58,5 +55,11 @@ public class Tile{
 
     public char getCarrentPieceChar(){
         return carrentPieceChar;
+    }
+
+
+    //getters
+    public JLabel getLabel(){
+        return label;
     }
 }

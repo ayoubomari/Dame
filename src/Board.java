@@ -47,4 +47,12 @@ public class Board extends JPanel{
             }
         } 
     }
+
+    //getters
+    public Tile[][] getTile(){
+        return tiles;
+    }
+    public char[][] getBoard(){
+        return VBoard;
+    }
 }
