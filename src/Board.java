@@ -11,7 +11,7 @@ import com.Dame.GUI.Tile;
 public class Board extends JPanel{
     //create cases
     public Tile[][] tiles = new Tile[8][8];
-    public DefaultVBoard VBoard = new DefaultVBoard();
+    public char[][] VBoard = new DefaultVBoard().VBoard;
 
     public Board(){
         setLayout(new GridLayout(8, 8));
@@ -32,7 +32,7 @@ public class Board extends JPanel{
                 tiles[i][j].label.setSize(75, 75);
 
                 //choose default piece
-                tiles[i][j].chatToPiece(VBoard.VBoard[i].charAt(j));
+                tiles[i][j].chatToPiece(VBoard.VBoard[i][j]);
 
                 //add to it the board
                 add(tiles[i][j].label);
