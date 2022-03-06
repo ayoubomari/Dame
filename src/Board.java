@@ -54,7 +54,7 @@ public class Board extends JPanel{
         return tiles;
     }
     public Tile getTile(int i, int j){
-        return tile[i][j];
+        return tiles[i][j];
     }
     public char[][] getBoard(){
         return VBoard;
