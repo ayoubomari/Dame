@@ -1,7 +1,0 @@
-./src/Colors.java
-./src/PlayFrame.java
-./src/Main.java
-./src/Menubar.java
-./src/Board.java
-./src/Tile.java
-./src/Sound.java

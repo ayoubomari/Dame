@@ -18,7 +18,7 @@ public class Tile{
         label.setVerticalAlignment(JLabel.CENTER);
         label.setHorizontalAlignment(JLabel.CENTER);
 
-        label.setIcon(PieceImage.empty);
+        label.setIcon(null);
     }
 
     public void chatToPiece(char pieceName){

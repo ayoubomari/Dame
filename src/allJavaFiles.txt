@@ -1,5 +1,6 @@
 ./Colors.java
 ./PlayFrame.java
+./Game.java
 ./PieceImage.java
 ./Main.java
 ./Menubar.java
