@@ -4,12 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import com.Dame.Constances.*;
+import com.Dame.Constances.Colors;
+import com.Dame.Constances.DefaultVBoard;
 import com.Dame.GUI.Tile;
 
 public class Board extends JPanel{
     //create cases
     public Tile[][] tiles = new Tile[8][8];
+    public DefaultVBoard VBoard = new DefaultVBoard();
 
     public Board(){
         setLayout(new GridLayout(8, 8));
@@ -28,6 +30,11 @@ public class Board extends JPanel{
                 }
                 tiles[i][j].label.setOpaque(true);
                 tiles[i][j].label.setSize(75, 75);
+
+                //choose default piece
+                tiles[i][j].chatToPiece(VBoard.VBoard[i].charAt(j));
+
+                //add to it the board
                 add(tiles[i][j].label);
             }
         } 

@@ -1,7 +1,9 @@
 ./Colors.java
 ./PlayFrame.java
+./PieceImage.java
 ./Main.java
 ./Menubar.java
 ./Board.java
 ./Tile.java
+./DefaultVBoard.java
 ./Sound.java
