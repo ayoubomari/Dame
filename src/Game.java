@@ -15,7 +15,7 @@ public class Game {
     private int carrentPlayer;
     private int carrentSlotIndex;
     private char carrentSlotChar;
-    private Vector<int[]> listChooses; 
+    private Vector<Vector<int[]>> listChooses; 
     
     public Game(PlayFrame playFrame, String rule,String playerOne, String PlayerTwo){
         this.playFrame = playFrame;
@@ -24,10 +24,10 @@ public class Game {
         this.PlayerTwo = PlayerTwo;
 
 
-        VBoard = movePiecebyIndex(VBoard, 17, 24);
+        VBoard = movePiecebyRowAndColumn(VBoard, 2, 1, 3, 0);
         drawBoard(VBoard);
 
-        VBoard = removePiecebyIndex(VBoard, 40);
+        VBoard = removePiecebyRowAndColumn(VBoard, 5, 0);
         drawBoard(VBoard);
     }
 
@@ -38,25 +38,30 @@ public class Game {
     }
 
     //get the row and the column number of the slot using it's index
-    public  int[] getRowAndColumnByIndex(int index){
-        int[] result = {(index / 8), (index % 8)};
+    public  int[] getRowAndColumnByIndex(int slot){
+        int[] result = {(slot / 8), (slot % 8)};
         return result;
     }
-    public int getRowOfSlot(int index){
-        return index / 8;
+    public int getRowOfSlot(int slot){
+        return slot / 8;
     }
-    public int getColumnOfSlot(int index){
-        return index % 8;
+    public int getColumnOfSlot(int slot){
+        return slot % 8;
+    }
+
+    //get the slot index by row and column
+    public int getIndexByRowAndColumn(int row, int column){
+        return ((row * 8) + column);
     }
 
     //check if the slot is empty
-    public boolean isEmtySlot(int slot, char[][] board){
-        if(slot < 0 || slot > 63){
+    public boolean isEmtySlot(char[][] board, int row, int column){
+        if((row < 0 || row > 7) || (column < 0 || column > 7)){
             return false;
         }
 
-        int row = getRowOfSlot(slot);
-        int column = getColumnOfSlot(slot);
+        // int row = getRowOfSlot(slot);
+        // int column = getColumnOfSlot(slot);
         
         if(board[row][column] == ' '){
             return true;
@@ -80,13 +85,13 @@ public class Game {
     }
 
     //get char of slot by it's index
-    public char getSlotChar(char[][] VBoard, int slot){
-        if(slot < 0 || slot > 63){
+    public char getSlotChar(char[][] VBoard, int row, int column){
+        if((row < 0 || row > 7) || (column < 0 || column > 7)){
             return ' ';
         }
 
-        int row = getRowOfSlot(slot);
-        int column = getColumnOfSlot(slot);
+        // int row = getRowOfSlot(slot);
+        // int column = getColumnOfSlot(slot);
 
         return VBoard[row][column];
     }
@@ -136,7 +141,7 @@ public class Game {
     }
 
     //get the slot index of all pieces of one specific player
-    public Vector<int[]> getAllPieceSlotIndex(char[][] board, int player){
+    public Vector<int[]> getAllPieceRowAndColumn(char[][] board, int player){
         int [] slot = new int[2];
         Vector<int[]> some = new Vector<int[]>();
 
@@ -164,7 +169,7 @@ public class Game {
         return some;
     }
     //get the slot index of all pieces of the two players
-    public Vector<int[][]> getAllPieceSlotIndexOfTwoPlayer(char[][] board){
+    public Vector<int[][]> getAllPieceRowAndColumnOfTwoPlayer(char[][] board){
         int [][] slot = new int[2][2];
         Vector<int[][]> some = new Vector<int[][]>();
 
@@ -198,20 +203,20 @@ public class Game {
     }
 
     //move piece in the virtual board by it's index
-    public char[][] movePiecebyIndex(char[][] board, int carrentSlotIndex, int newSlotIndex){
-        if((isEmtySlot(carrentSlotIndex, board)) || !(isEmtySlot(newSlotIndex, board)) || (newSlotIndex % 2 != 0)){
+    public char[][] movePiecebyRowAndColumn(char[][] board, int carrentRow, int carrentColumn, int newRow, int newColumn){
+        if((isEmtySlot(board, carrentRow, carrentColumn)) || !(isEmtySlot(board, newRow, newColumn)) || ((newRow + newColumn) % 2 == 0)){
             System.err.println("this move is Ilegal because the carrentSlotIndex is empty or the newSlotIndex isn't empty or available.");
             return board;
         }
 
         char [][] newBoard = cloneBoard(board);
 
-        int carrentRow = getRowOfSlot(carrentSlotIndex);
-        int carrentColumn = getColumnOfSlot(carrentSlotIndex);
-        char carrentpieceChar = getSlotChar(newBoard, carrentSlotIndex);
+        // int carrentRow = getRowOfSlot(carrentSlotIndex);
+        // int carrentColumn = getColumnOfSlot(carrentSlotIndex);
+        char carrentpieceChar = getSlotChar(newBoard, carrentRow, carrentColumn);
 
-        int newRow = getRowOfSlot(newSlotIndex);
-        int newColumn = getColumnOfSlot(newSlotIndex);
+        // int newRow = getRowOfSlot(newSlotIndex);
+        // int newColumn = getColumnOfSlot(newSlotIndex);
 
         newBoard[carrentRow][carrentColumn] = ' ';
         newBoard[newRow][newColumn] = carrentpieceChar;
@@ -220,16 +225,16 @@ public class Game {
     }
 
     //remove piece in the vitual board by it's index
-    public char[][] removePiecebyIndex(char[][] board, int slot){
-        if((isEmtySlot(slot, board)) || (slot % 2 != 0)){
+    public char[][] removePiecebyRowAndColumn(char[][] board, int row, int column){
+        if((isEmtySlot(board, row, column)) || ((row + column) % 2 == 0)){
             System.err.println("this remove is Ilegal because the slot is empty or available.");
             return board;
         }
 
         char[][] newBoard = cloneBoard(board);
 
-        int row = getRowOfSlot(slot);
-        int column = getColumnOfSlot(slot);
+        // int row = getRowOfSlot(slot);
+        // int column = getColumnOfSlot(slot);
 
         newBoard[row][column] = ' ';
 
@@ -249,10 +254,23 @@ public class Game {
         }
     }
 
-    //get the list of chooses available in the board of a specific player
-    public Vector<int[]> getListofChooses(char[][] board, int player){
+    //----------------------------------------------------- rules ------------------------------------------------------------//
+    //get the list of chooses available in the board of a specific player in one specific piece (spain's rules)
+    public Vector<int[]> getListofChoosesOfOnePieceSpain(char[][] board, int player, int row, int column){
         Vector<int[]> listChooses = new Vector<int[]>();
         
+
+        return listChooses;
+    }
+
+    //get the list of chooses available in the board of a specific player (spain's rules)
+    public Vector<Vector<int[]>> getListofChoosesSpain(char[][] board, int player){
+        Vector<Vector<int[]>> listChooses = new Vector<Vector<int[]>>();
+        Vector<int[]> AllPlayerPieces = getAllPieceRowAndColumn(board, player);
+
+        for(int i = 0; i < AllPlayerPieces.size(); i++){
+            listChooses.addElement(getListofChoosesOfOnePieceSpain(board, player, AllPlayerPieces.elementAt(i)[0], AllPlayerPieces.elementAt(i)[1]));
+        }
 
         return listChooses;
     }
