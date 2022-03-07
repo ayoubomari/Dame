@@ -59,9 +59,6 @@ public class Game {
         if((row < 0 || row > 7) || (column < 0 || column > 7)){
             return false;
         }
-
-        // int row = getRowOfSlot(slot);
-        // int column = getColumnOfSlot(slot);
         
         if(board[row][column] == ' '){
             return true;
@@ -89,9 +86,6 @@ public class Game {
         if((row < 0 || row > 7) || (column < 0 || column > 7)){
             return ' ';
         }
-
-        // int row = getRowOfSlot(slot);
-        // int column = getColumnOfSlot(slot);
 
         return VBoard[row][column];
     }
@@ -132,6 +126,50 @@ public class Game {
                 if(board[i][j] == 'a' || board[i][j] == 'A'){
                     some[0]++;
                 }else if(board[i][j] == 'b' || board[i][j] == 'B'){
+                    some[1]++;
+                }
+            }
+        }
+
+        return some;
+    }
+
+    //get the number of kings of a specific player that still on the board
+    public int getNumberOfKingOfOnePlayer(char[][] board, int player){
+        if(player != 1 && player != 2){
+            return 0;
+        }
+        
+        int some = 0;
+        if(player == 1){
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; i < 8; j++){
+                    if(board[i][j] == 'A'){
+                        some++;
+                    }
+                }
+            }
+        }
+        else if(player == 2){
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; i < 8; j++){
+                    if(board[i][j] == 'B'){
+                        some++;
+                    }
+                }
+            }
+        }
+
+        return some;
+    }
+    //get the number of pieces of the two players that still on the board
+    public int[] getNumberOfKingsOfTwoPlayer(char[][] board){
+        int[] some = {0, 0};
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; i < 8; j++){
+                if(board[i][j] == 'A'){
+                    some[0]++;
+                }else if(board[i][j] == 'B'){
                     some[1]++;
                 }
             }
@@ -205,21 +243,23 @@ public class Game {
     //move piece in the virtual board by it's index
     public char[][] movePiecebyRowAndColumn(char[][] board, int carrentRow, int carrentColumn, int newRow, int newColumn){
         if((isEmtySlot(board, carrentRow, carrentColumn)) || !(isEmtySlot(board, newRow, newColumn)) || ((newRow + newColumn) % 2 == 0)){
-            System.err.println("this move is Ilegal because the carrentSlotIndex is empty or the newSlotIndex isn't empty or available.");
+            System.err.println("this move is Ilegal because the carrentSlotIndex is empty or the newSlotIndex isn't empty or unavailable.");
             return board;
         }
 
         char [][] newBoard = cloneBoard(board);
 
-        // int carrentRow = getRowOfSlot(carrentSlotIndex);
-        // int carrentColumn = getColumnOfSlot(carrentSlotIndex);
         char carrentpieceChar = getSlotChar(newBoard, carrentRow, carrentColumn);
 
-        // int newRow = getRowOfSlot(newSlotIndex);
-        // int newColumn = getColumnOfSlot(newSlotIndex);
-
         newBoard[carrentRow][carrentColumn] = ' ';
-        newBoard[newRow][newColumn] = carrentpieceChar;
+
+        if((newRow == 0 && carrentpieceChar == 'a')){
+            newBoard[newRow][newColumn] = 'A';
+        }else if((newRow == 7 && carrentpieceChar == 'b')){
+            newBoard[newRow][newColumn] = 'B';
+        }else {
+            newBoard[newRow][newColumn] = carrentpieceChar;
+        }
 
         return newBoard;
     }
@@ -227,14 +267,11 @@ public class Game {
     //remove piece in the vitual board by it's index
     public char[][] removePiecebyRowAndColumn(char[][] board, int row, int column){
         if((isEmtySlot(board, row, column)) || ((row + column) % 2 == 0)){
-            System.err.println("this remove is Ilegal because the slot is empty or available.");
+            System.err.println("this remove is Ilegal because the slot is empty or unavailable.");
             return board;
         }
 
         char[][] newBoard = cloneBoard(board);
-
-        // int row = getRowOfSlot(slot);
-        // int column = getColumnOfSlot(slot);
 
         newBoard[row][column] = ' ';
 
@@ -255,10 +292,18 @@ public class Game {
     }
 
     //----------------------------------------------------- rules ------------------------------------------------------------//
+    //get the all list of chooses in the board of a specific player in one specific piece recursively
+    public void getListOfChoosesOfPieceSpain(char[][] board, int player, Vector<int[]> listChooses, int row, int column){
+
+    }
+    
     //get the list of chooses available in the board of a specific player in one specific piece (spain's rules)
-    public Vector<int[]> getListofChoosesOfOnePieceSpain(char[][] board, int player, int row, int column){
+    public Vector<int[]> getListofChoosesAvailableOfOnePieceSpain(char[][] board, int player, int row, int column){
         Vector<int[]> listChooses = new Vector<int[]>();
         
+        getListOfChoosesOfPieceSpain(board, player, listChooses, row, column);
+
+        //filtering the longeest path
 
         return listChooses;
     }
@@ -269,8 +314,10 @@ public class Game {
         Vector<int[]> AllPlayerPieces = getAllPieceRowAndColumn(board, player);
 
         for(int i = 0; i < AllPlayerPieces.size(); i++){
-            listChooses.addElement(getListofChoosesOfOnePieceSpain(board, player, AllPlayerPieces.elementAt(i)[0], AllPlayerPieces.elementAt(i)[1]));
+            listChooses.addElement(getListofChoosesAvailableOfOnePieceSpain(board, player, AllPlayerPieces.elementAt(i)[0], AllPlayerPieces.elementAt(i)[1]));
         }
+
+        //filtering the longeest paths for every piece
 
         return listChooses;
     }
