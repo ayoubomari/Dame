@@ -293,7 +293,7 @@ public class Game {
 
     //----------------------------------------------------- rules ------------------------------------------------------------//
     //get the all list of chooses in the board of a specific player in one specific piece recursively
-    public void getListOfChoosesOfPieceSpain(char[][] board, int player, Vector<int[]> listChooses, int row, int column){
+    public void getListOfChoosesOfPieceSpain(char[][] board, int player, Vector<int[]> listChooses, int row, int column, boolean isFirstStep){
 
     }
     
@@ -301,7 +301,7 @@ public class Game {
     public Vector<int[]> getListofChoosesAvailableOfOnePieceSpain(char[][] board, int player, int row, int column){
         Vector<int[]> listChooses = new Vector<int[]>();
         
-        getListOfChoosesOfPieceSpain(board, player, listChooses, row, column);
+        getListOfChoosesOfPieceSpain(board, player, listChooses, row, column, true);
 
         //filtering the longeest path
 
