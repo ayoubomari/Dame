@@ -27,7 +27,10 @@ public class Tile{
             return;
         }
 
-        if(pieceName == 'a'){
+        if(pieceName == ' '){
+            carrentPieceChar = ' ';
+            label.setIcon(null);
+        }else if(pieceName == 'a'){
             carrentPieceChar = 'a';
             label.setIcon(PieceImage.NORMALYELLOW);
         }else if(pieceName == 'b'){
