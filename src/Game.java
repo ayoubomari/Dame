@@ -23,7 +23,12 @@ public class Game {
         this.playerOne = playerOne;
         this.PlayerTwo = PlayerTwo;
 
-        drawBoard(move(VBoard, 17, 24));
+
+        VBoard = movePiecebyIndex(VBoard, 17, 24);
+        drawBoard(VBoard);
+
+        VBoard = removePiecebyIndex(VBoard, 40);
+        drawBoard(VBoard);
     }
 
 
@@ -192,26 +197,44 @@ public class Game {
         return newBoard;
     }
 
-    //move piece in the virtual board
-    public char[][] move(char[][] board, int carrentSlotIndex, int newSlotIndex){
+    //move piece in the virtual board by it's index
+    public char[][] movePiecebyIndex(char[][] board, int carrentSlotIndex, int newSlotIndex){
         if((isEmtySlot(carrentSlotIndex, board)) || !(isEmtySlot(newSlotIndex, board)) || (newSlotIndex % 2 != 0)){
-            System.err.println("The move is Ilegal because the carrentSlotIndex is empty or the newSlotIndex isn't empty or available.");
+            System.err.println("this move is Ilegal because the carrentSlotIndex is empty or the newSlotIndex isn't empty or available.");
             return board;
         }
 
+        char [][] newBoard = cloneBoard(board);
+
         int carrentRow = getRowOfSlot(carrentSlotIndex);
         int carrentColumn = getColumnOfSlot(carrentSlotIndex);
-        char carrentpieceChar = getSlotChar(board, carrentSlotIndex);
+        char carrentpieceChar = getSlotChar(newBoard, carrentSlotIndex);
 
         int newRow = getRowOfSlot(newSlotIndex);
         int newColumn = getColumnOfSlot(newSlotIndex);
 
-        board[carrentRow][carrentColumn] = ' ';
-        board[newRow][newColumn] = carrentpieceChar;
+        newBoard[carrentRow][carrentColumn] = ' ';
+        newBoard[newRow][newColumn] = carrentpieceChar;
 
-        return board;
+        return newBoard;
     }
 
+    //remove piece in the vitual board by it's index
+    public char[][] removePiecebyIndex(char[][] board, int slot){
+        if((isEmtySlot(slot, board)) || (slot % 2 != 0)){
+            System.err.println("this remove is Ilegal because the slot is empty or available.");
+            return board;
+        }
+
+        char[][] newBoard = cloneBoard(board);
+
+        int row = getRowOfSlot(slot);
+        int column = getColumnOfSlot(slot);
+
+        newBoard[row][column] = ' ';
+
+        return newBoard;
+    }
 
     //check if someone win and return his carrentPlayer value or return 0 if no one win yet
     public int winner(char[][] board){
