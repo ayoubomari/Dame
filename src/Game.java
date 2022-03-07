@@ -84,7 +84,7 @@ public class Game {
         return VBoard[row][column];
     }
 
-    //get the number of piece of one player that still on the board
+    //get the number of pieces of a specific player that still on the board
     public int getNumberOfPieceOfOnePlayer(char[][] board, int player){
         if(player != 1 && player != 2){
             return 0;
@@ -100,7 +100,7 @@ public class Game {
                 }
             }
         }
-        else if(player == 1){
+        else if(player == 2){
             for(int i = 0; i < 8; i++){
                 for(int j = 0; i < 8; j++){
                     if(board[i][j] == 'b' || board[i][j] == 'B'){
@@ -112,7 +112,7 @@ public class Game {
 
         return some;
     }
-    //get the number of piece of the two players that still on the board
+    //get the number of pieces of the two players that still on the board
     public int[] getNumberOfPieceOfTwoPlayer(char[][] board){
         int[] some = {0, 0};
         for(int i = 0; i < 8; i++){
@@ -127,6 +127,57 @@ public class Game {
 
         return some;
     }
+
+    //get the slot index of all pieces of one specific player
+    public Vector<int[]> getAllPieceSlotIndex(char[][] board, int player){
+        int [] slot = new int[2];
+        Vector<int[]> some = new Vector<int[]>();
+
+        if(player == 1){
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; i < 8; j++){
+                    if(board[i][j] == 'a' || board[i][j] == 'A'){
+                        slot[0] = i; slot[1] = j;
+                        some.addElement(slot);
+                    }
+                }
+            }
+        }
+        else if(player == 2){
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; i < 8; j++){
+                    if(board[i][j] == 'b' || board[i][j] == 'B'){
+                        slot[0] = i; slot[1] = j;
+                        some.addElement(slot);
+                    }
+                }
+            }
+        }
+
+        return some;
+    }
+    //get the slot index of all pieces of the two players
+    public Vector<int[][][]> getAllPieceSlotIndexOfTwoPlayer(char[][] board){
+        int [][] slot = new int[2][2];
+        Vector<int[]> some = new Vector<int[]>();
+
+        if(player == 1){
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; i < 8; j++){
+                    if(board[i][j] == 'a' || board[i][j] == 'A'){
+                        slot[0][0] = i; slot[0][1] = j;
+                        some.addElement(slot);
+                    }else if(board[i][j] == 'b' || board[i][j] == 'B'){
+                        slot[1][0] = i; slot[1][1] = j;
+                        some.addElement(slot);
+                    }
+                }
+            }
+        }
+
+        return some;
+    }
+
 
     //clone virtual board
     public char[][] cloneBoard(char[][] board){
@@ -173,5 +224,13 @@ public class Game {
         }else {
             return 0;
         }
+    }
+
+    //get the list of chooses available in the board of a specific player
+    public Vector<int[]> getListofChooses(char[][] board, int player){
+        Vector<int[]> listChooses;
+        
+
+        return listChooses;
     }
 }
