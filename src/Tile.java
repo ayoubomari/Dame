@@ -7,13 +7,14 @@ import javax.swing.*;
 import com.Dame.Constances.PieceImage;
 
 public class Tile{
-    public int x,y;
-    public JLabel label = new JLabel();
-    public char carrentPieceChar = ' ';
+    private int row;
+    private int column;
+    private JLabel label = new JLabel();
+    private char carrentPieceChar = ' ';
 
-    public Tile(int x, int y){
-        this.x = x;
-        this.y = y;
+    public Tile(int row, int column){
+        this.row = row;
+        this.column = column;
 
         label.setVerticalAlignment(JLabel.CENTER);
         label.setHorizontalAlignment(JLabel.CENTER);
@@ -47,7 +48,7 @@ public class Tile{
 
     //getting the index of the tile from 0 to 63
     public int getTileIndex(){
-        return ((y * 8) + x);
+        return ((column * 8) + row);
     }
 
     //check if the tile is empty (the tile did not contain any piece)
@@ -66,10 +67,10 @@ public class Tile{
     public char getCarrentPieceChar(){
         return carrentPieceChar;
     }
-    public int getX(){
-        return x;
+    public int getRow(){
+        return row;
     }
-    public int getY(){
-        return y;
+    public int getColumn(){
+        return column;
     }
 }
