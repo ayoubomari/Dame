@@ -8,6 +8,7 @@ import com.Dame.GUI.PlayFrame;
 
 public class Game {
     private PlayFrame playFrame;
+    private String rule;
     private char[][] VBoard = new DefaultVBoard().getDefaultVboad();
     private String playerOne;
     private String PlayerTwo;
@@ -16,8 +17,9 @@ public class Game {
     private char carrentSlotChar;
     private Vector<int[]> listChooses; 
     
-    public Game(PlayFrame playFrame, String playerOne, String PlayerTwo){
+    public Game(PlayFrame playFrame, String rule,String playerOne, String PlayerTwo){
         this.playFrame = playFrame;
+        this.rule = rule;
         this.playerOne = playerOne;
         this.PlayerTwo = PlayerTwo;
 
@@ -157,23 +159,21 @@ public class Game {
         return some;
     }
     //get the slot index of all pieces of the two players
-    public Vector<int[][][]> getAllPieceSlotIndexOfTwoPlayer(char[][] board){
+    public Vector<int[][]> getAllPieceSlotIndexOfTwoPlayer(char[][] board){
         int [][] slot = new int[2][2];
-        Vector<int[]> some = new Vector<int[]>();
+        Vector<int[][]> some = new Vector<int[][]>();
 
-        if(player == 1){
-            for(int i = 0; i < 8; i++){
-                for(int j = 0; i < 8; j++){
-                    if(board[i][j] == 'a' || board[i][j] == 'A'){
-                        slot[0][0] = i; slot[0][1] = j;
-                        some.addElement(slot);
-                    }else if(board[i][j] == 'b' || board[i][j] == 'B'){
-                        slot[1][0] = i; slot[1][1] = j;
-                        some.addElement(slot);
-                    }
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; i < 8; j++){
+                if(board[i][j] == 'a' || board[i][j] == 'A'){
+                    slot[0][0] = i; slot[0][1] = j;
+                    some.addElement(slot);
+                }else if(board[i][j] == 'b' || board[i][j] == 'B'){
+                    slot[1][0] = i; slot[1][1] = j;
+                    some.addElement(slot);
                 }
             }
-        }
+        }        
 
         return some;
     }
@@ -228,7 +228,7 @@ public class Game {
 
     //get the list of chooses available in the board of a specific player
     public Vector<int[]> getListofChooses(char[][] board, int player){
-        Vector<int[]> listChooses;
+        Vector<int[]> listChooses = new Vector<int[]>();
         
 
         return listChooses;

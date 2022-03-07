@@ -10,6 +10,6 @@ import com.Dame.GUI.PlayFrame;
 public class Main{
     public static void main(String agrs[]){
         PlayFrame playframe = new PlayFrame();
-        Game game = new Game(playframe, "humain", "humain");
+        Game game = new Game(playframe, "Spain","humain", "humain");
     }
 }
