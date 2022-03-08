@@ -6,10 +6,12 @@ import javax.swing.*;
 
 import com.Dame.GUI.Board;
 import com.Dame.GUI.Menubar;
+import com.Dame.GUI.IntroPanel;
 
 public class PlayFrame extends JFrame{
     private boolean son = true;
     private Menubar menubar = new Menubar();
+    private IntroPanel introPanel = new IntroPanel();
     private Board board = new Board();
     
     public PlayFrame(){
@@ -21,9 +23,12 @@ public class PlayFrame extends JFrame{
         ImageIcon icon = new ImageIcon("images/icon.png");
         setIconImage(icon.getImage());
 
-        //set components
+        //set components-----------------
+        //set menubar
         setJMenuBar(menubar);
-        
+        //set the intro panel
+
+        add(introPanel);
         //-----------------------------------------
 
 
@@ -41,9 +46,12 @@ public class PlayFrame extends JFrame{
     //getters
     public boolean getSon(){
         return son;
-    }
+    }  
     public Menubar getMenubar(){
         return menubar;
+    }
+    public IntroPanel getIntroPanel(){
+        return introPanel;
     }
     public Board getBoard(){
         return board;

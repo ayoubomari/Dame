@@ -1,3 +1,4 @@
+./IntroPanel.java
 ./Colors.java
 ./PlayFrame.java
 ./Game.java
