@@ -23,7 +23,7 @@ public class PlayFrame extends JFrame{
 
         //set components
         setJMenuBar(menubar);
-        add(board);
+        
         //-----------------------------------------
 
 
