@@ -291,13 +291,15 @@ public class Game {
         }
     }
 
-    //----------------------------------------------------- rules ------------------------------------------------------------//
+    //################################################################ rules ################################################################//
+    //============================================= spain's rules =============================================//
     //get the all list of chooses in the board of a specific player in one specific piece recursively
-    public void getListOfChoosesOfOnePieceSpain(char[][] board, int player, Vector<Vector<int[]>> listChooses, Vector<Vector<int[]>> comulPath, int row, int column, boolean isFirstStep, boolean eatting, boolean eated){
+    public void getListOfChoosesOfOnePieceSpain(char[][] board, int player, Vector<Vector<int[]>> listChooses, Vector<int[]> comulPath, int row, int column, boolean isFirstStep, boolean eatting, boolean eated){
         char pieceChar = getSlotChar(board, row, column);
         Vector<int[]> path = new Vector<int[]>();
         int [] rowAndColumn = new int[2];
         if(isFirstStep){
+            //---------------- corners ----------------//
             if(row == 0 && column == 0){
                 if(pieceChar == 'b'){
                     if(getSlotChar(board, row + 1, column + 1) == ' '){
@@ -314,7 +316,7 @@ public class Game {
                     }else if(getSlotChar(board, row + 1, column + 1) == 'a' || getSlotChar(board, row + 1, column + 1) == 'A'){
                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column + 1);
 
-                        Vector<int []> newComulPath = new Vector<int []>();
+                        Vector<int[]> newComulPath = new Vector<int[]>();
                         
                         getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, newComulPath, row + 1, column + 1, false, true, false);
                     }
@@ -650,8 +652,10 @@ public class Game {
                     }
                 }
             }
-            else if(row == 0){
 
+            //---------------- touch lines ----------------//
+            else if(row == 0){
+                
             }
         }else{
 
@@ -662,7 +666,7 @@ public class Game {
     public Vector<Vector<int[]>> getListofChoosesAvailableOfOnePieceSpain(char[][] board, int player, int row, int column){
         Vector<Vector<int[]>> listChooses = new Vector<Vector<int[]>>();
         
-        getListOfChoosesOfOnePieceSpain(board, player, listChooses, listChooses, row, column, true, false, false);
+        getListOfChoosesOfOnePieceSpain(board, player, listChooses, new Vector<int[]>(), row, column, true, false, false);
 
         //filtering the longeest path
 
@@ -670,8 +674,8 @@ public class Game {
     }
 
     //get the list of chooses available in the board of a specific player (spain's rules)
-    public Vector<Vector<int[]>> getListofChoosesSpain(char[][] board, int player){
-        Vector<Vector<int[]>> listChooses = new Vector<Vector<int[]>>();
+    public Vector<Vector<Vector<int[]>>> getListofChoosesSpain(char[][] board, int player){
+        Vector<Vector<Vector<int[]>>> listChooses = new Vector<Vector<Vector<int[]>>>();
         Vector<int[]> AllPlayerPieces = getAllPieceRowAndColumn(board, player);
 
         for(int i = 0; i < AllPlayerPieces.size(); i++){
