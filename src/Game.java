@@ -2855,8 +2855,14 @@ public class Game {
                 }
             }
         }else if(eated){
-            if(!(row == 0 || row == 7 || column == 0 || column == 7)){//the player can't pass piece in corner or touch line
-                
+            if((row == 0 && column == 0) || (row == 0 && column == 7) || (row == 7 && column == 0) || (row == 7 && column == 7)){//all corners
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                newComulPath.addElement(rowAndColumn);
+
+                listChooses.addElement(newComulPath);
             }
         }
     }
