@@ -5,6 +5,7 @@
 ./PieceImage.java
 ./Main.java
 ./Menubar.java
+./AboutDialog.java
 ./Board.java
 ./Tile.java
 ./DefaultVBoard.java

@@ -28,7 +28,8 @@ public class PlayFrame extends JFrame{
         setJMenuBar(menubar);
         //set the intro panel
 
-        add(introPanel);
+        //add(introPanel);
+        add(board);
         //-----------------------------------------
 
 
