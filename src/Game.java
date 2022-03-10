@@ -28,19 +28,19 @@ public class Game {
 
         board = movePiecebyRowAndColumn(board, 2, 1, 4, 3);
         board = removePiecebyRowAndColumn(board, 5, 0);
-        // board = removePiecebyRowAndColumn(board, 0, 3);
-        // board = movePiecebyRowAndColumn(board, 1, 2, 2, 1);
-        // board = removePiecebyRowAndColumn(board, 2, 5);
-        // board = movePiecebyRowAndColumn(board, 5, 6, 4, 7);
-        // board = removePiecebyRowAndColumn(board, 5, 4);
-        // board = removePiecebyRowAndColumn(board, 1, 0);
-        // board = movePiecebyRowAndColumn(board, 2, 7, 3, 6);
-        // board = removePiecebyRowAndColumn(board, 1, 4);
-        // board = removePiecebyRowAndColumn(board, 0, 7);
+        board = removePiecebyRowAndColumn(board, 0, 3);
+        board = movePiecebyRowAndColumn(board, 1, 2, 2, 1);
+        board = removePiecebyRowAndColumn(board, 2, 5);
+        board = movePiecebyRowAndColumn(board, 5, 6, 4, 7);
+        board = removePiecebyRowAndColumn(board, 5, 4);
+        board = removePiecebyRowAndColumn(board, 1, 0);
+        board = movePiecebyRowAndColumn(board, 2, 7, 3, 6);
+        board = removePiecebyRowAndColumn(board, 1, 4);
+        board = removePiecebyRowAndColumn(board, 0, 7);
         board = removePiecebyRowAndColumn(board, 5, 2);
         board = movePiecebyRowAndColumn(board, 2, 3, 1, 4);
         board = movePiecebyRowAndColumn(board, 0, 1, 1, 2);
-        //board = removePiecebyRowAndColumn(board, 0, 3);
+        board = removePiecebyRowAndColumn(board, 0, 3);
         board = removePiecebyRowAndColumn(board, 2, 5);
         board = movePiecebyRowAndColumn(board, 5, 6, 2, 5);
         board[5][4] = 'A';
@@ -49,11 +49,13 @@ public class Game {
         board = movePiecebyRowAndColumn(board, 1, 0, 2, 1);
         board[4][3] = 'A'; 
         board[1][2] = 'A';  
+        board = removePiecebyRowAndColumn(board, 7, 0);
+        board = removePiecebyRowAndColumn(board, 7, 4);
 
         drawBoard(board);
 
 
-        Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 2);
+        Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 1);
         System.out.println("---------- list of paths can choose ----------");
         for(int i = 0; i < listofChooses.size(); i++){
             System.out.println("##############################");
