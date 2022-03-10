@@ -28,37 +28,45 @@ public class Game {
 
         board = movePiecebyRowAndColumn(board, 2, 1, 4, 3);
         board = removePiecebyRowAndColumn(board, 5, 0);
-        board = removePiecebyRowAndColumn(board, 0, 3);
-        board = movePiecebyRowAndColumn(board, 1, 2, 2, 1);
-        board = removePiecebyRowAndColumn(board, 2, 5);
-        board = movePiecebyRowAndColumn(board, 5, 6, 4, 7);
-        board = removePiecebyRowAndColumn(board, 5, 4);
-        board = removePiecebyRowAndColumn(board, 1, 0);
-        board = movePiecebyRowAndColumn(board, 2, 7, 3, 6);
-        board = removePiecebyRowAndColumn(board, 1, 4);
-        board = removePiecebyRowAndColumn(board, 0, 7);
+        // board = removePiecebyRowAndColumn(board, 0, 3);
+        // board = movePiecebyRowAndColumn(board, 1, 2, 2, 1);
+        // board = removePiecebyRowAndColumn(board, 2, 5);
+        // board = movePiecebyRowAndColumn(board, 5, 6, 4, 7);
+        // board = removePiecebyRowAndColumn(board, 5, 4);
+        // board = removePiecebyRowAndColumn(board, 1, 0);
+        // board = movePiecebyRowAndColumn(board, 2, 7, 3, 6);
+        // board = removePiecebyRowAndColumn(board, 1, 4);
+        // board = removePiecebyRowAndColumn(board, 0, 7);
         board = removePiecebyRowAndColumn(board, 5, 2);
         board = movePiecebyRowAndColumn(board, 2, 3, 1, 4);
         board = movePiecebyRowAndColumn(board, 0, 1, 1, 2);
-        board[5][4] = 'A';  
+        //board = removePiecebyRowAndColumn(board, 0, 3);
+        board = removePiecebyRowAndColumn(board, 2, 5);
+        board = movePiecebyRowAndColumn(board, 5, 6, 2, 5);
+        board[5][4] = 'A';
+        board[1][6] = 'B';  
+        board = removePiecebyRowAndColumn(board, 5, 4);
+        board = movePiecebyRowAndColumn(board, 1, 0, 2, 1);
+        board[4][3] = 'A'; 
+        board[1][2] = 'A';  
 
         drawBoard(board);
 
 
-        // Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 1);
-        // System.out.println("---------- list of paths can choose ----------");
-        // for(int i = 0; i < listofChooses.size(); i++){
-        //     System.out.println("##############################");
-        //     if(listofChooses.get(i).size() > 0){
-        //         for(int j = 0; j < listofChooses.get(i).size(); j++){
-        //             System.out.println("---------------------------------");
-        //             for(int k  = 0; k < listofChooses.get(i).get(j).size(); k++){
-        //                 System.out.println("row: " + listofChooses.get(i).get(j).get(k)[0]);;
-        //                 System.out.println("column: " + listofChooses.get(i).get(j).get(k)[1]);
-        //             }
-        //         }
-        //     }
-        // }
+        Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 2);
+        System.out.println("---------- list of paths can choose ----------");
+        for(int i = 0; i < listofChooses.size(); i++){
+            System.out.println("##############################");
+            if(listofChooses.get(i).size() > 0){
+                for(int j = 0; j < listofChooses.get(i).size(); j++){
+                    System.out.println("---------------------------------");
+                    for(int k  = 0; k < listofChooses.get(i).get(j).size(); k++){
+                        System.out.println("row: " + listofChooses.get(i).get(j).get(k)[0]);;
+                        System.out.println("column: " + listofChooses.get(i).get(j).get(k)[1]);
+                    }
+                }
+            }
+        }
 
         // Vector<int []> listOfPieceCanMove = getListOfPieceCanMove(board, 1);
         // System.out.println("---------- list of piece can move ----------");
@@ -3262,20 +3270,7 @@ public class Game {
                                 if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                     break;
                                 }else if(nextSlotChar == ' '){
-                                    Vector<int[]> newPath = new Vector<int[]>();
-                                    newPath = clonePath(comulPath);
-                                    //add the carrent piece to the path (from)
-                                    int [] newRowAndColumn = new int[2];
-                                    newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
-                                    newPath.addElement(newRowAndColumn);
-
-                                    //add the next empty piece to the path (to)
-                                    int [] rowAndColumn2 = new int[2];
-                                    rowAndColumn2[0] = row + i; rowAndColumn2[1] = column + i; 
-                                    newPath.addElement(rowAndColumn2);
-
-                                    //add the path to the list of chooses
-                                    listChooses.addElement(newPath);
+                                    lastSlotChar = nextSlotChar; continue;
                                 }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                     char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column + i);
 
@@ -3304,20 +3299,7 @@ public class Game {
                                 if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                     break;
                                 }else if(nextSlotChar == ' '){
-                                    Vector<int[]> newPath = new Vector<int[]>();
-                                    newPath = clonePath(comulPath);
-                                    //add the carrent piece to the path (from)
-                                    int [] newRowAndColumn = new int[2];
-                                    newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
-                                    newPath.addElement(newRowAndColumn);
-
-                                    //add the next empty piece to the path (to)
-                                    int [] rowAndColumn2 = new int[2];
-                                    rowAndColumn2[0] = row + i; rowAndColumn2[1] = column - i; 
-                                    newPath.addElement(rowAndColumn2);
-
-                                    //add the path to the list of chooses
-                                    listChooses.addElement(newPath);
+                                    lastSlotChar = nextSlotChar; continue;
                                 }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                     char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column - i);
 
@@ -3352,20 +3334,7 @@ public class Game {
                                 if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                     break;
                                 }else if(nextSlotChar == ' '){
-                                    Vector<int[]> newPath = new Vector<int[]>();
-                                    newPath = clonePath(comulPath);
-                                    //add the carrent piece to the path (from)
-                                    int [] newRowAndColumn = new int[2];
-                                    newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
-                                    newPath.addElement(newRowAndColumn);
-
-                                    //add the next empty piece to the path (to)
-                                    int [] rowAndColumn2 = new int[2];
-                                    rowAndColumn2[0] = row + i; rowAndColumn2[1] = column + i; 
-                                    newPath.addElement(rowAndColumn2);
-
-                                    //add the path to the list of chooses
-                                    listChooses.addElement(newPath);
+                                    lastSlotChar = nextSlotChar; continue;
                                 }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                     char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column + i);
 
@@ -3394,20 +3363,7 @@ public class Game {
                                 if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                     break;
                                 }else if(nextSlotChar == ' '){
-                                    Vector<int[]> newPath = new Vector<int[]>();
-                                    newPath = clonePath(comulPath);
-                                    //add the carrent piece to the path (from)
-                                    int [] newRowAndColumn = new int[2];
-                                    newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
-                                    newPath.addElement(newRowAndColumn);
-
-                                    //add the next empty piece to the path (to)
-                                    int [] rowAndColumn2 = new int[2];
-                                    rowAndColumn2[0] = row + i; rowAndColumn2[1] = column - i; 
-                                    newPath.addElement(rowAndColumn2);
-
-                                    //add the path to the list of chooses
-                                    listChooses.addElement(newPath);
+                                    lastSlotChar = nextSlotChar; continue;
                                 }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                     char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column - i);
 
@@ -3444,20 +3400,7 @@ public class Game {
                                 if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                     break;
                                 }else if(nextSlotChar == ' '){
-                                    Vector<int[]> newPath = new Vector<int[]>();
-                                    newPath = clonePath(comulPath);
-                                    //add the carrent piece to the path (from)
-                                    int [] newRowAndColumn = new int[2];
-                                    newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
-                                    newPath.addElement(newRowAndColumn);
-
-                                    //add the next empty piece to the path (to)
-                                    int [] rowAndColumn2 = new int[2];
-                                    rowAndColumn2[0] = row - i; rowAndColumn2[1] = column + i; 
-                                    newPath.addElement(rowAndColumn2);
-
-                                    //add the path to the list of chooses
-                                    listChooses.addElement(newPath);
+                                    lastSlotChar = nextSlotChar; continue;
                                 }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                     char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column + i);
 
@@ -3486,20 +3429,7 @@ public class Game {
                                 if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                     break;
                                 }else if(nextSlotChar == ' '){
-                                    Vector<int[]> newPath = new Vector<int[]>();
-                                    newPath = clonePath(comulPath);
-                                    //add the carrent piece to the path (from)
-                                    int [] newRowAndColumn = new int[2];
-                                    newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
-                                    newPath.addElement(newRowAndColumn);
-
-                                    //add the next empty piece to the path (to)
-                                    int [] rowAndColumn2 = new int[2];
-                                    rowAndColumn2[0] = row - i; rowAndColumn2[1] = column - i; 
-                                    newPath.addElement(rowAndColumn2);
-
-                                    //add the path to the list of chooses
-                                    listChooses.addElement(newPath);
+                                    lastSlotChar = nextSlotChar; continue;
                                 }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                     char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
 
@@ -3534,20 +3464,7 @@ public class Game {
                                 if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                     break;
                                 }else if(nextSlotChar == ' '){
-                                    Vector<int[]> newPath = new Vector<int[]>();
-                                    newPath = clonePath(comulPath);
-                                    //add the carrent piece to the path (from)
-                                    int [] newRowAndColumn = new int[2];
-                                    newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
-                                    newPath.addElement(newRowAndColumn);
-
-                                    //add the next empty piece to the path (to)
-                                    int [] rowAndColumn2 = new int[2];
-                                    rowAndColumn2[0] = row - i; rowAndColumn2[1] = column + i; 
-                                    newPath.addElement(rowAndColumn2);
-
-                                    //add the path to the list of chooses
-                                    listChooses.addElement(newPath);
+                                    lastSlotChar = nextSlotChar; continue;
                                 }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                     char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column + i);
 
@@ -3576,20 +3493,7 @@ public class Game {
                                 if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                     break;
                                 }else if(nextSlotChar == ' '){
-                                    Vector<int[]> newPath = new Vector<int[]>();
-                                    newPath = clonePath(comulPath);
-                                    //add the carrent piece to the path (from)
-                                    int [] newRowAndColumn = new int[2];
-                                    newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
-                                    newPath.addElement(newRowAndColumn);
-
-                                    //add the next empty piece to the path (to)
-                                    int [] rowAndColumn2 = new int[2];
-                                    rowAndColumn2[0] = row - i; rowAndColumn2[1] = column - i; 
-                                    newPath.addElement(rowAndColumn2);
-
-                                    //add the path to the list of chooses
-                                    listChooses.addElement(newPath);
+                                    lastSlotChar = nextSlotChar; continue;
                                 }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                     char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
 
