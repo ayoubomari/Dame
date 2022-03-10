@@ -29,8 +29,11 @@ public class Game {
         VBoard = removePiecebyRowAndColumn(VBoard, 0, 3);
         VBoard = movePiecebyRowAndColumn(VBoard, 1, 2, 2, 1);
         VBoard = removePiecebyRowAndColumn(VBoard, 2, 5);
-        //VBoard = removePiecebyRowAndColumn(VBoard, 6, 5);
+        VBoard = removePiecebyRowAndColumn(VBoard, 6, 5);
         VBoard = movePiecebyRowAndColumn(VBoard, 2, 3, 4, 5);
+        VBoard = movePiecebyRowAndColumn(VBoard, 1, 4, 2, 5);
+        VBoard = movePiecebyRowAndColumn(VBoard, 2, 1, 2, 3);
+        VBoard = movePiecebyRowAndColumn(VBoard, 1, 0, 2, 1);
         VBoard[5][4] = 'A';  
 
         drawBoard(VBoard);
@@ -43,7 +46,7 @@ public class Game {
         //     }
         // }
 
-        Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(VBoard, 2);
+        Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(VBoard, 1);
         for(int i = 0; i < listofChooses.size(); i++){
             System.out.println("##############################");
             if(listofChooses.get(i).size() > 0){
@@ -2761,7 +2764,7 @@ public class Game {
                                     newComulPath.addElement(rowAndColumn);
 
                                     getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + i, column + i, false, false, true);
-                                }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
+                                }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                     char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column + i);
 
                                     Vector<int[]> newComulPath = new Vector<int[]>();
@@ -3672,7 +3675,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column + i);
 
@@ -3702,7 +3705,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column - i);
 
@@ -3732,7 +3735,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column + i);
 
@@ -3764,7 +3767,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column + i);
 
@@ -3794,7 +3797,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column - i);
 
@@ -3824,7 +3827,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
 
@@ -3856,7 +3859,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column + i);
 
@@ -3886,7 +3889,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column + i);
 
@@ -3916,7 +3919,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
 
@@ -3939,7 +3942,7 @@ public class Game {
                                 char lastSlotChar = ' ';
                                 char nextSlotChar;
                                 for(int i = 1; i < 8; i++){
-                                    nextSlotChar = getSlotChar(board, row - i, column - i);
+                                    nextSlotChar = getSlotChar(board, row + i, column - i);
 
                                     if((lastSlotChar == 'a' || lastSlotChar == 'A') && (nextSlotChar == 'a' || nextSlotChar == 'A')){
                                         break;
@@ -3948,9 +3951,9 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
-                                        char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
+                                        char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column - i);
 
                                         Vector<int[]> newComulPath = new Vector<int[]>();
                                         newComulPath = clonePath(comulPath);
@@ -3959,7 +3962,7 @@ public class Game {
                                         newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
                                         newComulPath.addElement(newRowAndColumn);
                                     
-                                        getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - i, column - i, false, true, false);
+                                        getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + i, column - i, false, true, false);
                                     }
 
                                     lastSlotChar = nextSlotChar;
@@ -3978,7 +3981,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column + i);
 
@@ -4008,7 +4011,7 @@ public class Game {
                                     if(nextSlotChar == 'b' || nextSlotChar == 'B' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'a' || nextSlotChar == 'A'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
 
@@ -4045,7 +4048,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column + i);
 
@@ -4075,7 +4078,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column - i);
 
@@ -4105,7 +4108,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column + i);
 
@@ -4137,7 +4140,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column + i);
 
@@ -4167,7 +4170,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column - i);
 
@@ -4197,7 +4200,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
 
@@ -4229,7 +4232,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column + i);
 
@@ -4259,7 +4262,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column + i);
 
@@ -4289,7 +4292,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
 
@@ -4312,7 +4315,7 @@ public class Game {
                                 char lastSlotChar = ' ';
                                 char nextSlotChar;
                                 for(int i = 1; i < 8; i++){
-                                    nextSlotChar = getSlotChar(board, row - i, column - i);
+                                    nextSlotChar = getSlotChar(board, row + i, column - i);
 
                                     if((lastSlotChar == 'b' || lastSlotChar == 'B') && (nextSlotChar == 'b' || nextSlotChar == 'B')){
                                         break;
@@ -4321,9 +4324,9 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
-                                        char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
+                                        char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + i, column - i);
 
                                         Vector<int[]> newComulPath = new Vector<int[]>();
                                         newComulPath = clonePath(comulPath);
@@ -4332,7 +4335,7 @@ public class Game {
                                         newRowAndColumn[0] = row; newRowAndColumn[1] = column; 
                                         newComulPath.addElement(newRowAndColumn);
                                     
-                                        getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - i, column - i, false, true, false);
+                                        getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + i, column - i, false, true, false);
                                     }
 
                                     lastSlotChar = nextSlotChar;
@@ -4351,7 +4354,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column + i);
 
@@ -4381,7 +4384,7 @@ public class Game {
                                     if(nextSlotChar == 'a' || nextSlotChar == 'A' || nextSlotChar == '!'){
                                         break;
                                     }else if(nextSlotChar == ' '){
-                                        continue;
+                                        
                                     }else if(nextSlotChar == 'b' || nextSlotChar == 'B'){
                                         char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - i, column - i);
 
