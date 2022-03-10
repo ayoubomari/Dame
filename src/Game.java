@@ -29,11 +29,8 @@ public class Game {
         VBoard = removePiecebyRowAndColumn(VBoard, 0, 3);
         VBoard = movePiecebyRowAndColumn(VBoard, 1, 2, 2, 1);
         VBoard = removePiecebyRowAndColumn(VBoard, 2, 5);
-        VBoard = removePiecebyRowAndColumn(VBoard, 6, 5);
-        VBoard = movePiecebyRowAndColumn(VBoard, 2, 3, 4, 5);
-        VBoard = movePiecebyRowAndColumn(VBoard, 1, 4, 2, 5);
-        VBoard = movePiecebyRowAndColumn(VBoard, 2, 1, 2, 3);
-        VBoard = movePiecebyRowAndColumn(VBoard, 1, 0, 2, 1);
+        VBoard = movePiecebyRowAndColumn(VBoard, 5, 6, 4, 7);
+        VBoard = removePiecebyRowAndColumn(VBoard, 5, 4);
         VBoard[5][4] = 'A';  
 
         drawBoard(VBoard);
@@ -3629,9 +3626,9 @@ public class Game {
                             getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, true, false);
                         }
                     }else if(pieceChar == 'a'){
-                        char nextSlotChar1 = getSlotChar(board, row + 1, column + 1);
+                        char nextSlotChar1 = getSlotChar(board, row - 1, column + 1);
                         if(nextSlotChar1 == 'b' || nextSlotChar1 == 'B'){
-                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column + 1);
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column + 1);
 
                             Vector<int[]> newComulPath = new Vector<int[]>();
                             newComulPath = clonePath(comulPath);
@@ -3640,12 +3637,12 @@ public class Game {
                             rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
                             newComulPath.addElement(rowAndColumn1);
                         
-                            getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column + 1, false, true, false);
+                            getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column + 1, false, true, false);
                         }
                         //------------------
-                        char nextSlotChar2 = getSlotChar(board, row + 1, column - 1);
+                        char nextSlotChar2 = getSlotChar(board, row - 1, column - 1);
                         if(nextSlotChar2 == 'b' || nextSlotChar2 == 'B'){
-                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column - 1);
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column - 1);
 
                             Vector<int[]> newComulPath = new Vector<int[]>();
                             newComulPath = clonePath(comulPath);
@@ -3654,7 +3651,7 @@ public class Game {
                             rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
                             newComulPath.addElement(rowAndColumn1);
                         
-                            getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, true, false);
+                            getListOfChoosesOfOnePieceSpain(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column - 1, false, true, false);
                         }
                     }else if(pieceChar == 'B'){
                         int rowDifferent = row - comulPath.lastElement()[0];
