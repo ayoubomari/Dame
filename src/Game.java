@@ -56,16 +56,15 @@ public class Game {
         board[6][5] = 'B';  
         board[5][4] = 'A'; 
         board[1][4] = 'A';  
-        board[7][0] = 'b';  
-        board[5][2] = ' ';  
+        board[5][2] = 'b';    
 
         drawBoard(board);
-        coloringBoard(coloringListOfTilesCanMove(board, 1));
-        coloringBoard(coloringFullEattingPaths(board, 1, 1, 2));
+        coloringBoard(coloringListOfTilesCanMove(board, 2));
+        coloringBoard(coloringFullEattingPaths(board, 2, 5, 2));
 
         coloringBoard(new DefaultBGColorVBoard().getDefaultBGColorVBoard());
-        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 1, 1, 2);
-        movePiecebyRowAndColumnSlowlyWithDisplay(board, fullPaths, 1, 1, 2, 0, 1);
+        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 2, 5, 2);
+        movePiecebyRowAndColumnSlowlyWithDisplay(board, fullPaths, 2, 5, 2, 7, 0);
 
         // Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 2);
         // System.out.println("---------- list of paths can choose ----------");
@@ -4544,6 +4543,9 @@ public class Game {
     }
 
     public void movePiecebyRowAndColumnSlowlyWithDisplay(char[][] board, Vector<Vector<int[]>> fullPaths, int player, int firstRow, int firstColumn, int lastRow, int lastColumn){
+        //emit
+        System.out.println("move sound");
+        
         char[][] newBoard = cloneBoard(board);
 
         int pathLong;
@@ -4553,10 +4555,23 @@ public class Game {
                 int carrentRow = firstRow;
                 int carrentColumn = firstColumn;
                 boolean eated = false;
+                char carrentSlotChar = getSlotChar(newBoard, carrentRow, carrentColumn);
                 for(int j = 0; j < fullPaths.get(i).size() - 1; j++){
+                    if(carrentSlotChar == 'b'){
+                        if(fullPaths.get(i).get(j + 1)[0] == 7){
+                            //emit
+                            System.out.println("be king sound");
+                        }
+                    }else if(carrentSlotChar == 'a'){
+                        if(fullPaths.get(i).get(j + 1)[0] == 0){
+                            //emit
+                            System.out.println("be king sound");
+                        }
+                    }
+
                     if(eated){ 
-                        //emet
-                        System.out.println("eat sonds");
+                        //emit
+                        System.out.println("eat sound");
                     }
 
                     if(getSlotChar(newBoard, fullPaths.get(i).get(j + 1)[0], fullPaths.get(i).get(j + 1)[1]) != ' '){
@@ -4570,6 +4585,7 @@ public class Game {
 
                     carrentRow = fullPaths.get(i).get(j + 1)[0];
                     carrentColumn = fullPaths.get(i).get(j + 1)[1];
+                    carrentSlotChar = getSlotChar(newBoard, carrentRow, carrentColumn);
 
                     drawBoard(newBoard);
                     //sleep
