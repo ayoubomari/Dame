@@ -12,7 +12,7 @@ import com.Dame.Constances.DefaultBGColorVBoard;
 import com.Dame.GUI.Board;
 import com.Dame.GUI.PlayFrame;
 
-public class Game implements ActionListener {
+public class Game implements MouseListener {
     private PlayFrame playFrame;
     private String rule;
     private char[][] board = new DefaultVBoard().getDefaultVboad();
@@ -33,7 +33,7 @@ public class Game implements ActionListener {
 
         // coloringBoard(new DefaultBGColorVBoard().getDefaultBGColorVBoard());
         // Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 2, 5, 2);
-        // movePiecebyRowAndColumnSlowlyWithDisplay(board, fullPaths, 2, 5, 2, 7, 0);
+        // movePiecebyRowAndColumnSlowlyWithDisplay(board, 2, 5, 2, 7, 0);
 
         // Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 2);
         // System.out.println("---------- list of paths can choose ----------");
@@ -73,6 +73,38 @@ public class Game implements ActionListener {
     //     play(rule, playerOne, playerTwo);
     // }
 
+    public PlayFrame getPlayFrame(){
+        return playFrame;
+    }
+    public String getRule(){
+        return rule;
+    }
+    public char[][] getBoard(){
+        return board;
+    }
+    public char[][] getBGColorBoard(){
+        return BGColorBoard;
+    }
+    public String getPlayerOne(){
+        return playerOne;
+    }
+    public String getPlayerTwo(){
+        return playerTwo;
+    }
+    public int getCarrentPlayer(){
+        return carrentPlayer;
+    }
+    public String getCarrentPlayerName(){
+        return carrentPlayerName;
+    }
+    public int[] getCarrentSlotIndex(){
+        return carrentSlotIndex;
+    }
+    public int getMaxNullPlay(){
+        return maxNullPlay;
+    }
+
+
     public void setPlayFrame(PlayFrame playFrame){
         this.playFrame = playFrame;
     }
@@ -105,6 +137,9 @@ public class Game implements ActionListener {
         return ((row * 8) + column);
     }
 
+
+
+
     //check if the slot is empty
     public boolean isEmtySlot(char[][] board, int row, int column){
         if((row < 0 || row > 7) || (column < 0 || column > 7)){
@@ -118,10 +153,6 @@ public class Game implements ActionListener {
     }
 
 
-    //get the value of the carrentSlotIndex
-    public int[] setCarrentSlotIndex(){
-        return carrentSlotIndex;
-    }
     //set value on the carrentSlotIndex
     public void setCarrentSlotIndex(int[] carrentSlotIndex){
         this.carrentSlotIndex[0] = carrentSlotIndex[0];
@@ -142,12 +173,40 @@ public class Game implements ActionListener {
     }
 
     //swap the carrentPlayer value
-    public int SwapCarrentPlayer(int carrentPlayer){
+    public int getSwapCarrentPlayer(int carrentPlayer){
         if(carrentPlayer == 1){
             return 2;
         }
         else{
             return 1;
+        }
+    }
+    //swap the carrentPlayer value
+    public String getSwapCarrentPlayerName(int carrentPlayer){
+        if(carrentPlayer == 1){
+            return playerTwo;
+        }
+        else{
+            return playerOne;
+        }
+    }
+
+    //swap the carrentPlayer value
+    public void swapCarrentPlayer(int carrentPlayer){
+        if(carrentPlayer == 1){
+            this.carrentPlayer = 2;
+        }
+        else{
+            this.carrentPlayer = 1;
+        }
+    }
+    //swap the carrentPlayer value
+    public void swapCarrentPlayerName(int carrentPlayer){
+        if(carrentPlayer == 1){
+            this.carrentPlayerName = playerTwo;
+        }
+        else{
+            this.carrentPlayerName = playerOne;
         }
     }
 
@@ -4499,13 +4558,13 @@ public class Game implements ActionListener {
     }
 
     //get background color board for all available paths for specific piece
-    char[][] coloringFullEattingPaths(char[][] board, int player, int row, int column){
+    public char[][] coloringFullEattingPaths(char[][] board, int player, int row, int column){
         char[][] BGColorboard = coloringListOfTilesCanMove(board, player);
 
         Vector<Vector<int[]>> listOfPaths = traceFullPaths(board, player, row, column);
 
         int j = -1;
-        for(int i = 0; i < listOfPaths.size(); i++){
+        for(int i = listOfPaths.size() - 1; i >= 0; i--){
             for(j = 0; j < listOfPaths.get(i).size() - 1; j++){
                 BGColorboard[listOfPaths.get(i).get(j)[0]][listOfPaths.get(i).get(j)[1]] = 'b';
             }
@@ -4518,7 +4577,9 @@ public class Game implements ActionListener {
         return BGColorboard;
     }
 
-    public void movePiecebyRowAndColumnSlowlyWithDisplay(char[][] board, Vector<Vector<int[]>> fullPaths, int player, int firstRow, int firstColumn, int lastRow, int lastColumn){
+    public void movePiecebyRowAndColumnSlowlyWithDisplay(char[][] board, int player, int firstRow, int firstColumn, int lastRow, int lastColumn){
+        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, player, firstRow, firstColumn);
+
         //emit
         System.out.println("move sound");
         
@@ -4575,9 +4636,11 @@ public class Game implements ActionListener {
                 break;
             }
         }
+
+        this.board = newBoard;
     }
 
-    public void play(String rule, String playerOne, String playerTwo){
+    public void init(String rule, String playerOne, String playerTwo){
         this.rule = rule;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
@@ -4592,15 +4655,47 @@ public class Game implements ActionListener {
             carrentPlayerName = playerTwo;
         }
 
+        play();
+    }
+
+
+
+    public void play(){
         if(carrentPlayerName == "humain"){
             coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
         }
+
+
+        //swapCarrentPlayerName(carrentPlayer);
+        //swapCarrentPlayer(carrentPlayer);
 
         //drawBoard(board);
         //coloringBoard(BGColorBoard);
     }
 
-    public void actionPerformed(ActionEvent e){
-        System.out.println("ok");
+
+
+
+
+    @Override
+    public void mouseClicked(MouseEvent e){
+        JLabel label = (JLabel)e.getSource();
+        
+    }
+    @Override
+    public void mousePressed(MouseEvent e){
+
+    }
+    @Override
+    public void mouseReleased(MouseEvent e){
+
+    }
+    @Override
+    public void mouseEntered(MouseEvent e){
+
+    }
+    @Override
+    public void mouseExited(MouseEvent e){
+
     }
 }

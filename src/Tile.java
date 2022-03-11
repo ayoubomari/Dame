@@ -9,7 +9,7 @@ import com.Dame.Constances.Colors;
 
 import com.Dame.Concepts.Game;
 
-public class Tile /*implements MouseListener*/ {
+public class Tile implements MouseListener {
     private int row;
     private int column;
     private JLabel label = new JLabel();
@@ -26,15 +26,14 @@ public class Tile /*implements MouseListener*/ {
         label.setHorizontalAlignment(JLabel.CENTER);
 
         label.setIcon(null);
-
-        //label.addMouseListener(getGame());
+        label.addMouseListener(this);
     }
     
     //translate char to piece in the label of the tile
     public void chatToPiece(char pieceName){
-        if(pieceName == carrentPieceChar){
-            return;
-        }
+        // if(pieceName == carrentPieceChar){
+        //     return;
+        // }
 
         if(pieceName == ' '){
             carrentPieceChar = ' ';
@@ -56,9 +55,9 @@ public class Tile /*implements MouseListener*/ {
 
     //translate char to background color in the label of the tile
     public void chatToBGColor(char BGColor){
-        if(BGColor == carrentBGColorChar){
-            return;
-        }
+        // if(BGColor == carrentBGColorChar){
+        //     return;
+        // }
 
         if(BGColor == 'w'){
             carrentBGColorChar = 'w';
@@ -102,6 +101,9 @@ public class Tile /*implements MouseListener*/ {
     public char getCarrentPieceChar(){
         return carrentPieceChar;
     }
+    public char carrentBGColorChar(){
+        return carrentBGColorChar;
+    }
     public int getRow(){
         return row;
     }
@@ -110,5 +112,66 @@ public class Tile /*implements MouseListener*/ {
     }
     public Game getGame(){
         return game;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e){
+        Game game = getGame();
+        if(carrentBGColorChar != 'y' && carrentBGColorChar != 'g'){
+            //emit
+            System.out.println("prohibated click sound");
+
+            if(carrentBGColorChar != 'b'){
+                label.setBackground(Colors.RED);
+            }
+        }
+        else if(carrentBGColorChar == 'y'){
+            game.coloringBoard(game.coloringFullEattingPaths(game.getBoard(), game.getCarrentPlayer(), row, column));
+            game.setCarrentSlotIndex(row, column);
+        }
+        else if(carrentBGColorChar == 'g'){
+            game.coloringBoard(game.getBGColorBoard());
+            game.movePiecebyRowAndColumnSlowlyWithDisplay(game.getBoard(), game.getCarrentPlayer(), game.getCarrentSlotIndex()[0], game.getCarrentSlotIndex()[1], row, column);
+
+
+
+            game.swapCarrentPlayerName(game.getCarrentPlayer());
+            game.swapCarrentPlayer(game.getCarrentPlayer());
+
+            if(game.getCarrentPlayerName() == "humain"){
+                game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
+            }
+
+            if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                if(game.getPlayerOne() == "humain" && game.getPlayerTwo() == "humain"){
+                    game.swapCarrentPlayerName(game.getCarrentPlayer());
+                    game.swapCarrentPlayer(game.getCarrentPlayer());
+    
+                    System.out.println("the Player " + game.getCarrentPlayer() + " win.");
+                }else{
+                    if(game.getCarrentPlayer() == 2){
+                        System.out.println("You win.");
+                    }else{
+                        System.out.println("You lost.");
+                    }
+                }
+            }
+        }
+    }
+    @Override
+    public void mousePressed(MouseEvent e){
+
+    }
+    @Override
+    public void mouseReleased(MouseEvent e){
+
+    }
+    @Override
+    public void mouseEntered(MouseEvent e){
+
+    }
+    @Override
+    public void mouseExited(MouseEvent e){
+
     }
 }
