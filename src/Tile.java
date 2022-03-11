@@ -14,7 +14,7 @@ public class Tile{
     private char carrentPieceChar = ' ';
     private char carrentBGColorChar = ' ';
 
-    public Tile(int row, int column){
+    public Tile(Game game, int row, int column){
         this.row = row;
         this.column = column;
 
@@ -101,5 +101,8 @@ public class Tile{
     }
     public int getColumn(){
         return column;
+    }
+    public Game getGame(){
+        return game;
     }
 }

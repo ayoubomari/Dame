@@ -15,14 +15,14 @@ public class Board extends JPanel{
     private char[][] VBoard = new DefaultVBoard().getDefaultVboad();
     private char[][] BGColorBoard = new DefaultBGColorVBoard().getDefaultBGColorVBoard();
 
-    public Board(){
+    public Board(Game game){
         setLayout(new GridLayout(8, 8));
         setSize(600,600); 
         
         //fill cases
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                tiles[i][j] = new Tile(i, j);
+                tiles[i][j] = new Tile(game, i, j);
 
                 tiles[i][j].getLabel().setOpaque(true);
                 tiles[i][j].getLabel().setSize(75, 75);

@@ -12,11 +12,13 @@ public class PlayFrame extends JFrame{
     private boolean son = true;
     private Menubar menubar = new Menubar();
     private IntroPanel introPanel = new IntroPanel();
-    private Board board = new Board();
+    private Board board;
     
-    public PlayFrame(){
+    public PlayFrame(Game game){
         //frame title
         super("Dame");
+
+        board = new Board(game);
 
         //-----------------------------------------
         //set icon
