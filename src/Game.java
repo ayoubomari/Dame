@@ -8,7 +8,7 @@ import com.Dame.Constances.DefaultBGColorVBoard;
 import com.Dame.GUI.Board;
 import com.Dame.GUI.PlayFrame;
 
-public class Game {
+public class Game implements ActionListener {
     private PlayFrame playFrame;
     private String rule;
     private char[][] board = new DefaultVBoard().getDefaultVboad();
@@ -4594,5 +4594,9 @@ public class Game {
 
         //drawBoard(board);
         //coloringBoard(BGColorBoard);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        System.out.println("ok");
     }
 }
