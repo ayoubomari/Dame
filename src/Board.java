@@ -7,7 +7,10 @@ import javax.swing.*;
 import com.Dame.Constances.Colors;
 import com.Dame.Constances.DefaultVBoard;
 import com.Dame.Constances.DefaultBGColorVBoard;
+
 import com.Dame.GUI.Tile;
+
+import com.Dame.Concepts.Game;
 
 public class Board extends JPanel{
     //create cases

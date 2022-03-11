@@ -14,57 +14,22 @@ public class Game {
     private char[][] board = new DefaultVBoard().getDefaultVboad();
     private char[][] BGColorBoard = new DefaultBGColorVBoard().getDefaultBGColorVBoard();
     private String playerOne;
-    private String PlayerTwo;
+    private String playerTwo;
     private int carrentPlayer;
+    private String carrentPlayerName;
     private int[] carrentSlotIndex = new int[2];
-    private char carrentSlotChar;
+    private char carrentSlotChar = ' ';
+    private int maxNullPlay = 50;
     private Vector<Vector<int[]>> listChooses; 
     
-    public Game(PlayFrame playFrame, String rule,String playerOne, String PlayerTwo){
-        this.playFrame = playFrame;
-        this.rule = rule;
-        this.playerOne = playerOne;
-        this.PlayerTwo = PlayerTwo;
+    public Game(){
+        // drawBoard(board);
+        // coloringBoard(coloringListOfTilesCanMove(board, 2));
+        // coloringBoard(coloringFullEattingPaths(board, 2, 5, 2));
 
-
-        // board = movePiecebyRowAndColumn(board, 2, 1, 4, 3);
-        // board = removePiecebyRowAndColumn(board, 5, 0);
-        // board = removePiecebyRowAndColumn(board, 0, 3);
-        // board = movePiecebyRowAndColumn(board, 1, 2, 2, 1);
-        // board = removePiecebyRowAndColumn(board, 2, 5);
-        // board = movePiecebyRowAndColumn(board, 5, 6, 4, 7);
-        // board = removePiecebyRowAndColumn(board, 5, 4);
-        // board = removePiecebyRowAndColumn(board, 1, 0);
-        // board = movePiecebyRowAndColumn(board, 2, 7, 3, 6);
-        // board = removePiecebyRowAndColumn(board, 1, 4);
-        // board = removePiecebyRowAndColumn(board, 0, 7);
-        // board = removePiecebyRowAndColumn(board, 5, 2);
-        // board = movePiecebyRowAndColumn(board, 2, 3, 1, 4);
-        board = movePiecebyRowAndColumn(board, 0, 1, 1, 2);
-        board = removePiecebyRowAndColumn(board, 0, 3);
-        board = removePiecebyRowAndColumn(board, 2, 5);
-        board = movePiecebyRowAndColumn(board, 5, 6, 2, 5);
-        board[5][4] = 'A';
-        board[1][6] = 'B';  
-        board = removePiecebyRowAndColumn(board, 5, 4);
-        board = movePiecebyRowAndColumn(board, 1, 0, 2, 1);
-        board[4][3] = 'A'; 
-        board[1][2] = 'A';  
-        board = removePiecebyRowAndColumn(board, 7, 0);
-        board = removePiecebyRowAndColumn(board, 7, 4);
-        board[6][3] = 'B';  
-        board[6][5] = 'B';  
-        board[5][4] = 'A'; 
-        board[1][4] = 'A';  
-        board[5][2] = 'b';    
-
-        drawBoard(board);
-        coloringBoard(coloringListOfTilesCanMove(board, 2));
-        coloringBoard(coloringFullEattingPaths(board, 2, 5, 2));
-
-        coloringBoard(new DefaultBGColorVBoard().getDefaultBGColorVBoard());
-        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 2, 5, 2);
-        movePiecebyRowAndColumnSlowlyWithDisplay(board, fullPaths, 2, 5, 2, 7, 0);
+        // coloringBoard(new DefaultBGColorVBoard().getDefaultBGColorVBoard());
+        // Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 2, 5, 2);
+        // movePiecebyRowAndColumnSlowlyWithDisplay(board, fullPaths, 2, 5, 2, 7, 0);
 
         // Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 2);
         // System.out.println("---------- list of paths can choose ----------");
@@ -99,6 +64,13 @@ public class Game {
         //         System.out.println("column: " + fullPaths.get(i).get(j)[1]);
         //     }
         // }
+    }
+    // public Game(String rule, String playerOne, String playerTwo){
+    //     play(rule, playerOne, playerTwo);
+    // }
+
+    public void setPlayFrame(PlayFrame playFrame){
+        this.playFrame = playFrame;
     }
 
 
@@ -4599,5 +4571,28 @@ public class Game {
                 break;
             }
         }
+    }
+
+    public void play(String rule, String playerOne, String playerTwo){
+        this.rule = rule;
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+
+        int turn = ((int) (Math.random() * 10)) % 2;
+
+        if(turn == 0){
+            carrentPlayer = 1;
+            carrentPlayerName = playerOne;
+        }else{
+            carrentPlayer = 2;
+            carrentPlayerName = playerTwo;
+        }
+
+        if(carrentPlayerName == "humain"){
+            coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
+        }
+
+        //drawBoard(board);
+        //coloringBoard(BGColorBoard);
     }
 }

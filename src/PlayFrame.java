@@ -8,9 +8,11 @@ import com.Dame.GUI.Board;
 import com.Dame.GUI.Menubar;
 import com.Dame.GUI.IntroPanel;
 
+import com.Dame.Concepts.Game;
+
 public class PlayFrame extends JFrame{
     private boolean son = true;
-    private Menubar menubar = new Menubar();
+    private Menubar menubar;
     private IntroPanel introPanel = new IntroPanel();
     private Board board;
     
@@ -18,6 +20,7 @@ public class PlayFrame extends JFrame{
         //frame title
         super("Dame");
 
+        menubar = new Menubar(game);
         board = new Board(game);
 
         //-----------------------------------------

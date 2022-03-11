@@ -4,10 +4,18 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import com.Dame.Concepts.Game;
 
 public class Menubar extends JMenuBar{
-    Menubar(){
+    private Game game;
+    Menubar(Game game){
+        this.game = game;
+
         JMenu newGame = new JMenu("new Game");
         add(newGame);
+    }
+
+    public Game getGame(){
+        return game;
     }
 }

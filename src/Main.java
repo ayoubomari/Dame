@@ -9,8 +9,15 @@ import com.Dame.GUI.PlayFrame;
 
 public class Main{
     public static void main(String agrs[]){
-        Game game;
+        //make new game object
+        Game game = new Game();
+        
+        //make new playFrame
         PlayFrame playframe = new PlayFrame(game);
-        game = new Game(playframe, "Spain","humain", "humain");
+        //add the playeFrame to the game object
+        game.setPlayFrame(playframe);
+
+        //star playing the game
+        game.play("Spain", "humain", "humain");
     }
 }

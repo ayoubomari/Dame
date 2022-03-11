@@ -7,16 +7,20 @@ import javax.swing.*;
 import com.Dame.Constances.PieceImage;
 import com.Dame.Constances.Colors;
 
+import com.Dame.Concepts.Game;
+
 public class Tile{
     private int row;
     private int column;
     private JLabel label = new JLabel();
     private char carrentPieceChar = ' ';
     private char carrentBGColorChar = ' ';
+    private Game game;
 
     public Tile(Game game, int row, int column){
         this.row = row;
         this.column = column;
+        this.game = game;
 
         label.setVerticalAlignment(JLabel.CENTER);
         label.setHorizontalAlignment(JLabel.CENTER);
