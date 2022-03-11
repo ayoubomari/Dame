@@ -64,7 +64,8 @@ public class Game {
         coloringBoard(coloringFullEattingPaths(board, 1, 1, 2));
 
         coloringBoard(new DefaultBGColorVBoard().getDefaultBGColorVBoard());
-        movePiecebyRowAndColumnSlowlyWithDisplay(board, 1, 1, 2, 0, 1);
+        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 1, 1, 2);
+        movePiecebyRowAndColumnSlowlyWithDisplay(board, fullPaths, 1, 1, 2, 0, 1);
 
         // Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 2);
         // System.out.println("---------- list of paths can choose ----------");
@@ -81,24 +82,24 @@ public class Game {
         //     }
         // }
 
-        Vector<int []> listOfPieceCanMove = getListOfPieceCanMove(board, 1);
-        System.out.println("---------- list of piece can move ----------");
-        for(int i = 0; i < listOfPieceCanMove.size(); i++){
-            System.out.println("##############################");
-            System.out.println("row: " + listOfPieceCanMove.get(i)[0]);;
-            System.out.println("column: " + listOfPieceCanMove.get(i)[1]);
-        }
+        // Vector<int []> listOfPieceCanMove = getListOfPieceCanMove(board, 1);
+        // System.out.println("---------- list of piece can move ----------");
+        // for(int i = 0; i < listOfPieceCanMove.size(); i++){
+        //     System.out.println("##############################");
+        //     System.out.println("row: " + listOfPieceCanMove.get(i)[0]);;
+        //     System.out.println("column: " + listOfPieceCanMove.get(i)[1]);
+        // }
 
-        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 1, 1, 2);
-        System.out.println("---------- trace the full paths of a piece can move ----------");
-        for(int i = 0; i < fullPaths.size(); i++){
-            System.out.println("\n\n\n------\n\n\n");
-            for(int j = 0; j < fullPaths.get(i).size(); j++){
-                System.out.println("##############################");
-                System.out.println("row: " + fullPaths.get(i).get(j)[0]);;
-                System.out.println("column: " + fullPaths.get(i).get(j)[1]);
-            }
-        }
+        // Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 1, 1, 2);
+        // System.out.println("---------- trace the full paths of a piece can move ----------");
+        // for(int i = 0; i < fullPaths.size(); i++){
+        //     System.out.println("\n\n\n------\n\n\n");
+        //     for(int j = 0; j < fullPaths.get(i).size(); j++){
+        //         System.out.println("##############################");
+        //         System.out.println("row: " + fullPaths.get(i).get(j)[0]);;
+        //         System.out.println("column: " + fullPaths.get(i).get(j)[1]);
+        //     }
+        // }
     }
 
 
@@ -4542,9 +4543,8 @@ public class Game {
         return BGColorboard;
     }
 
-    public void movePiecebyRowAndColumnSlowlyWithDisplay(char[][] board, int player, int firstRow, int firstColumn, int lastRow, int lastColumn){
+    public void movePiecebyRowAndColumnSlowlyWithDisplay(char[][] board, Vector<Vector<int[]>> fullPaths, int player, int firstRow, int firstColumn, int lastRow, int lastColumn){
         char[][] newBoard = cloneBoard(board);
-        Vector<Vector<int[]>> fullPaths = traceFullPaths(newBoard, player, firstRow, firstColumn);
 
         int pathLong;
         for(int i = 0; i < fullPaths.size(); i++){
