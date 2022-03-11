@@ -9,7 +9,7 @@ import com.Dame.Constances.Colors;
 
 import com.Dame.Concepts.Game;
 
-public class Tile implements MouseListener {
+public class Tile{
     private int row;
     private int column;
     private JLabel label = new JLabel();
@@ -110,5 +110,5 @@ public class Tile implements MouseListener {
         return game;
     }
 
-    label.addActionListener(getGame());
+    //label.addActionListener(getGame());
 }
