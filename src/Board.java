@@ -6,12 +6,14 @@ import javax.swing.*;
 
 import com.Dame.Constances.Colors;
 import com.Dame.Constances.DefaultVBoard;
+import com.Dame.Constances.DefaultBGColorVBoard;
 import com.Dame.GUI.Tile;
 
 public class Board extends JPanel{
     //create cases
     private Tile[][] tiles = new Tile[8][8];
     private char[][] VBoard = new DefaultVBoard().getDefaultVboad();
+    private char[][] BGColorBoard = new DefaultBGColorVBoard().getDefaultBGColorVBoard();
 
     public Board(){
         setLayout(new GridLayout(8, 8));
@@ -22,17 +24,14 @@ public class Board extends JPanel{
             for(int j = 0; j < 8; j++){
                 tiles[i][j] = new Tile(i, j);
 
-                //choose case color
-                if((i + j) % 2 == 0){
-                    tiles[i][j].getLabel().setBackground(Colors.WHITE);
-                }else {
-                    tiles[i][j].getLabel().setBackground(Colors.BROWN);
-                }
                 tiles[i][j].getLabel().setOpaque(true);
                 tiles[i][j].getLabel().setSize(75, 75);
 
                 //choose default piece
                 tiles[i][j].chatToPiece(VBoard[i][j]);
+
+                //choose case color
+                tiles[i][j].chatToBGColor(BGColorBoard[i][j]);
 
                 //add to it the board
                 add(tiles[i][j].getLabel());
@@ -67,5 +66,8 @@ public class Board extends JPanel{
     }
     public char[][] getBoard(){
         return VBoard;
+    }
+    public char[][] BGColorBoard(){
+        return BGColorBoard;
     }
 }

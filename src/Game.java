@@ -1,8 +1,7 @@
 package com.Dame.Concepts;
 
 import java.util.Vector;
-
-import javax.swing.plaf.metal.MetalBorders.PaletteBorder;
+import java.util.concurrent.TimeUnit;
 
 import com.Dame.Constances.DefaultVBoard;
 import com.Dame.Constances.DefaultBGColorVBoard;
@@ -17,7 +16,7 @@ public class Game {
     private String playerOne;
     private String PlayerTwo;
     private int carrentPlayer;
-    private int carrentSlotIndex;
+    private int[] carrentSlotIndex = new int[2];
     private char carrentSlotChar;
     private Vector<Vector<int[]>> listChooses; 
     
@@ -58,10 +57,14 @@ public class Game {
         board[5][4] = 'A'; 
         board[1][4] = 'A';  
         board[7][0] = 'b';  
+        board[5][2] = ' ';  
 
         drawBoard(board);
         coloringBoard(coloringListOfTilesCanMove(board, 1));
-        coloringBoard(coloringFullEattingPaths(board, 1, 1, 4));
+        coloringBoard(coloringFullEattingPaths(board, 1, 1, 2));
+
+        coloringBoard(new DefaultBGColorVBoard().getDefaultBGColorVBoard());
+        movePiecebyRowAndColumnSlowlyWithDisplay(board, 1, 1, 2, 0, 1);
 
         // Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 2);
         // System.out.println("---------- list of paths can choose ----------");
@@ -86,7 +89,7 @@ public class Game {
             System.out.println("column: " + listOfPieceCanMove.get(i)[1]);
         }
 
-        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 1, 1, 4);
+        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 1, 1, 2);
         System.out.println("---------- trace the full paths of a piece can move ----------");
         for(int i = 0; i < fullPaths.size(); i++){
             System.out.println("\n\n\n------\n\n\n");
@@ -138,14 +141,33 @@ public class Game {
         return false;
     }
 
-    //set value on the carrentSlot
-    public void setCarrentSlotIndex(int carrentSlotIndex){
-        this.carrentSlotIndex = carrentSlotIndex;
+
+    //get the value of the carrentSlotIndex
+    public int[] setCarrentSlotIndex(){
+        return carrentSlotIndex;
+    }
+    //set value on the carrentSlotIndex
+    public void setCarrentSlotIndex(int[] carrentSlotIndex){
+        this.carrentSlotIndex[0] = carrentSlotIndex[0];
+        this.carrentSlotIndex[1] = carrentSlotIndex[1];
+    }
+    public void setCarrentSlotIndex(int row, int column){
+        this.carrentSlotIndex[0] = row;
+        this.carrentSlotIndex[1] = column;
+    }
+
+    //set value on the carrentSlotChar
+    public void setCarrentSlotChar(char carrentSlotChar){
+        this.carrentSlotChar = carrentSlotChar;
+    }
+    //get the value of the carrentSlotChar
+    public char getCarrentSlotChar(){
+        return carrentSlotChar;
     }
 
     //swap the carrentPlayer value
-    public int SwapCarrentPlayer(int _carrentPlayer){
-        if(_carrentPlayer == 1){
+    public int SwapCarrentPlayer(int carrentPlayer){
+        if(carrentPlayer == 1){
             return 2;
         }
         else{
@@ -4518,5 +4540,48 @@ public class Game {
         }
 
         return BGColorboard;
+    }
+
+    public void movePiecebyRowAndColumnSlowlyWithDisplay(char[][] board, int player, int firstRow, int firstColumn, int lastRow, int lastColumn){
+        char[][] newBoard = cloneBoard(board);
+        Vector<Vector<int[]>> fullPaths = traceFullPaths(newBoard, player, firstRow, firstColumn);
+
+        int pathLong;
+        for(int i = 0; i < fullPaths.size(); i++){
+            pathLong = fullPaths.get(i).size();
+            if(fullPaths.get(i).get(0)[0] == firstRow && fullPaths.get(i).get(0)[1] == firstColumn && fullPaths.get(i).get(pathLong - 1)[0] == lastRow && fullPaths.get(i).get(pathLong - 1)[1] == lastColumn){
+                int carrentRow = firstRow;
+                int carrentColumn = firstColumn;
+                boolean eated = false;
+                for(int j = 0; j < fullPaths.get(i).size() - 1; j++){
+                    if(eated){ 
+                        //emet
+                        System.out.println("eat sonds");
+                    }
+
+                    if(getSlotChar(newBoard, fullPaths.get(i).get(j + 1)[0], fullPaths.get(i).get(j + 1)[1]) != ' '){
+                        eated = true;
+                    }else{
+                        eated = false;
+                    }
+
+
+                    newBoard = movePiecebyRowAndColumn(newBoard, carrentRow, carrentColumn, fullPaths.get(i).get(j + 1)[0], fullPaths.get(i).get(j + 1)[1]);
+
+                    carrentRow = fullPaths.get(i).get(j + 1)[0];
+                    carrentColumn = fullPaths.get(i).get(j + 1)[1];
+
+                    drawBoard(newBoard);
+                    //sleep
+                    try{
+                        TimeUnit.MILLISECONDS.sleep(150);
+                    }catch(InterruptedException e){
+                        continue;
+                    }
+                    
+                }
+                break;
+            }
+        }
     }
 }
