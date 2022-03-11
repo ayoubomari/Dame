@@ -5,12 +5,14 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import com.Dame.Constances.PieceImage;
+import com.Dame.Constances.Colors;
 
 public class Tile{
     private int row;
     private int column;
     private JLabel label = new JLabel();
     private char carrentPieceChar = ' ';
+    private char carrentBGColorChar = ' ';
 
     public Tile(int row, int column){
         this.row = row;
@@ -21,7 +23,7 @@ public class Tile{
 
         label.setIcon(null);
     }
-
+    
     //translate char to piece in the label of the tile
     public void chatToPiece(char pieceName){
         if(pieceName == carrentPieceChar){
@@ -43,6 +45,33 @@ public class Tile{
         }else if(pieceName == 'B'){
             carrentPieceChar = 'B';
             label.setIcon(PieceImage.KINGBLACK);
+        }
+    }
+
+    //translate char to background color in the label of the tile
+    public void chatToBGColor(char BGColor){
+        if(BGColor == carrentBGColorChar){
+            return;
+        }
+
+        if(BGColor == 'w'){
+            carrentBGColorChar = 'w';
+            label.setBackground(Colors.WHITE);
+        }else if(BGColor == 'n'){
+            carrentBGColorChar = 'n';
+            label.setBackground(Colors.BROWN);
+        }else if(BGColor == 'b'){
+            carrentBGColorChar = 'b';
+            label.setBackground(Colors.BLUE);
+        }else if(BGColor == 'g'){
+            carrentBGColorChar = 'g';
+            label.setBackground(Colors.GREEN);
+        }else if(BGColor == 'r'){
+            carrentBGColorChar = 'r';
+            label.setBackground(Colors.RED);
+        }else if(BGColor == 'y'){
+            carrentBGColorChar = 'y';
+            label.setBackground(Colors.YELLOW);
         }
     }
 

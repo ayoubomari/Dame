@@ -40,11 +40,20 @@ public class Board extends JPanel{
         } 
     }
 
-    //translate a char[][] to piece in all tiles of the board
+    //translate a char[][] to piece on all tiles of the board
     public void charsToPieces(char[][] boardChars){
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 tiles[i][j].chatToPiece(boardChars[i][j]);
+            }
+        } 
+    }
+
+    //translate a char[][] to background color on all tiles of the board
+    public void charsToBGColor(char[][] BGColorBoardChars){
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                tiles[i][j].chatToBGColor(BGColorBoardChars[i][j]);
             }
         } 
     }

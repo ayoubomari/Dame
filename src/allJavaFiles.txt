@@ -1,6 +1,7 @@
 ./IntroPanel.java
 ./Colors.java
 ./PlayFrame.java
+./DefaultBGColorVBoard.java
 ./Game.java
 ./PieceImage.java
 ./Main.java

@@ -5,6 +5,7 @@ import java.util.Vector;
 import javax.swing.plaf.metal.MetalBorders.PaletteBorder;
 
 import com.Dame.Constances.DefaultVBoard;
+import com.Dame.Constances.DefaultBGColorVBoard;
 import com.Dame.GUI.Board;
 import com.Dame.GUI.PlayFrame;
 
@@ -12,6 +13,7 @@ public class Game {
     private PlayFrame playFrame;
     private String rule;
     private char[][] board = new DefaultVBoard().getDefaultVboad();
+    private char[][] BGColorBoard = new DefaultBGColorVBoard().getDefaultBGColorVBoard();
     private String playerOne;
     private String PlayerTwo;
     private int carrentPlayer;
@@ -26,19 +28,19 @@ public class Game {
         this.PlayerTwo = PlayerTwo;
 
 
-        board = movePiecebyRowAndColumn(board, 2, 1, 4, 3);
-        board = removePiecebyRowAndColumn(board, 5, 0);
-        board = removePiecebyRowAndColumn(board, 0, 3);
-        board = movePiecebyRowAndColumn(board, 1, 2, 2, 1);
-        board = removePiecebyRowAndColumn(board, 2, 5);
-        board = movePiecebyRowAndColumn(board, 5, 6, 4, 7);
-        board = removePiecebyRowAndColumn(board, 5, 4);
-        board = removePiecebyRowAndColumn(board, 1, 0);
-        board = movePiecebyRowAndColumn(board, 2, 7, 3, 6);
-        board = removePiecebyRowAndColumn(board, 1, 4);
-        board = removePiecebyRowAndColumn(board, 0, 7);
-        board = removePiecebyRowAndColumn(board, 5, 2);
-        board = movePiecebyRowAndColumn(board, 2, 3, 1, 4);
+        // board = movePiecebyRowAndColumn(board, 2, 1, 4, 3);
+        // board = removePiecebyRowAndColumn(board, 5, 0);
+        // board = removePiecebyRowAndColumn(board, 0, 3);
+        // board = movePiecebyRowAndColumn(board, 1, 2, 2, 1);
+        // board = removePiecebyRowAndColumn(board, 2, 5);
+        // board = movePiecebyRowAndColumn(board, 5, 6, 4, 7);
+        // board = removePiecebyRowAndColumn(board, 5, 4);
+        // board = removePiecebyRowAndColumn(board, 1, 0);
+        // board = movePiecebyRowAndColumn(board, 2, 7, 3, 6);
+        // board = removePiecebyRowAndColumn(board, 1, 4);
+        // board = removePiecebyRowAndColumn(board, 0, 7);
+        // board = removePiecebyRowAndColumn(board, 5, 2);
+        // board = movePiecebyRowAndColumn(board, 2, 3, 1, 4);
         board = movePiecebyRowAndColumn(board, 0, 1, 1, 2);
         board = removePiecebyRowAndColumn(board, 0, 3);
         board = removePiecebyRowAndColumn(board, 2, 5);
@@ -51,38 +53,60 @@ public class Game {
         board[1][2] = 'A';  
         board = removePiecebyRowAndColumn(board, 7, 0);
         board = removePiecebyRowAndColumn(board, 7, 4);
+        board[6][3] = 'B';  
+        board[6][5] = 'B';  
+        board[5][4] = 'A'; 
+        board[1][4] = 'A';  
+        board[7][0] = 'b';  
 
         drawBoard(board);
+        coloringBoard(coloringListOfTilesCanMove(board, 1));
+        coloringBoard(coloringFullEattingPaths(board, 1, 1, 4));
 
+        // Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 2);
+        // System.out.println("---------- list of paths can choose ----------");
+        // for(int i = 0; i < listofChooses.size(); i++){
+        //     System.out.println("##############################");
+        //     if(listofChooses.get(i).size() > 0){
+        //         for(int j = 0; j < listofChooses.get(i).size(); j++){
+        //             System.out.println("---------------------------------");
+        //             for(int k  = 0; k < listofChooses.get(i).get(j).size(); k++){
+        //                 System.out.println("row: " + listofChooses.get(i).get(j).get(k)[0]);;
+        //                 System.out.println("column: " + listofChooses.get(i).get(j).get(k)[1]);
+        //             }
+        //         }
+        //     }
+        // }
 
-        Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 1);
-        System.out.println("---------- list of paths can choose ----------");
-        for(int i = 0; i < listofChooses.size(); i++){
+        Vector<int []> listOfPieceCanMove = getListOfPieceCanMove(board, 1);
+        System.out.println("---------- list of piece can move ----------");
+        for(int i = 0; i < listOfPieceCanMove.size(); i++){
             System.out.println("##############################");
-            if(listofChooses.get(i).size() > 0){
-                for(int j = 0; j < listofChooses.get(i).size(); j++){
-                    System.out.println("---------------------------------");
-                    for(int k  = 0; k < listofChooses.get(i).get(j).size(); k++){
-                        System.out.println("row: " + listofChooses.get(i).get(j).get(k)[0]);;
-                        System.out.println("column: " + listofChooses.get(i).get(j).get(k)[1]);
-                    }
-                }
-            }
+            System.out.println("row: " + listOfPieceCanMove.get(i)[0]);;
+            System.out.println("column: " + listOfPieceCanMove.get(i)[1]);
         }
 
-        // Vector<int []> listOfPieceCanMove = getListOfPieceCanMove(board, 1);
-        // System.out.println("---------- list of piece can move ----------");
-        // for(int i = 0; i < listOfPieceCanMove.size(); i++){
-        //     System.out.println("##############################");
-        //     System.out.println("row: " + listOfPieceCanMove.get(i)[0]);;
-        //     System.out.println("column: " + listOfPieceCanMove.get(i)[1]);
-        // }
+        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 1, 1, 4);
+        System.out.println("---------- trace the full paths of a piece can move ----------");
+        for(int i = 0; i < fullPaths.size(); i++){
+            System.out.println("\n\n\n------\n\n\n");
+            for(int j = 0; j < fullPaths.get(i).size(); j++){
+                System.out.println("##############################");
+                System.out.println("row: " + fullPaths.get(i).get(j)[0]);;
+                System.out.println("column: " + fullPaths.get(i).get(j)[1]);
+            }
+        }
     }
 
 
     //draw the board
     public void drawBoard(char [][] board){
         this.playFrame.getBoard().charsToPieces(board);
+    }
+
+    //coloring the board
+    public void coloringBoard(char [][] BGColorboard){
+        this.playFrame.getBoard().charsToBGColor(BGColorboard);
     }
 
     //get the row and the column number of the slot using it's index
@@ -292,11 +316,6 @@ public class Game {
 
     //move piece in the virtual board by it's index
     public char[][] movePiecebyRowAndColumn(char[][] board, int carrentRow, int carrentColumn, int newRow, int newColumn){
-        // if((isEmtySlot(board, carrentRow, carrentColumn)) /*|| !(isEmtySlot(board, newRow, newColumn)) || ((newRow + newColumn) % 2 == 0)*/){
-        //     System.err.println("this move is Ilegal because the carrentSlotIndex is empty or the newSlotIndex isn't empty or unavailable.");
-        //     return board;
-        // }
-
         char [][] newBoard = cloneBoard(board);
 
         char carrentpieceChar = getSlotChar(newBoard, carrentRow, carrentColumn);
@@ -316,11 +335,6 @@ public class Game {
 
     //remove piece in the vitual board by it's index
     public char[][] removePiecebyRowAndColumn(char[][] board, int row, int column){
-        if((isEmtySlot(board, row, column)) || ((row + column) % 2 == 0)){
-            System.err.println("this remove is Ilegal because the slot is empty or unavailable.");
-            return board;
-        }
-
         char[][] newBoard = cloneBoard(board);
 
         newBoard[row][column] = ' ';
@@ -4414,5 +4428,95 @@ public class Game {
         }
 
         return filtredListPieceSlot;
+    }
+
+
+    //get BGColor of the board and make the list of piece that can move yellow
+    public char[][] coloringListOfTilesCanMove(char[][] board, int player){
+        Vector<int[]> listOfPieceCanMove = getListOfPieceCanMove(board, player);
+        char[][] BGColorboard = new DefaultBGColorVBoard().getDefaultBGColorVBoard();
+
+        for(int i = 0; i < listOfPieceCanMove.size(); i++){
+            BGColorboard[listOfPieceCanMove.get(i)[0]][listOfPieceCanMove.get(i)[1]] = 'y';
+        }
+
+        return BGColorboard;
+    }
+
+    public Vector<Vector<int[]>> traceFullPaths(char[][] board, int player, int row, int column){
+        Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, player);
+        Vector<Vector<int[]>> fullPaths = new Vector<Vector<int[]>>();
+
+        for(int i = 0; i < listofChooses.size(); i++){
+            if(listofChooses.get(i).get(0).get(0)[0] == row && listofChooses.get(i).get(0).get(0)[1] == column){
+                for(int j = 0; j < listofChooses.get(i).size(); j++){
+                    Vector<int[]> newPath = new Vector<int[]>();
+
+                    int carrentRow;
+                    int carrentColumn;
+
+                    int[] rowAndColumn = new int[2];
+                    rowAndColumn[0] = row; rowAndColumn[1] = column;
+
+                    newPath.addElement(rowAndColumn);
+
+                    for(int k = 1; k < listofChooses.get(i).get(j).size(); k++){
+                        int rowDifferent = listofChooses.get(i).get(j).get(k)[0] - listofChooses.get(i).get(j).get(k - 1)[0];
+                        int columnDifferent = listofChooses.get(i).get(j).get(k)[1] - listofChooses.get(i).get(j).get(k - 1)[1];
+
+                        carrentRow = listofChooses.get(i).get(j).get(k - 1)[0];
+                        carrentColumn = listofChooses.get(i).get(j).get(k - 1)[1];
+
+                        for(int o = 1; o <= Math.sqrt(rowDifferent * rowDifferent); o++){
+                            if(rowDifferent >= 1 && columnDifferent >= 1){
+                                int[] rowAndColumn1 = new int[2];
+                                rowAndColumn1[0] = carrentRow + o; rowAndColumn1[1] = carrentColumn + o;
+    
+                                newPath.addElement(rowAndColumn1);
+                            }else if(rowDifferent >= 1 && columnDifferent <= -1){
+                                int[] rowAndColumn1 = new int[2];
+                                rowAndColumn1[0] = carrentRow + o; rowAndColumn1[1] = carrentColumn + (o * (-1));
+    
+                                newPath.addElement(rowAndColumn1);
+                            }else if(rowDifferent <= -1 && columnDifferent >= 1){
+                                int[] rowAndColumn1 = new int[2];
+                                rowAndColumn1[0] = carrentRow + (o * (-1)); rowAndColumn1[1] = carrentColumn + o;
+    
+                                newPath.addElement(rowAndColumn1);
+                            }else if(rowDifferent <= -1 && columnDifferent <= -1){
+                                int[] rowAndColumn1 = new int[2];
+                                rowAndColumn1[0] = carrentRow + (o * (-1)); rowAndColumn1[1] = carrentColumn + (o * (-1));
+    
+                                newPath.addElement(rowAndColumn1);
+                            }
+                        }
+                    }
+                    fullPaths.addElement(newPath);
+                }
+                break;
+            }
+        }
+
+        return fullPaths;
+    }
+
+    //get background color board for all available paths for specific piece
+    char[][] coloringFullEattingPaths(char[][] board, int player, int row, int column){
+        char[][] BGColorboard = coloringListOfTilesCanMove(board, player);
+
+        Vector<Vector<int[]>> listOfPaths = traceFullPaths(board, player, row, column);
+
+        int j = -1;
+        for(int i = 0; i < listOfPaths.size(); i++){
+            for(j = 0; j < listOfPaths.get(i).size() - 1; j++){
+                BGColorboard[listOfPaths.get(i).get(j)[0]][listOfPaths.get(i).get(j)[1]] = 'b';
+            }
+
+            if(!(j == -1)){
+                BGColorboard[listOfPaths.get(i).get(j)[0]][listOfPaths.get(i).get(j)[1]] = 'g';
+            }
+        }
+
+        return BGColorboard;
     }
 }
