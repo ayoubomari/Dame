@@ -27,7 +27,7 @@ public class Tile implements MouseListener {
 
         label.setIcon(null);
 
-        label.addMouseListener(getGame());
+        //label.addMouseListener(getGame());
     }
     
     //translate char to piece in the label of the tile
