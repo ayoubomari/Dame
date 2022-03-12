@@ -4001,11 +4001,11 @@ public class Game {
 
                     drawBoard(newBoard);
                     //sleep
-                    try{
-                        TimeUnit.MILLISECONDS.sleep(0);
-                    }catch(InterruptedException e){
-                        continue;
-                    }
+                    // try{
+                    //     TimeUnit.MILLISECONDS.sleep(150);
+                    // }catch(InterruptedException e){
+                    //     continue;
+                    // }
                     
                 }
                 break;
