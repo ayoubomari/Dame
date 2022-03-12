@@ -27,7 +27,47 @@ public class Game {
     private Vector<Vector<int[]>> listChooses; 
     
     // public Game(){
-        
+    //     // drawBoard(board);
+    //     // coloringBoard(coloringListOfTilesCanMove(board, 2));
+    //     // coloringBoard(coloringFullEattingPaths(board, 2, 5, 2));
+
+    //     // coloringBoard(new DefaultBGColorVBoard().getDefaultBGColorVBoard());
+    //     // Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 2, 5, 2);
+    //     // movePiecebyRowAndColumnSlowlyWithDisplay(board, 2, 5, 2, 7, 0);
+
+    //     // Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 2);
+    //     // System.out.println("---------- list of paths can choose ----------");
+    //     // for(int i = 0; i < listofChooses.size(); i++){
+    //     //     System.out.println("##############################");
+    //     //     if(listofChooses.get(i).size() > 0){
+    //     //         for(int j = 0; j < listofChooses.get(i).size(); j++){
+    //     //             System.out.println("---------------------------------");
+    //     //             for(int k  = 0; k < listofChooses.get(i).get(j).size(); k++){
+    //     //                 System.out.println("row: " + listofChooses.get(i).get(j).get(k)[0]);;
+    //     //                 System.out.println("column: " + listofChooses.get(i).get(j).get(k)[1]);
+    //     //             }
+    //     //         }
+    //     //     }
+    //     // }
+
+    //     // Vector<int []> listOfPieceCanMove = getListOfPieceCanMove(board, 1);
+    //     // System.out.println("---------- list of piece can move ----------");
+    //     // for(int i = 0; i < listOfPieceCanMove.size(); i++){
+    //     //     System.out.println("##############################");
+    //     //     System.out.println("row: " + listOfPieceCanMove.get(i)[0]);;
+    //     //     System.out.println("column: " + listOfPieceCanMove.get(i)[1]);
+    //     // }
+
+    //     // Vector<Vector<int[]>> fullPaths = traceFullPaths(board, 1, 1, 2);
+    //     // System.out.println("---------- trace the full paths of a piece can move ----------");
+    //     // for(int i = 0; i < fullPaths.size(); i++){
+    //     //     System.out.println("\n\n\n------\n\n\n");
+    //     //     for(int j = 0; j < fullPaths.get(i).size(); j++){
+    //     //         System.out.println("##############################");
+    //     //         System.out.println("row: " + fullPaths.get(i).get(j)[0]);;
+    //     //         System.out.println("column: " + fullPaths.get(i).get(j)[1]);
+    //     //     }
+    //     // }
     // }
 
     public PlayFrame getPlayFrame(){
