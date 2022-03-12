@@ -12,7 +12,7 @@ import com.Dame.Constances.DefaultBGColorVBoard;
 import com.Dame.GUI.Board;
 import com.Dame.GUI.PlayFrame;
 
-public class Game implements MouseListener {
+public class Game {
     private PlayFrame playFrame;
     private String rule;
     private char[][] board = new DefaultVBoard().getDefaultVboad();
@@ -4627,7 +4627,7 @@ public class Game implements MouseListener {
                     drawBoard(newBoard);
                     //sleep
                     try{
-                        TimeUnit.MILLISECONDS.sleep(150);
+                        TimeUnit.MILLISECONDS.sleep(0);
                     }catch(InterruptedException e){
                         continue;
                     }
@@ -4645,6 +4645,9 @@ public class Game implements MouseListener {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
 
+        board = new DefaultVBoard().getDefaultVboad();
+        BGColorBoard = new DefaultBGColorVBoard().getDefaultBGColorVBoard();
+
         int turn = ((int) (Math.random() * 10)) % 2;
 
         if(turn == 0){
@@ -4660,8 +4663,26 @@ public class Game implements MouseListener {
 
 
 
+    public void computerRandomchoose(char[][] board, int player){
+        Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, player);
+        if(listofChooses.size() > 0){
+            int slot = ((int) (Math.random() * 10)) % listofChooses.size();
+            int path = ((int) (Math.random() * 10)) % listofChooses.get(slot).size();
+            int pathLength = listofChooses.get(slot).get(path).size();
+        
+            movePiecebyRowAndColumnSlowlyWithDisplay(board, player, listofChooses.get(slot).get(path).get(0)[0], listofChooses.get(slot).get(path).get(0)[1], listofChooses.get(slot).get(path).get(pathLength - 1)[0], listofChooses.get(slot).get(path).get(pathLength - 1)[1]);
+    
+            swapCarrentPlayerName(carrentPlayer);
+            swapCarrentPlayer(carrentPlayer);
+        }
+    }
+
+
     public void play(){
         if(carrentPlayerName == "humain"){
+            coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
+        }else if(carrentPlayerName == "random"){
+            computerRandomchoose(board, carrentPlayer);
             coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
         }
 
@@ -4671,31 +4692,5 @@ public class Game implements MouseListener {
 
         //drawBoard(board);
         //coloringBoard(BGColorBoard);
-    }
-
-
-
-
-
-    @Override
-    public void mouseClicked(MouseEvent e){
-        JLabel label = (JLabel)e.getSource();
-        
-    }
-    @Override
-    public void mousePressed(MouseEvent e){
-
-    }
-    @Override
-    public void mouseReleased(MouseEvent e){
-
-    }
-    @Override
-    public void mouseEntered(MouseEvent e){
-
-    }
-    @Override
-    public void mouseExited(MouseEvent e){
-
     }
 }

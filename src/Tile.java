@@ -133,27 +133,33 @@ public class Tile implements MouseListener {
             game.coloringBoard(game.getBGColorBoard());
             game.movePiecebyRowAndColumnSlowlyWithDisplay(game.getBoard(), game.getCarrentPlayer(), game.getCarrentSlotIndex()[0], game.getCarrentSlotIndex()[1], row, column);
 
-
-
             game.swapCarrentPlayerName(game.getCarrentPlayer());
             game.swapCarrentPlayer(game.getCarrentPlayer());
 
+
+
             if(game.getCarrentPlayerName() == "humain"){
                 game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
-            }
 
-            if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
-                if(game.getPlayerOne() == "humain" && game.getPlayerTwo() == "humain"){
+                if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     game.swapCarrentPlayerName(game.getCarrentPlayer());
                     game.swapCarrentPlayer(game.getCarrentPlayer());
     
                     System.out.println("the Player " + game.getCarrentPlayer() + " win.");
-                }else{
-                    if(game.getCarrentPlayer() == 2){
-                        System.out.println("You win.");
-                    }else{
-                        System.out.println("You lost.");
-                    }
+                    return;
+                }
+            } else if(game.getCarrentPlayerName() == "random"){
+                if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    System.out.println("You win.");
+                    return;
+                }
+
+                game.computerRandomchoose(game.getBoard(), game.getCarrentPlayer());
+                game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
+
+                if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    System.out.println("You lost.");
+                    return;
                 }
             }
         }
