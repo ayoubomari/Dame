@@ -138,7 +138,7 @@ public class Tile implements MouseListener {
 
 
 
-            if(game.getCarrentPlayerName() == "humain"){
+            if(game.getCarrentPlayerName() == "human"){
                 game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
@@ -151,6 +151,7 @@ public class Tile implements MouseListener {
             } else if(game.getCarrentPlayerName() == "random"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You win.");
+                    game.init("Spain", "human", "random");
                     return;
                 }
 
@@ -159,6 +160,7 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You lost.");
+                    game.init("Spain", "human", "random");
                     return;
                 }
             }

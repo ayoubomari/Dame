@@ -4640,29 +4640,7 @@ public class Game {
         this.board = newBoard;
     }
 
-    public void init(String rule, String playerOne, String playerTwo){
-        this.rule = rule;
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
-
-        board = new DefaultVBoard().getDefaultVboad();
-        BGColorBoard = new DefaultBGColorVBoard().getDefaultBGColorVBoard();
-
-        int turn = ((int) (Math.random() * 10)) % 2;
-
-        if(turn == 0){
-            carrentPlayer = 1;
-            carrentPlayerName = playerOne;
-        }else{
-            carrentPlayer = 2;
-            carrentPlayerName = playerTwo;
-        }
-
-        play();
-    }
-
-
-
+    //computer random slot
     public void computerRandomchoose(char[][] board, int player){
         Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, player);
         if(listofChooses.size() > 0){
@@ -4677,9 +4655,34 @@ public class Game {
         }
     }
 
+    public void init(String rule, String playerOne, String playerTwo){
+        this.rule = rule;
+        this.playerOne = playerOne;
+        this.playerTwo = playerTwo;
+
+        //reintitialase the board
+        board = new DefaultVBoard().getDefaultVboad();
+        BGColorBoard = new DefaultBGColorVBoard().getDefaultBGColorVBoard();
+        drawBoard(board);
+        coloringBoard(BGColorBoard);
+
+        //choose randomly who will start playing first
+        int turn = ((int) (Math.random() * 10)) % 2;
+
+        if(turn == 0){
+            carrentPlayer = 1;
+            carrentPlayerName = playerOne;
+        }else{
+            carrentPlayer = 2;
+            carrentPlayerName = playerTwo;
+        }
+
+        play();
+    }
+
 
     public void play(){
-        if(carrentPlayerName == "humain"){
+        if(carrentPlayerName == "human"){
             coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
         }else if(carrentPlayerName == "random"){
             computerRandomchoose(board, carrentPlayer);
