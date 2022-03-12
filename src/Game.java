@@ -4015,7 +4015,7 @@ public class Game {
         this.board = newBoard;
     }
 
-    //computer random slot
+    //computer random choose
     public void computerRandomchoose(char[][] board, int player){
         Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, player);
         if(listofChooses.size() > 0){
