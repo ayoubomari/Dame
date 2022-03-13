@@ -1676,11 +1676,11 @@ public class Game {
                         result[4] = minmax;
                     }
                     if(minmax < 0){
-                        result[2] += minmax;
-                        //result[2]--;
-                    }else if(minmax >= 0){
-                        result[3] += minmax;
-                        //result[3]++;
+                        //result[2] += minmax;
+                        result[2]--;
+                    }else{
+                        //result[3] += minmax;
+                        result[3]++;
                     }
                 }
                 //System.out.println(minScore + " " + maxScore);
