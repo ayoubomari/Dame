@@ -178,6 +178,21 @@ public class Tile implements MouseListener {
                     game.init("Spain", "human", "AI1");
                     return;
                 }
+            } else if(game.getCarrentPlayerName() == "AI2"){
+                if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    System.out.println("You win.");
+                    game.init("Spain", "human", "AI2");
+                    return;
+                }
+
+                game.computerAIchoose(game.getBoard(), game.getCarrentPlayer(), 3);
+                game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
+
+                if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    System.out.println("You lost.");
+                    game.init("Spain", "human", "AI2");
+                    return;
+                }
             }
         }
     }

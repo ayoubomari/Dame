@@ -1663,12 +1663,12 @@ public class Game {
         lastResult[1] = numberOfpiece[1];
         lastResult[2] = numberOfking[0];
         lastResult[3] = numberOfking[1];
-        System.out.println("fromTo:" + fromTo[0] + " " + fromTo[1] + " " + fromTo[2] + " " + fromTo[3]);
+        //System.out.println("fromTo:" + fromTo[0] + " " + fromTo[1] + " " + fromTo[2] + " " + fromTo[3]);
         for(int i = 0; i < listofChooses.size(); i++){
             for(int j = 0; j < listofChooses.get(i).size(); j++){
                 Vector<Integer> minMaxList = new Vector<Integer>();
                 if(this.rule == "Spain"){
-                    getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 6, depth - 1, depth);
+                    getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 5, depth - 1, depth);
                 }else{
                     getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 2, depth - 1, depth);
                 }
@@ -1693,7 +1693,7 @@ public class Game {
                         result[3]++;
                     }
                 }
-                System.out.println(minScore + " " + maxScore);
+                //System.out.println(minScore + " " + maxScore);
 
                 
                 if(minScore >= beta){
@@ -1703,7 +1703,7 @@ public class Game {
                 }  
             }
         }
-        System.out.println("\n\n\n");
+        //System.out.println("\n\n\n");
 
         return result;
     }
@@ -1818,6 +1818,9 @@ public class Game {
             coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
         }else if(carrentPlayerName == "AI1"){
             computerAIchoose(board, carrentPlayer, 2);
+            coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
+        }else if(carrentPlayerName == "AI2"){
+            computerAIchoose(board, carrentPlayer, 3);
             coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
         }
     }
