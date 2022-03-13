@@ -1624,15 +1624,9 @@ public class Game {
                 }
             }
         }else{
-            //int result = (newLastResult[1] -  lastResult[1]) - (newLastResult[0] - lastResult[0]) + ((newLastResult[3] -  lastResult[3]) - (newLastResult[2] - lastResult[2]) / 2);
-            //int result = (newLastResult[1] + newLastResult[3]) - ( lastResult[0] + lastResult[2] ) + (lastResult[1] + lastResult[3]) - ( lastResult[0] + lastResult[2]);
-            
             int[] numberOfNormalPiece = getNumberOfNormalPieceOfTwoPlayer(board);
             int[] numberOfking = getNumberOfKingsOfTwoPlayer(board);
 
-            // int playerScore = ;
-            // int computerScore = ;
-            //int result = (((numberOfNormalPiece[1] + (numberOfking[1] * 2)) - (lastResult[1] + (lastResult[3] * 2))) - ((numberOfNormalPiece[0] + (numberOfking[0] * 2)) - (lastResult[0] + (lastResult[2] * 2))));
             int result = (((numberOfNormalPiece[1] - lastResult[1]) + ((numberOfking[1] * kingImportant) - (lastResult[3] * kingImportant))) - ((numberOfNormalPiece[0] - lastResult[0]) + ((numberOfking[0] * kingImportant) - (lastResult[2] * kingImportant))));
             minMaxList.addElement(result);
         
@@ -1668,7 +1662,7 @@ public class Game {
             for(int j = 0; j < listofChooses.get(i).size(); j++){
                 Vector<Integer> minMaxList = new Vector<Integer>();
                 if(this.rule == "Spain"){
-                    getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 5, depth - 1, depth);
+                    getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 1, depth - 1, depth);
                 }else{
                     getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 2, depth - 1, depth);
                 }
@@ -1686,11 +1680,11 @@ public class Game {
                         result[4] = minmax;
                     }
                     if(minmax < 0){
-                        //result[2] += minmax;
-                        result[2]--;
+                        result[2] += minmax;
+                        //result[2]--;
                     }else if(minmax >= 0){
-                        //result[3] += minmax;
-                        result[3]++;
+                        result[3] += minmax;
+                        //result[3]++;
                     }
                 }
                 //System.out.println(minScore + " " + maxScore);
@@ -1817,10 +1811,10 @@ public class Game {
             computerRandomchoose(board, carrentPlayer);
             coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
         }else if(carrentPlayerName == "AI1"){
-            computerAIchoose(board, carrentPlayer, 2);
+            computerRandomchoose(board, carrentPlayer);
             coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
         }else if(carrentPlayerName == "AI2"){
-            computerAIchoose(board, carrentPlayer, 3);
+            computerRandomchoose(board, carrentPlayer);
             coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
         }
     }
