@@ -1661,11 +1661,7 @@ public class Game {
         for(int i = 0; i < listofChooses.size(); i++){
             for(int j = 0; j < listofChooses.get(i).size(); j++){
                 Vector<Integer> minMaxList = new Vector<Integer>();
-                if(this.rule == "Spain"){
-                    getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 1, depth - 1, depth);
-                }else{
-                    getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 2, depth - 1, depth);
-                }
+                getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 1, depth - 1, depth);
                 int minScore = Integer.MAX_VALUE;
                 int maxScore = Integer.MIN_VALUE;
                 for(int k = 0; k < minMaxList.size(); k++){
