@@ -131,7 +131,7 @@ public class Tile implements MouseListener {
         }
         else if(carrentBGColorChar == 'g'){
             game.coloringBoard(game.getBGColorBoard());
-            game.movePiecebyRowAndColumnSlowlyWithDisplay(game.getBoard(), game.getCarrentPlayer(), game.getCarrentSlotIndex()[0], game.getCarrentSlotIndex()[1], row, column);
+            game.movePiecebyRowAndColumnSlowlyWithDisplay(game.getCarrentPlayer(), game.getCarrentSlotIndex()[0], game.getCarrentSlotIndex()[1], row, column);
 
             game.swapCarrentPlayerName(game.getCarrentPlayer());
             game.swapCarrentPlayer(game.getCarrentPlayer());
@@ -161,6 +161,21 @@ public class Tile implements MouseListener {
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You lost.");
                     game.init("Spain", "human", "random");
+                    return;
+                }
+            } else if(game.getCarrentPlayerName() == "AI1"){
+                if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    System.out.println("You win.");
+                    game.init("Spain", "human", "AI1");
+                    return;
+                }
+
+                game.computerAIchoose(game.getBoard(), game.getCarrentPlayer(), 2);
+                game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
+
+                if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    System.out.println("You lost.");
+                    game.init("Spain", "human", "AI1");
                     return;
                 }
             }
