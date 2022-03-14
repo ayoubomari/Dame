@@ -116,7 +116,6 @@ public class Tile implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e){
-        Game game = getGame();
         if(carrentBGColorChar != 'y' && carrentBGColorChar != 'g'){
             //emit
             System.out.println("prohibated click sound");
