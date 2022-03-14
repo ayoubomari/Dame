@@ -1297,6 +1297,8 @@ public class Game {
 
         if(rule == "Spain"){
             getListOfChoosesOfOnePieceSpain(board, player, listChooses, ' ', comulPath, row, column, true, false, false);
+        }else if(rule == "USA"){
+            
         }
 
         //search for the longeest path

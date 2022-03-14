@@ -150,7 +150,7 @@ public class Tile implements MouseListener {
             } else if(game.getCarrentPlayerName() == "random"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You win.");
-                    game.init("Spain", "human", "random");
+                    game.init(game.getRule(), "human", "random");
                     return;
                 }
 
@@ -159,13 +159,13 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You lost.");
-                    game.init("Spain", "human", "random");
+                    game.init(game.getRule(), "human", "random");
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "AI1"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You win.");
-                    game.init("Spain", "human", "AI1");
+                    game.init(game.getRule(), "human", "AI1");
                     return;
                 }
 
@@ -174,13 +174,13 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You lost.");
-                    game.init("Spain", "human", "AI1");
+                    game.init(game.getRule(), "human", "AI1");
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "AI2"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You win.");
-                    game.init("Spain", "human", "AI2");
+                    game.init(game.getRule(), "human", "AI2");
                     return;
                 }
 
@@ -189,7 +189,7 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You lost.");
-                    game.init("Spain", "human", "AI2");
+                    game.init(game.getRule(), "human", "AI2");
                     return;
                 }
             }
