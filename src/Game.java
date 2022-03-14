@@ -1626,7 +1626,8 @@ public class Game {
             int[] numberOfNormalPiece = getNumberOfNormalPieceOfTwoPlayer(board);
             int[] numberOfking = getNumberOfKingsOfTwoPlayer(board);
 
-            int result = (((numberOfNormalPiece[1] - lastResult[1]) + ((numberOfking[1] * kingImportant) - (lastResult[3] * kingImportant))) - ((numberOfNormalPiece[0] - lastResult[0]) + ((numberOfking[0] * kingImportant) - (lastResult[2] * kingImportant))));
+            //int result = (((numberOfNormalPiece[1] - lastResult[1]) + ((numberOfking[1] * kingImportant) - (lastResult[3] * kingImportant))) - ((numberOfNormalPiece[0] - lastResult[0]) + ((numberOfking[0] * kingImportant) - (lastResult[2] * kingImportant))));
+            int result = (((numberOfNormalPiece[1]) + ((numberOfking[1]))) - ((numberOfNormalPiece[0]) + ((numberOfking[0]))));
             minMaxList.addElement(result);
         
             //printBoard(board);
