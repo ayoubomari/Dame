@@ -1289,6 +1289,664 @@ public class Game {
             }
         }
     }
+
+
+    //============================================= USA's rules =============================================//
+    public void kingPieceMoveBeforEattingUSA(char[][] board, int player, Vector<Vector<int[]>> listChooses, Vector<int[]> comulPath, int row, int column, int rowDifferent, int columnDifferent, char slotChar){
+        char lastSlotChar = ' ';
+        char nextSlotChar;
+        char[] carrentPlayerSlotChar = new char[2]; 
+        char[] otherPlayerSlotChar = new char[2]; 
+        if(slotChar == 'B'){
+            carrentPlayerSlotChar[0] = 'b';
+            carrentPlayerSlotChar[1] = 'B';
+
+            otherPlayerSlotChar[0] = 'a';
+            otherPlayerSlotChar[1] = 'A';
+        }else{
+            carrentPlayerSlotChar[0] = 'a';
+            carrentPlayerSlotChar[1] = 'A';
+
+            otherPlayerSlotChar[0] = 'b';
+            otherPlayerSlotChar[1] = 'B';
+        }
+        
+        if(rowDifferent == 1 && columnDifferent == 1){
+            if(getSlotChar(board, row + 1, column + 1) == ' '){
+                Vector<int[]> path = new Vector<int[]>();
+                path = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                path.addElement(rowAndColumn);
+
+                //add the next empty piece to the path (to)
+                int [] rowAndColumn2 = new int[2];
+                rowAndColumn2[0] = row + 1; rowAndColumn2[1] = column + 1; 
+                path.addElement(rowAndColumn2);
+
+                //add the path to the list of chooses
+                listChooses.addElement(path);
+            }else if(getSlotChar(board, row + 1, column + 1) == otherPlayerSlotChar[0]  || getSlotChar(board, row + 1, column + 1) == otherPlayerSlotChar[1]){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column + 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                newComulPath.addElement(rowAndColumn);
+                
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column + 1, false, true, false);
+            }
+        }else if(rowDifferent == 1 && columnDifferent == -1){
+            if(getSlotChar(board, row + 1, column - 1) == ' '){
+                Vector<int[]> path = new Vector<int[]>();
+                path = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                path.addElement(rowAndColumn);
+
+                //add the next empty piece to the path (to)
+                int [] rowAndColumn2 = new int[2];
+                rowAndColumn2[0] = row + 1; rowAndColumn2[1] = column - 1; 
+                path.addElement(rowAndColumn2);
+
+                //add the path to the list of chooses
+                listChooses.addElement(path);
+            }else if(getSlotChar(board, row + 1, column - 1) == otherPlayerSlotChar[0] || getSlotChar(board, row + 1, column - 1) == otherPlayerSlotChar[1]){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column - 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                newComulPath.addElement(rowAndColumn);
+                
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, true, false);
+            }
+        }else if(rowDifferent == -1 && columnDifferent == 1){
+            if(getSlotChar(board, row - 1, column + 1) == ' '){
+                Vector<int[]> path = new Vector<int[]>();
+                path = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                path.addElement(rowAndColumn);
+
+                //add the next empty piece to the path (to)
+                int [] rowAndColumn2 = new int[2];
+                rowAndColumn2[0] = row - 1; rowAndColumn2[1] = column + 1; 
+                path.addElement(rowAndColumn2);
+
+                //add the path to the list of chooses
+                listChooses.addElement(path);
+            }else if(getSlotChar(board, row - 1, column + 1) == otherPlayerSlotChar[0] || getSlotChar(board, row - 1, column + 1) == otherPlayerSlotChar[1]){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column + 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                newComulPath.addElement(rowAndColumn);
+                
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column + 1, false, true, false);
+            }
+        }else if(rowDifferent == -1 && columnDifferent == -1){
+            if(getSlotChar(board, row - 1, column - 1) == ' '){
+                Vector<int[]> path = new Vector<int[]>();
+                path = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                path.addElement(rowAndColumn);
+
+                //add the next empty piece to the path (to)
+                int [] rowAndColumn2 = new int[2];
+                rowAndColumn2[0] = row - 1; rowAndColumn2[1] = column - 1; 
+                path.addElement(rowAndColumn2);
+
+                //add the path to the list of chooses
+                listChooses.addElement(path);
+            }else if(getSlotChar(board, row - 1, column - 1) == otherPlayerSlotChar[0] || getSlotChar(board, row - 1, column - 1) == otherPlayerSlotChar[1]){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column - 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                newComulPath.addElement(rowAndColumn);
+                
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column - 1, false, true, false);
+            }
+        }
+    }
+    public void kingPieceMoveInEattingUSA(char[][] board, int player, Vector<Vector<int[]>> listChooses, Vector<int[]> comulPath, int row, int column, int rowDifferent, int columnDifferent, char slotChar){
+        char lastSlotChar = 'a';
+        char nextSlotChar;
+        char[] carrentPlayerSlotChar = new char[2]; 
+        char[] otherPlayerSlotChar = new char[2]; 
+        if(slotChar == 'B'){
+            carrentPlayerSlotChar[0] = 'b';
+            carrentPlayerSlotChar[1] = 'B';
+
+            otherPlayerSlotChar[0] = 'a';
+            otherPlayerSlotChar[1] = 'A';
+        }else{
+            carrentPlayerSlotChar[0] = 'a';
+            carrentPlayerSlotChar[1] = 'A';
+
+            otherPlayerSlotChar[0] = 'b';
+            otherPlayerSlotChar[1] = 'B';
+        }
+
+        if(rowDifferent == 1 && columnDifferent == 1){
+            if(getSlotChar(board, row + 1, column + 1) == ' '){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column + 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                newComulPath.addElement(rowAndColumn);
+                
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column + 1, false, false, true);
+            }   
+        }else if(rowDifferent == 1 && columnDifferent == -1){
+            if(getSlotChar(board, row + 1, column - 1) == ' '){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column - 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                newComulPath.addElement(rowAndColumn);
+                
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, false, true);
+            }
+        }else if(rowDifferent == -1 && columnDifferent == 1){
+            if(getSlotChar(board, row - 1, column + 1) == ' '){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column + 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                newComulPath.addElement(rowAndColumn);
+                
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column + 1, false, false, true);
+            } 
+        }else if(rowDifferent == -1 && columnDifferent == -1){
+            if(getSlotChar(board, row - 1, column - 1) == ' '){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column - 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn = new int[2];
+                rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                newComulPath.addElement(rowAndColumn);
+                
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column - 1, false, false, true);
+            }
+        }
+    }
+    public void kingPieceMoveAfterEattingUSA(char[][] board, int player, Vector<Vector<int[]>> listChooses, Vector<int[]> comulPath, int row, int column, int rowDifferent, int columnDifferent, char slotChar){
+        char lastSlotChar = ' ';
+        char nextSlotChar;
+        char[] carrentPlayerSlotChar = new char[2]; 
+        char[] otherPlayerSlotChar = new char[2]; 
+        if(slotChar == 'B'){
+            carrentPlayerSlotChar[0] = 'b';
+            carrentPlayerSlotChar[1] = 'B';
+
+            otherPlayerSlotChar[0] = 'a';
+            otherPlayerSlotChar[1] = 'A';
+        }else{
+            carrentPlayerSlotChar[0] = 'a';
+            carrentPlayerSlotChar[1] = 'A';
+
+            otherPlayerSlotChar[0] = 'b';
+            otherPlayerSlotChar[1] = 'B';
+        }
+        
+        if(rowDifferent == 1 && columnDifferent == 1){
+            char nextSlotChar1 = getSlotChar(board, row + 1, column + 1);
+            if(nextSlotChar1 == otherPlayerSlotChar[0] || nextSlotChar1 == otherPlayerSlotChar[1]){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column + 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn1 = new int[2];
+                rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
+                newComulPath.addElement(rowAndColumn1);
+            
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column + 1, false, true, false);
+            }
+        }else if(rowDifferent == 1 && columnDifferent == -1){
+            char nextSlotChar2 = getSlotChar(board, row + 1, column - 1);
+            if(nextSlotChar2 == otherPlayerSlotChar[0] || nextSlotChar2 == otherPlayerSlotChar[1]){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column - 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn1 = new int[2];
+                rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
+                newComulPath.addElement(rowAndColumn1);
+            
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, true, false);
+            }
+        }else if(rowDifferent == -1 && columnDifferent == 1){
+            char nextSlotChar1 = getSlotChar(board, row - 1, column + 1);
+            if(nextSlotChar1 == otherPlayerSlotChar[0] || nextSlotChar1 == otherPlayerSlotChar[1]){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column + 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn1 = new int[2];
+                rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
+                newComulPath.addElement(rowAndColumn1);
+            
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column + 1, false, true, false);
+            }
+        }else if(rowDifferent == -1 && columnDifferent == -1){
+            char nextSlotChar2 = getSlotChar(board, row - 1, column - 1);
+            if(nextSlotChar2 == otherPlayerSlotChar[0] || nextSlotChar2 == otherPlayerSlotChar[1]){
+                char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column - 1);
+
+                Vector<int[]> newComulPath = new Vector<int[]>();
+                newComulPath = clonePath(comulPath);
+                //add the carrent piece to the path (from)
+                int [] rowAndColumn1 = new int[2];
+                rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
+                newComulPath.addElement(rowAndColumn1);
+            
+                getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column - 1, false, true, false);
+            }
+        }
+    }
+    
+    
+    //get the all list of chooses in the board of a specific player in one specific piece recursively
+    public void getListOfChoosesOfOnePieceUSA(char[][] board, int player, Vector<Vector<int[]>> listChooses, char lastCarrentSlot, Vector<int[]> comulPath, int row, int column, boolean isFirstStep, boolean eatting, boolean eated){
+        char pieceChar = getSlotChar(board, row, column);
+        //Vector<int[]> path = new Vector<int[]>();
+        //int [] rowAndColumn = new int[2];
+        if(isFirstStep){
+            if(pieceChar == 'b'){
+                if(getSlotChar(board, row + 1, column + 1) == ' '){
+                    Vector<int[]> path = new Vector<int[]>();
+                    path = clonePath(comulPath);
+                    //add the carrent piece to the path (from)
+                    int [] rowAndColumn = new int[2];
+                    rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                    path.addElement(rowAndColumn);
+
+                    //add the next empty piece to the path (to)
+                    int [] rowAndColumn2 = new int[2];
+                    rowAndColumn2[0] = row + 1; rowAndColumn2[1] = column + 1; 
+                    path.addElement(rowAndColumn2);
+
+                    //add the path to the list of chooses
+                    listChooses.addElement(path);
+                }else if(getSlotChar(board, row + 1, column + 1) == 'a' || getSlotChar(board, row + 1, column + 1) == 'A'){
+                    char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column + 1);
+
+                    Vector<int[]> newComulPath = new Vector<int[]>();
+                    newComulPath = clonePath(comulPath);
+                    //add the carrent piece to the path (from)
+                    int [] rowAndColumn = new int[2];
+                    rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                    newComulPath.addElement(rowAndColumn);
+                    
+                    getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column + 1, false, true, false);
+                }
+                ///////////////////////
+                if(getSlotChar(board, row + 1, column - 1) == ' '){
+                    Vector<int[]> path = new Vector<int[]>();
+                    path = clonePath(comulPath);
+                    //add the carrent piece to the path (from)
+                    int [] rowAndColumn = new int[2];
+                    rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                    path.addElement(rowAndColumn);
+
+                    //add the next empty piece to the path (to)
+                    int [] rowAndColumn2 = new int[2];
+                    rowAndColumn2[0] = row + 1; rowAndColumn2[1] = column - 1; 
+                    path.addElement(rowAndColumn2);
+
+                    //add the path to the list of chooses
+                    listChooses.addElement(path);
+                }else if(getSlotChar(board, row + 1, column - 1) == 'a' || getSlotChar(board, row + 1, column - 1) == 'A'){
+                    char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column - 1);
+
+                    Vector<int[]> newComulPath = new Vector<int[]>();
+                    //add the carrent piece to the path (from)
+                    int [] rowAndColumn = new int[2];
+                    rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                    newComulPath.addElement(rowAndColumn);
+                    
+                    getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, true, false);
+                }
+            }else if(pieceChar == 'a'){
+                if(getSlotChar(board, row - 1, column + 1) == ' '){
+                    Vector<int[]> path = new Vector<int[]>();
+                    path = clonePath(comulPath);
+                    //add the carrent piece to the path (from)
+                    int [] rowAndColumn = new int[2];
+                    rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                    path.addElement(rowAndColumn);
+
+                    //add the next empty piece to the path (to)
+                    int [] rowAndColumn2 = new int[2];
+                    rowAndColumn2[0] = row - 1; rowAndColumn2[1] = column + 1; 
+                    path.addElement(rowAndColumn2);
+
+                    //add the path to the list of chooses
+                    listChooses.addElement(path);
+                }else if(getSlotChar(board, row - 1, column + 1) == 'b' || getSlotChar(board, row - 1, column + 1) == 'B'){
+                    char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column + 1);
+
+                    Vector<int[]> newComulPath = new Vector<int[]>();
+                    //add the carrent piece to the path (from)
+                    int [] rowAndColumn = new int[2];
+                    rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                    newComulPath.addElement(rowAndColumn);
+                    
+                    getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column + 1, false, true, false);
+                }
+                ///////////////////////////
+                if(getSlotChar(board, row - 1, column - 1) == ' '){
+                    Vector<int[]> path = new Vector<int[]>();
+                    path = clonePath(comulPath);
+                    //add the carrent piece to the path (from)
+                    int [] rowAndColumn = new int[2];
+                    rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                    path.addElement(rowAndColumn);
+
+                    //add the next empty piece to the path (to)
+                    int [] rowAndColumn2 = new int[2];
+                    rowAndColumn2[0] = row - 1; rowAndColumn2[1] = column - 1; 
+                    path.addElement(rowAndColumn2);
+
+                    //add the path to the list of chooses
+                    listChooses.addElement(path);
+                }else if(getSlotChar(board, row - 1, column - 1) == 'b' || getSlotChar(board, row - 1, column - 1) == 'B'){
+                    char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column - 1);
+
+                    Vector<int[]> newComulPath = new Vector<int[]>();
+                    //add the carrent piece to the path (from)
+                    int [] rowAndColumn = new int[2];
+                    rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                    newComulPath.addElement(rowAndColumn);
+                    
+                    getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column - 1, false, true, false);
+                }
+            }else if(pieceChar == 'B'){
+                kingPieceMoveBeforEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'B');
+                kingPieceMoveBeforEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'B');
+                kingPieceMoveBeforEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'B');
+                kingPieceMoveBeforEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'B');
+            }else if(pieceChar == 'A'){
+                kingPieceMoveBeforEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                kingPieceMoveBeforEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'A');
+                kingPieceMoveBeforEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'A');
+                kingPieceMoveBeforEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'A');
+            }
+        }else if(eatting){
+            if(!(row == 0 || row == 7 || column == 0 || column == 7)){//the player can't eat piece in corner or touch line
+                //processing the hart of the board
+                if(pieceChar == 'b'){
+                    int rowDifferent = row - comulPath.lastElement()[0];
+                    int columnDifferent = column - comulPath.lastElement()[1];
+
+                    if(rowDifferent >= 1 && columnDifferent >= 1){//the backward is top left
+                        if(getSlotChar(board, row + 1, column + 1) == ' '){
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column + 1);
+    
+                            Vector<int[]> newComulPath = new Vector<int[]>();
+                            newComulPath = clonePath(comulPath);
+                            //add the carrent piece to the path (from)
+                            int [] rowAndColumn = new int[2];
+                            rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                            newComulPath.addElement(rowAndColumn);
+                            
+                            getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column + 1, false, false, true);
+                        }   
+                    }else if(rowDifferent >= 1 && columnDifferent <= -1){//the backward is top right
+                        if(getSlotChar(board, row + 1, column - 1) == ' '){
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column - 1);
+    
+                            Vector<int[]> newComulPath = new Vector<int[]>();
+                            newComulPath = clonePath(comulPath);
+                            //add the carrent piece to the path (from)
+                            int [] rowAndColumn = new int[2];
+                            rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                            newComulPath.addElement(rowAndColumn);
+                            
+                            getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, false, true);
+                        }
+                    }
+                }
+                else if(pieceChar == 'a'){
+                    int rowDifferent = row - comulPath.lastElement()[0];
+                    int columnDifferent = column - comulPath.lastElement()[1];
+
+                    if(rowDifferent <= -1 && columnDifferent <= -1){//the backward is buttom right
+                        if(getSlotChar(board, row - 1, column - 1) == ' '){
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column - 1);
+    
+                            Vector<int[]> newComulPath = new Vector<int[]>();
+                            newComulPath = clonePath(comulPath);
+                            //add the carrent piece to the path (from)
+                            int [] rowAndColumn = new int[2];
+                            rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                            newComulPath.addElement(rowAndColumn);
+                            
+                            getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column - 1, false, false, true);
+                        }
+                    }else if(rowDifferent <= -1 && columnDifferent >= 1){//the backward is buttom left
+                        if(getSlotChar(board, row - 1, column + 1) == ' '){
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column + 1);
+    
+                            Vector<int[]> newComulPath = new Vector<int[]>();
+                            newComulPath = clonePath(comulPath);
+                            //add the carrent piece to the path (from)
+                            int [] rowAndColumn = new int[2];
+                            rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                            newComulPath.addElement(rowAndColumn);
+                            
+                            getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column + 1, false, false, true);
+                        }   
+                    }
+                }
+                else if(pieceChar == 'B'){
+                    int rowDifferent = row - comulPath.lastElement()[0];
+                    int columnDifferent = column - comulPath.lastElement()[1];
+
+                    //the piece can't go backward
+                    if(rowDifferent >= 1 && columnDifferent >= 1){//the backward is top left
+                        if(!(getSlotChar(board, row + 1, column + 1) != ' ')){
+                            kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'B');
+                        }
+                    }
+                    ////////////
+                    else if(rowDifferent >= 1 && columnDifferent <= -1){//the backward is top right
+                        if(!(getSlotChar(board, row + 1, column - 1) != ' ')){
+                            kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'B');
+                        }
+                    }
+                    ////////////
+                    else if(rowDifferent <= -1 && columnDifferent >= 1){//the backward is buttom left
+                        if(!(getSlotChar(board, row - 1, column + 1) != ' ')){
+                            kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'B');
+                        }
+                    }
+                    ////////////
+                    else if(rowDifferent <= -1 && columnDifferent <= -1){//the backward is buttom right
+                        if(!(getSlotChar(board, row - 1, column - 1) != ' ')){
+                            kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'B');
+                        }
+                    }
+                }
+                else if(pieceChar == 'A'){
+                    int rowDifferent = row - comulPath.lastElement()[0];
+                    int columnDifferent = column - comulPath.lastElement()[1];
+
+                    
+                    //the piece can't go backward
+                    if(rowDifferent >= 1 && columnDifferent >= 1){//the backward is top left
+                        kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                    }
+                    ////////////
+                    else if(rowDifferent >= 1 && columnDifferent <= -1){//the backward is top right
+                        if(!(getSlotChar(board, row + 1, column - 1) != ' ')){
+                            kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'A');
+                        }
+                    }
+                    ////////////
+                    else if(rowDifferent <= -1 && columnDifferent >= 1){//the backward is buttom left
+                        if(!(getSlotChar(board, row - 1, column + 1) != ' ')){
+                            kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'A');
+                        }
+                    }
+                    ////////////
+                    else if(rowDifferent <= -1 && columnDifferent <= -1){//the backward is buttom right
+                        if(!(getSlotChar(board, row - 1, column - 1) != ' ')){
+                            kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'A');
+                        }
+                    }
+                }
+            }
+        }else if(eated){
+            Vector<int[]> path = new Vector<int[]>();
+            path = clonePath(comulPath);
+            //add the carrent piece to the path (from)
+            int [] rowAndColumn = new int[2];
+            rowAndColumn[0] = row; rowAndColumn[1] = column; 
+            path.addElement(rowAndColumn);
+
+            listChooses.addElement(path);
+
+
+            if(!((row == 0 && column == 0) || (row == 0 && column == 7) || (row == 7 && column == 0) || (row == 7 && column == 7))){//no corners
+                if(pieceChar == 'b'){
+                    char nextSlotChar1 = getSlotChar(board, row + 1, column + 1);
+                    if(nextSlotChar1 == 'a' || nextSlotChar1 == 'A'){
+                        char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column + 1);
+
+                        Vector<int[]> newComulPath = new Vector<int[]>();
+                        newComulPath = clonePath(comulPath);
+                        //add the carrent piece to the path (from)
+                        int [] rowAndColumn1 = new int[2];
+                        rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
+                        newComulPath.addElement(rowAndColumn1);
+                    
+                        getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column + 1, false, true, false);
+                    }
+                    //------------------
+                    char nextSlotChar2 = getSlotChar(board, row + 1, column - 1);
+                    if(nextSlotChar2 == 'a' || nextSlotChar2 == 'A'){
+                        char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column - 1);
+
+                        Vector<int[]> newComulPath = new Vector<int[]>();
+                        newComulPath = clonePath(comulPath);
+                        //add the carrent piece to the path (from)
+                        int [] rowAndColumn1 = new int[2];
+                        rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
+                        newComulPath.addElement(rowAndColumn1);
+                    
+                        getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, true, false);
+                    }
+                }else if(pieceChar == 'a'){
+                    char nextSlotChar1 = getSlotChar(board, row - 1, column + 1);
+                    if(nextSlotChar1 == 'b' || nextSlotChar1 == 'B'){
+                        char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column + 1);
+
+                        Vector<int[]> newComulPath = new Vector<int[]>();
+                        newComulPath = clonePath(comulPath);
+                        //add the carrent piece to the path (from)
+                        int [] rowAndColumn1 = new int[2];
+                        rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
+                        newComulPath.addElement(rowAndColumn1);
+                    
+                        getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column + 1, false, true, false);
+                    }
+                    //------------------
+                    char nextSlotChar2 = getSlotChar(board, row - 1, column - 1);
+                    if(nextSlotChar2 == 'b' || nextSlotChar2 == 'B'){
+                        char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column - 1);
+
+                        Vector<int[]> newComulPath = new Vector<int[]>();
+                        newComulPath = clonePath(comulPath);
+                        //add the carrent piece to the path (from)
+                        int [] rowAndColumn1 = new int[2];
+                        rowAndColumn1[0] = row; rowAndColumn1[1] = column; 
+                        newComulPath.addElement(rowAndColumn1);
+                    
+                        getListOfChoosesOfOnePieceUSA(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column - 1, false, true, false);
+                    }
+                }else if(pieceChar == 'B'){
+                    int rowDifferent = row - comulPath.lastElement()[0];
+                    int columnDifferent = column - comulPath.lastElement()[1];
+
+                    //the piece can't go backward
+                    if(rowDifferent >= 1 && columnDifferent >= 1){//the backward is top right
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'B');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'B');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'B');
+                    } 
+                    else if(rowDifferent >= 1 && columnDifferent <= -1){//the backward is top left
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'B');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'B');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'B');
+                    } 
+                    else if(rowDifferent <= -1 && columnDifferent >= 1){//the backward is buttom right
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'B');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'B');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'B');
+                    } 
+                    else if(rowDifferent <= -1 && columnDifferent <= -1){//the backward is buttom left
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'B');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'B');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'B');
+                    }
+                }else if(pieceChar == 'A'){
+                    int rowDifferent = row - comulPath.lastElement()[0];
+                    int columnDifferent = column - comulPath.lastElement()[1];
+
+                    //the piece can't go backward
+                    if(rowDifferent >= 1 && columnDifferent >= 1){//the backward is top right
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'A');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'A');
+                    } 
+                    else if(rowDifferent >= 1 && columnDifferent <= -1){//the backward is top left
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'A');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'A');
+                    } 
+                    else if(rowDifferent <= -1 && columnDifferent >= 1){//the backward is buttom left
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'A');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'A');
+                    } 
+                    else if(rowDifferent <= -1 && columnDifferent <= -1){//the backward is buttom right
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, 1, -1, 'A');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, 1, 'A');
+                        kingPieceMoveAfterEattingUSA(board, player, listChooses, comulPath, row, column, -1, -1, 'A');
+                    }
+                }
+            }
+        }
+    }
     
     //get the list of chooses available in the board of a specific player in one specific piece
     public Vector<Vector<int[]>> getListofChoosesAvailableOfOnePiece(char[][] board, int player, int row, int column){
@@ -1298,7 +1956,7 @@ public class Game {
         if(rule == "Spain"){
             getListOfChoosesOfOnePieceSpain(board, player, listChooses, ' ', comulPath, row, column, true, false, false);
         }else if(rule == "USA"){
-            
+            getListOfChoosesOfOnePieceUSA(board, player, listChooses, ' ', comulPath, row, column, true, false, false);
         }
 
         //search for the longeest path
@@ -1605,7 +2263,13 @@ public class Game {
             int[] numberOfking = getNumberOfKingsOfTwoPlayer(board);
 
             //int result = (((numberOfNormalPiece[1] - lastResult[1]) + ((numberOfking[1] * kingImportant) - (lastResult[3] * kingImportant))) - ((numberOfNormalPiece[0] - lastResult[0]) + ((numberOfking[0] * kingImportant) - (lastResult[2] * kingImportant))));
-            int result = (((numberOfNormalPiece[1]) + ((numberOfking[1] * 30))) - ((numberOfNormalPiece[0]) + ((numberOfking[0]))));
+            int result;
+            if(rule == "Spain"){
+                result= (((numberOfNormalPiece[1]) + ((numberOfking[1]))) - ((numberOfNormalPiece[0]) + ((numberOfking[0]))));
+            }else {
+                result = (((numberOfNormalPiece[1]) + ((numberOfking[1]))) - ((numberOfNormalPiece[0]) + ((numberOfking[0]))));
+            }
+            
             minMaxList.addElement(result);
         
             //printBoard(board);
@@ -1708,40 +2372,40 @@ public class Game {
         int minMax = 0;
 
         try{
-            // if(computerPiecesCanMove == 1){
-            //     int minScore = utilites.get(0)[1];
-            //     int someOfLoses = utilites.get(0)[2];
-            //     int someOfWines = utilites.get(0)[3];
-            //     int maxScore = utilites.get(0)[4];
-            //     for(int i = 1; i < utilites.size(); i++){
-            //         int[] utility = utilites.get(i);
-            //         if(utility[1] > minScore){
-            //             minScore = utility[1];
-            //             minMax = i;
-            //         }else if(utility[1] == minScore){
-            //             if(utility[2] > someOfLoses){
-            //                 someOfLoses = utility[2];
-            //                 minMax = i;
-            //             }else if(utility[2] == someOfLoses){
-            //                 if(utility[3] > someOfWines){
-            //                     someOfWines = utility[3];
-            //                     minMax = i;
-            //                 }else if(utility[3] == someOfWines){
-            //                     if(utility[4] > maxScore){
-            //                         maxScore = utility[4];
-            //                         minMax = i;
-            //                     }else if(utility[4] == maxScore){
-            //                         int rand = ((int) (Math.random() * 10)) % 2;
-            //                         if(rand == 0){
-            //                             maxScore = utility[4];
-            //                             minMax = i;
-            //                         }
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }else{
+            if(computerPiecesCanMove == 1){
+                int minScore = utilites.get(0)[1];
+                int someOfLoses = utilites.get(0)[2];
+                int someOfWines = utilites.get(0)[3];
+                int maxScore = utilites.get(0)[4];
+                for(int i = 1; i < utilites.size(); i++){
+                    int[] utility = utilites.get(i);
+                    if(utility[1] > minScore){
+                        minScore = utility[1];
+                        minMax = i;
+                    }else if(utility[1] == minScore){
+                        if(utility[2] > someOfLoses){
+                            someOfLoses = utility[2];
+                            minMax = i;
+                        }else if(utility[2] == someOfLoses){
+                            if(utility[3] > someOfWines){
+                                someOfWines = utility[3];
+                                minMax = i;
+                            }else if(utility[3] == someOfWines){
+                                if(utility[4] > maxScore){
+                                    maxScore = utility[4];
+                                    minMax = i;
+                                }else if(utility[4] == maxScore){
+                                    int rand = ((int) (Math.random() * 10)) % 2;
+                                    if(rand == 0){
+                                        maxScore = utility[4];
+                                        minMax = i;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }else{
                 int minScore = utilites.get(0)[1];
                 int someOfLoses = utilites.get(0)[2];
                 int someOfWines = utilites.get(0)[3];
@@ -1760,7 +2424,7 @@ public class Game {
                                 someOfLoses = utility[2];
                                 someOfWines = utility[3];
                                 minMax = i;
-                            }else if(utility[3] == someOfWines){
+                            }else if(utility[3] - utility[2] == someOfWines - someOfLoses){
                                 if(utility[4] > maxScore){
                                     maxScore = utility[4];
                                     minMax = i;
@@ -1775,7 +2439,7 @@ public class Game {
                         // }
                     }
                 }
-            // }
+            }
         }catch(Exception e){
 
         }
