@@ -1543,30 +1543,6 @@ public class Game {
                 boolean eated = false;
                 char carrentSlotChar = getSlotChar(newBoard, carrentRow, carrentColumn);
                 for(int j = 0; j < fullPaths.get(i).size() - 1; j++){
-                    // if(carrentSlotChar == 'b'){
-                    //     if(fullPaths.get(i).get(j + 1)[0] == 7){
-                    //         // //emit
-                    //         // System.out.println("be king sound");
-                    //     }
-                    // }else if(carrentSlotChar == 'a'){
-                    //     if(fullPaths.get(i).get(j + 1)[0] == 0){
-                    //         // //emit
-                    //         // System.out.println("be king sound");
-                    //     }
-                    // }
-
-                    // if(eated){ 
-                    //     //emit
-                    //     System.out.println("eat sound");
-                    // }
-
-                    // if(getSlotChar(newBoard, fullPaths.get(i).get(j + 1)[0], fullPaths.get(i).get(j + 1)[1]) != ' '){
-                    //     eated = true;
-                    // }else{
-                    //     eated = false;
-                    // }
-
-
                     newBoard = movePiecebyRowAndColumn(newBoard, carrentRow, carrentColumn, fullPaths.get(i).get(j + 1)[0], fullPaths.get(i).get(j + 1)[1]);
 
                     carrentRow = fullPaths.get(i).get(j + 1)[0];
