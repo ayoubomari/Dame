@@ -1702,39 +1702,75 @@ public class Game {
             }
         }
 
+        int computerPiecesCanMove = getListOfPieceCanMove(board, 2).size();
         int minMax = 0;
 
         try{
-            int minScore = utilites.get(0)[1];
-            int someOfLoses = utilites.get(0)[2];
-            int someOfWines = utilites.get(0)[3];
-            int maxScore = utilites.get(0)[4];
-            for(int i = 1; i < utilites.size(); i++){
-                int[] utility = utilites.get(i);
-                if(utility[1] > minScore){
-                    minScore = utility[1];
-                    minMax = i;
-                }else if(utility[1] == minScore){
-                    // if(utility[2] > someOfLoses){
-                    //     someOfLoses = utility[2];
-                    //     minMax = i;
-                    // }else if(utility[2] == someOfLoses){
-                        if(utility[3] > someOfWines){
-                            someOfWines = utility[3];
+            if(computerPiecesCanMove == 1){
+                int minScore = utilites.get(0)[1];
+                int someOfLoses = utilites.get(0)[2];
+                int someOfWines = utilites.get(0)[3];
+                int maxScore = utilites.get(0)[4];
+                for(int i = 1; i < utilites.size(); i++){
+                    int[] utility = utilites.get(i);
+                    if(utility[1] > minScore){
+                        minScore = utility[1];
+                        minMax = i;
+                    }else if(utility[1] == minScore){
+                        if(utility[2] > someOfLoses){
+                            someOfLoses = utility[2];
                             minMax = i;
-                        }else if(utility[3] == someOfWines){
-                            if(utility[4] > maxScore){
-                                maxScore = utility[4];
+                        }else if(utility[2] == someOfLoses){
+                            if(utility[3] > someOfWines){
+                                someOfWines = utility[3];
                                 minMax = i;
-                            }else if(utility[4] == maxScore){
-                                int rand = ((int) (Math.random() * 10)) % 2;
-                                if(rand == 0){
+                            }else if(utility[3] == someOfWines){
+                                if(utility[4] > maxScore){
                                     maxScore = utility[4];
                                     minMax = i;
+                                }else if(utility[4] == maxScore){
+                                    int rand = ((int) (Math.random() * 10)) % 2;
+                                    if(rand == 0){
+                                        maxScore = utility[4];
+                                        minMax = i;
+                                    }
                                 }
                             }
                         }
-                    // }
+                    }
+                }
+            }else{
+                int minScore = utilites.get(0)[1];
+                int someOfLoses = utilites.get(0)[2];
+                int someOfWines = utilites.get(0)[3];
+                int maxScore = utilites.get(0)[4];
+                for(int i = 1; i < utilites.size(); i++){
+                    int[] utility = utilites.get(i);
+                    if(utility[1] > minScore){
+                        minScore = utility[1];
+                        minMax = i;
+                    }else if(utility[1] == minScore){
+                        // if(utility[2] > someOfLoses){
+                        //     someOfLoses = utility[2];
+                        //     minMax = i;
+                        // }else if(utility[2] == someOfLoses){
+                            if(utility[3] > someOfWines){
+                                someOfWines = utility[3];
+                                minMax = i;
+                            }else if(utility[3] == someOfWines){
+                                if(utility[4] > maxScore){
+                                    maxScore = utility[4];
+                                    minMax = i;
+                                }else if(utility[4] == maxScore){
+                                    int rand = ((int) (Math.random() * 10)) % 2;
+                                    if(rand == 0){
+                                        maxScore = utility[4];
+                                        minMax = i;
+                                    }
+                                }
+                            }
+                        // }
+                    }
                 }
             }
         }catch(Exception e){
