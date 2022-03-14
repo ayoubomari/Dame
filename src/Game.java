@@ -1702,11 +1702,12 @@ public class Game {
             }
         }
 
+        int playerPiecesCanMove = getListOfPieceCanMove(board, 1).size();
         int computerPiecesCanMove = getListOfPieceCanMove(board, 2).size();
         int minMax = 0;
 
         try{
-            if(computerPiecesCanMove == 1){
+            if(computerPiecesCanMove < playerPiecesCanMove){
                 int minScore = utilites.get(0)[1];
                 int someOfLoses = utilites.get(0)[2];
                 int someOfWines = utilites.get(0)[3];
