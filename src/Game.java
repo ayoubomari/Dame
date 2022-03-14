@@ -1571,7 +1571,7 @@ public class Game {
         }
     }
 
-    public void getAllUtilites(char[][] board, Vector<Integer> minMaxList, int carrentPlayer, int[] lastResult, int kingImportant, int depth, int globalDepth){
+    public void getAllUtilites(char[][] board, Vector<Integer> minMaxList, int carrentPlayer, int[] lastResult, int depth){
         //printBoard(board);
         
         int carrentPlayerPiecesCanMove = getListOfPieceCanMove(board, carrentPlayer).size();
@@ -1595,7 +1595,7 @@ public class Game {
 
                     newBoard = movePiecebyRowAndColumnWithoutDisplay(newBoard, carrentPlayer, listofChooses.get(i).get(j).get(0)[0], listofChooses.get(i).get(j).get(0)[1], listofChooses.get(i).get(j).get( listofChooses.get(i).get(j).size() - 1 )[0], listofChooses.get(i).get(j).get( listofChooses.get(i).get(j).size() - 1 )[1]);
 
-                    getAllUtilites(newBoard, minMaxList, getSwapCarrentPlayer(carrentPlayer), lastResult, kingImportant, depth - 1, globalDepth);
+                    getAllUtilites(newBoard, minMaxList, getSwapCarrentPlayer(carrentPlayer), lastResult, depth - 1);
                 }
             }
         }else{
@@ -1637,7 +1637,7 @@ public class Game {
         for(int i = 0; i < listofChooses.size(); i++){
             for(int j = 0; j < listofChooses.get(i).size(); j++){
                 Vector<Integer> minMaxList = new Vector<Integer>();
-                getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, 1, depth - 1, depth);
+                getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, depth - 1);
                 int minScore = Integer.MAX_VALUE;
                 int maxScore = Integer.MIN_VALUE;
                 for(int k = 0; k < minMaxList.size(); k++){
@@ -1715,10 +1715,10 @@ public class Game {
                     minScore = utility[1];
                     minMax = i;
                 }else if(utility[1] == minScore){
-                    if(utility[2] > someOfLoses){
-                        someOfLoses = utility[2];
-                        minMax = i;
-                    }else if(utility[2] == someOfLoses){
+                    // if(utility[2] > someOfLoses){
+                    //     someOfLoses = utility[2];
+                    //     minMax = i;
+                    // }else if(utility[2] == someOfLoses){
                         if(utility[3] > someOfWines){
                             someOfWines = utility[3];
                             minMax = i;
@@ -1734,7 +1734,7 @@ public class Game {
                                 }
                             }
                         }
-                    }
+                    // }
                 }
             }
         }catch(Exception e){
