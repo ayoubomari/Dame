@@ -145,12 +145,13 @@ public class Tile implements MouseListener {
                     game.swapCarrentPlayer(game.getCarrentPlayer());
     
                     System.out.println("the Player " + game.getCarrentPlayer() + " win.");
+                    game.init(game.getRule(), "human", "human", game.getEatStrictMode());
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "random"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You win.");
-                    game.init(game.getRule(), "human", "random");
+                    game.init(game.getRule(), "human", "random", game.getEatStrictMode());
                     return;
                 }
 
@@ -159,13 +160,13 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You lost.");
-                    game.init(game.getRule(), "human", "random");
+                    game.init(game.getRule(), "human", "random", game.getEatStrictMode());
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "AI1"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You win.");
-                    game.init(game.getRule(), "human", "AI1");
+                    game.init(game.getRule(), "human", "AI1", game.getEatStrictMode());
                     return;
                 }
 
@@ -174,13 +175,13 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You lost.");
-                    game.init(game.getRule(), "human", "AI1");
+                    game.init(game.getRule(), "human", "AI1", game.getEatStrictMode());
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "AI2"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You win.");
-                    game.init(game.getRule(), "human", "AI2");
+                    game.init(game.getRule(), "human", "AI2", game.getEatStrictMode());
                     return;
                 }
 
@@ -189,7 +190,7 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     System.out.println("You lost.");
-                    game.init(game.getRule(), "human", "AI2");
+                    game.init(game.getRule(), "human", "AI2", game.getEatStrictMode());
                     return;
                 }
             }
