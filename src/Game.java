@@ -2894,11 +2894,11 @@ public class Game {
                         minScore = utility[0];
                         minMax = i;
                     }else if(utility[0] == minScore){
-                            if(utility[2] - utility[1] > someOfWines - someOfLoses){
+                            if(utility[2] + utility[1] > someOfWines + someOfLoses){
                                 someOfLoses = utility[1];
                                 someOfWines = utility[2];
                                 minMax = i;
-                            }else if(utility[2] - utility[1] == someOfWines - someOfLoses){
+                            }else if(utility[2] + utility[1] == someOfWines + someOfLoses){
                                 if(utility[3] > maxScore){
                                     maxScore = utility[3];
                                     minMax = i;
