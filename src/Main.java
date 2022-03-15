@@ -18,9 +18,6 @@ public class Main{
         game.setPlayFrame(playframe);
 
         //star playing the game
-        //game.init("Spain", "human", "human");
-        //game.init("Spain", "human", "random");
-        //game.init("Spain", "human", "AI1");
         game.init("Spain", "human", "AI2", true);
     }
 }
