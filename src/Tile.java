@@ -31,10 +31,6 @@ public class Tile implements MouseListener {
     
     //translate char to piece in the label of the tile
     public void chatToPiece(char pieceName){
-        // if(pieceName == carrentPieceChar){
-        //     return;
-        // }
-
         if(pieceName == ' '){
             carrentPieceChar = ' ';
             label.setIcon(null);
@@ -55,10 +51,6 @@ public class Tile implements MouseListener {
 
     //translate char to background color in the label of the tile
     public void chatToBGColor(char BGColor){
-        // if(BGColor == carrentBGColorChar){
-        //     return;
-        // }
-
         if(BGColor == 'w'){
             carrentBGColorChar = 'w';
             label.setBackground(Colors.WHITE);
@@ -145,12 +137,19 @@ public class Tile implements MouseListener {
                     game.swapCarrentPlayer(game.getCarrentPlayer());
     
                     System.out.println("the Player " + game.getCarrentPlayer() + " win.");
+
+                    //add dialog
+                    //if the user confirm
                     game.init(game.getRule(), "human", "human", game.getEatStrictMode());
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "random"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    //emit
                     System.out.println("You win.");
+
+                    //add dialog
+                    //if the user confirm
                     game.init(game.getRule(), "human", "random", game.getEatStrictMode());
                     return;
                 }
@@ -159,28 +158,44 @@ public class Tile implements MouseListener {
                 game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    //emit
                     System.out.println("You lost.");
+
+                    //add dialog
+                    //if the user confirm
                     game.init(game.getRule(), "human", "random", game.getEatStrictMode());
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "AI1"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    //emit
                     System.out.println("You win.");
+
+                    //add dialog
+                    //if the user confirm
                     game.init(game.getRule(), "human", "AI1", game.getEatStrictMode());
                     return;
                 }
 
-                game.computerAIchoose(game.getBoard(), game.getCarrentPlayer(), 2);
+                game.computerAIchoose(game.getBoard(), game.getCarrentPlayer(), 1);
                 game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    //emit
                     System.out.println("You lost.");
+
+                    //add dialog
+                    //if the user confirm
                     game.init(game.getRule(), "human", "AI1", game.getEatStrictMode());
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "AI2"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    //emit
                     System.out.println("You win.");
+
+                    //add dialog
+                    //if the user confirm
                     game.init(game.getRule(), "human", "AI2", game.getEatStrictMode());
                     return;
                 }
@@ -189,7 +204,11 @@ public class Tile implements MouseListener {
                 game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
+                    //emit
                     System.out.println("You lost.");
+
+                    //add dialog
+                    //if the user confirm
                     game.init(game.getRule(), "human", "AI2", game.getEatStrictMode());
                     return;
                 }

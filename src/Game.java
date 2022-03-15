@@ -2751,10 +2751,6 @@ public class Game {
         char[][] newBoard = cloneBoard(board);
         Vector<Vector<int[]>> fullPaths = traceFullPaths(board, player, firstRow, firstColumn);
 
-        // //emit
-        // System.out.println("move sound");
-        
-
         int pathLong;
         for(int i = 0; i < fullPaths.size(); i++){
             pathLong = fullPaths.get(i).size();
@@ -2856,7 +2852,6 @@ public class Game {
                 int maxScore = Integer.MIN_VALUE;
                 for(int k = 0; k < minMaxList.size(); k++){
                     int minmax = minMaxList.get(k);
-                    //System.out.println(minmax);
                     if(minmax < minScore){
                         minScore = minmax;
                         result[0] = minmax;
@@ -2977,8 +2972,9 @@ public class Game {
         swapCarrentPlayer(carrentPlayer);
     }
 
-    //
 
+    
+    
     public void init(String rule, String playerOne, String playerTwo, boolean eatStrictMode){
         this.rule = rule;
         this.playerOne = playerOne;
