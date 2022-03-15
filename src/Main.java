@@ -1,8 +1,5 @@
 package com.Dame;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 
 import com.Dame.Concepts.Game;
 import com.Dame.GUI.PlayFrame;
