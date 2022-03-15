@@ -2163,6 +2163,34 @@ public class Game {
                             getListOfChoosesOfOnePieceInternational(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, false, true);
                         }
                     }
+                    //---------------------------------
+                    if(rowDifferent <= -1 && columnDifferent <= -1){//the backward is buttom right
+                        if(getSlotChar(board, row - 1, column - 1) == ' '){
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column - 1);
+    
+                            Vector<int[]> newComulPath = new Vector<int[]>();
+                            newComulPath = clonePath(comulPath);
+                            //add the carrent piece to the path (from)
+                            int [] rowAndColumn = new int[2];
+                            rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                            newComulPath.addElement(rowAndColumn);
+                            
+                            getListOfChoosesOfOnePieceInternational(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column - 1, false, false, true);
+                        }
+                    }else if(rowDifferent <= -1 && columnDifferent >= 1){//the backward is buttom left
+                        if(getSlotChar(board, row - 1, column + 1) == ' '){
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row - 1, column + 1);
+    
+                            Vector<int[]> newComulPath = new Vector<int[]>();
+                            newComulPath = clonePath(comulPath);
+                            //add the carrent piece to the path (from)
+                            int [] rowAndColumn = new int[2];
+                            rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                            newComulPath.addElement(rowAndColumn);
+                            
+                            getListOfChoosesOfOnePieceInternational(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column + 1, false, false, true);
+                        }   
+                    }
                 }
                 else if(pieceChar == 'a'){
                     int rowDifferent = row - comulPath.lastElement()[0];
@@ -2194,6 +2222,34 @@ public class Game {
                             
                             getListOfChoosesOfOnePieceInternational(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row - 1, column + 1, false, false, true);
                         }   
+                    }
+                    //----------------------------------
+                    if(rowDifferent >= 1 && columnDifferent >= 1){//the backward is top left
+                        if(getSlotChar(board, row + 1, column + 1) == ' '){
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column + 1);
+    
+                            Vector<int[]> newComulPath = new Vector<int[]>();
+                            newComulPath = clonePath(comulPath);
+                            //add the carrent piece to the path (from)
+                            int [] rowAndColumn = new int[2];
+                            rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                            newComulPath.addElement(rowAndColumn);
+                            
+                            getListOfChoosesOfOnePieceInternational(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column + 1, false, false, true);
+                        }   
+                    }else if(rowDifferent >= 1 && columnDifferent <= -1){//the backward is top right
+                        if(getSlotChar(board, row + 1, column - 1) == ' '){
+                            char[][] newBoard = movePiecebyRowAndColumn(board, row, column, row + 1, column - 1);
+    
+                            Vector<int[]> newComulPath = new Vector<int[]>();
+                            newComulPath = clonePath(comulPath);
+                            //add the carrent piece to the path (from)
+                            int [] rowAndColumn = new int[2];
+                            rowAndColumn[0] = row; rowAndColumn[1] = column; 
+                            newComulPath.addElement(rowAndColumn);
+                            
+                            getListOfChoosesOfOnePieceInternational(newBoard, player, listChooses, getSlotChar(board, row, column), newComulPath, row + 1, column - 1, false, false, true);
+                        }
                     }
                 }
                 else if(pieceChar == 'B'){
