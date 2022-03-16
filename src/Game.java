@@ -2505,7 +2505,6 @@ public class Game {
             int lengthOfTheLongestPath = 0;
             for(int i = 0; i < listChooses.size(); i++){
                 if(listChooses.get(i).size() > lengthOfTheLongestPath){
-                    //System.out.println(listChooses.get(i).size());
                     lengthOfTheLongestPath = listChooses.get(i).size();
                 }
             }
@@ -2696,6 +2695,7 @@ public class Game {
     }
 
     public void movePiecebyRowAndColumnSlowlyWithDisplay(int player, int firstRow, int firstColumn, int lastRow, int lastColumn){
+        char[][] clonedBoard = cloneBoard(board);
         Vector<Vector<int[]>> fullPaths = traceFullPaths(board, player, firstRow, firstColumn);
 
         //emit
@@ -2751,6 +2751,29 @@ public class Game {
 
                     drawBoard(board);
                 }
+
+                if(eatStrictMode == false){
+                    //delete piece that has beggest path length then this carrent piece if the eat strict mode equals false
+                    Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(clonedBoard, player);
+                    for(int j = 0; j < listofChooses.size(); j++){
+                        for(int k = 0; k < listofChooses.get(j).size(); k++){
+
+                                int pathlength = listofChooses.get(j).get(k).size();
+                                if(pathlength > pathLong){
+                                    //emit
+                                    if(playFrame.getSon()){
+                                        System.out.println("you miss to eat sound");
+                                    }
+                                    
+                                    board[listofChooses.get(j).get(k).get(0)[0]][listofChooses.get(j).get(k).get(0)[1]] = ' ';
+                                    drawBoard(board);
+                                }
+                            
+                        }
+                    }   
+                }
+
+
                 break;
             }
         }
