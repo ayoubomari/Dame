@@ -110,7 +110,10 @@ public class Tile implements MouseListener {
     public void mouseClicked(MouseEvent e){
         if(carrentBGColorChar != 'y' && carrentBGColorChar != 'g'){
             //emit
-            System.out.println("prohibated click sound");
+            if(game.getPlayFrame().getSon()){
+                System.out.println("prohibated click sound");
+            }
+
 
             if(carrentBGColorChar != 'b'){
                 label.setBackground(Colors.RED);
@@ -146,7 +149,10 @@ public class Tile implements MouseListener {
             } else if(game.getCarrentPlayerName() == "random"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
-                    System.out.println("You win.");
+                    if(game.getPlayFrame().getSon()){
+                        System.out.println("You win.");
+                    }
+                    
 
                     //add dialog
                     //if the user confirm
@@ -159,7 +165,10 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
-                    System.out.println("You lost.");
+                    if(game.getPlayFrame().getSon()){
+                        System.out.println("You lost.");
+                    }
+                    
 
                     //add dialog
                     //if the user confirm
@@ -169,7 +178,10 @@ public class Tile implements MouseListener {
             } else if(game.getCarrentPlayerName() == "AI1"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
-                    System.out.println("You win.");
+                    if(game.getPlayFrame().getSon()){
+                        System.out.println("You win.");
+                    }
+                    
 
                     //add dialog
                     //if the user confirm
@@ -182,7 +194,10 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
-                    System.out.println("You lost.");
+                    if(game.getPlayFrame().getSon()){
+                        System.out.println("You lost.");
+                    }
+                    
 
                     //add dialog
                     //if the user confirm
@@ -192,7 +207,10 @@ public class Tile implements MouseListener {
             } else if(game.getCarrentPlayerName() == "AI2"){
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
-                    System.out.println("You win.");
+                    if(game.getPlayFrame().getSon()){
+                        System.out.println("You win.");
+                    }
+                    
 
                     //add dialog
                     //if the user confirm
@@ -205,7 +223,10 @@ public class Tile implements MouseListener {
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
-                    System.out.println("You lost.");
+                    if(game.getPlayFrame().getSon()){
+                        System.out.println("You lost.");
+                    }
+
 
                     //add dialog
                     //if the user confirm

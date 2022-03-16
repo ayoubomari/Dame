@@ -2521,7 +2521,7 @@ public class Game {
         }else {
             Vector<Vector<int[]>> filtredListChooses = new Vector<Vector<int[]>>();
             for(int i = 0; i < listChooses.size(); i++){
-                    filtredListChooses.addElement(listChooses.get(i));
+                filtredListChooses.addElement(listChooses.get(i));
             }
             return filtredListChooses;
         }
@@ -2699,7 +2699,9 @@ public class Game {
         Vector<Vector<int[]>> fullPaths = traceFullPaths(board, player, firstRow, firstColumn);
 
         //emit
-        System.out.println("move sound");
+        if(playFrame.getSon()){
+            System.out.println("move sound");
+        }
         
 
         int pathLong;
@@ -2714,18 +2716,24 @@ public class Game {
                     if(carrentSlotChar == 'b'){
                         if(fullPaths.get(i).get(j + 1)[0] == 7){
                             //emit
-                            System.out.println("be king sound");
+                            if(playFrame.getSon()){
+                                System.out.println("be king sound");
+                            }
                         }
                     }else if(carrentSlotChar == 'a'){
                         if(fullPaths.get(i).get(j + 1)[0] == 0){
                             //emit
-                            System.out.println("be king sound");
+                            if(playFrame.getSon()){
+                                System.out.println("be king sound");
+                            }
                         }
                     }
 
                     if(eated){ 
                         //emit
-                        System.out.println("eat sound");
+                        if(playFrame.getSon()){
+                            System.out.println("eat sound");
+                        }
                     }
 
                     if(getSlotChar(board, fullPaths.get(i).get(j + 1)[0], fullPaths.get(i).get(j + 1)[1]) != ' '){
