@@ -6,8 +6,8 @@
 ./PieceImage.java
 ./Main.java
 ./Menubar.java
-./AboutDialog.java
 ./Board.java
 ./Tile.java
+./AboutPanel.java
 ./DefaultVBoard.java
 ./Sound.java

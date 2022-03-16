@@ -144,6 +144,8 @@ public class Tile implements MouseListener {
                     //add dialog
                     //if the user confirm
                     game.init(game.getRule(), "human", "human", game.getEatStrictMode());
+                    
+                    
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "random"){
@@ -157,6 +159,8 @@ public class Tile implements MouseListener {
                     //add dialog
                     //if the user confirm
                     game.init(game.getRule(), "human", "random", game.getEatStrictMode());
+                    
+                    
                     return;
                 }
 
@@ -173,6 +177,8 @@ public class Tile implements MouseListener {
                     //add dialog
                     //if the user confirm
                     game.init(game.getRule(), "human", "random", game.getEatStrictMode());
+                    
+                    
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "AI1"){
@@ -186,6 +192,8 @@ public class Tile implements MouseListener {
                     //add dialog
                     //if the user confirm
                     game.init(game.getRule(), "human", "AI1", game.getEatStrictMode());
+                    
+                    
                     return;
                 }
 
@@ -202,6 +210,8 @@ public class Tile implements MouseListener {
                     //add dialog
                     //if the user confirm
                     game.init(game.getRule(), "human", "AI1", game.getEatStrictMode());
+                    
+                    
                     return;
                 }
             } else if(game.getCarrentPlayerName() == "AI2"){
@@ -215,6 +225,8 @@ public class Tile implements MouseListener {
                     //add dialog
                     //if the user confirm
                     game.init(game.getRule(), "human", "AI2", game.getEatStrictMode());
+                    
+                    
                     return;
                 }
 
@@ -231,6 +243,8 @@ public class Tile implements MouseListener {
                     //add dialog
                     //if the user confirm
                     game.init(game.getRule(), "human", "AI2", game.getEatStrictMode());
+                    
+                    
                     return;
                 }
             }

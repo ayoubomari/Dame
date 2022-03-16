@@ -7,6 +7,7 @@ import javax.swing.*;
 import com.Dame.GUI.Board;
 import com.Dame.GUI.Menubar;
 import com.Dame.GUI.IntroPanel;
+import com.Dame.GUI.AboutPanel;
 
 import com.Dame.Concepts.Game;
 
@@ -14,6 +15,7 @@ public class PlayFrame extends JFrame{
     private boolean son = true;
     private Menubar menubar;
     private IntroPanel introPanel = new IntroPanel();
+    private AboutPanel aboutPanel = new AboutPanel();
     private Board board;
     
     public PlayFrame(Game game){
@@ -35,7 +37,11 @@ public class PlayFrame extends JFrame{
         //body components
         //set the intro panel
         //add(introPanel);
+
+        //set the about panel
+        //add(aboutPanel);
         
+        //set the board panel
         add(board);
         //-----------------------------------------
 
