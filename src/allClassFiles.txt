@@ -1,5 +1,5 @@
-./com/Dame/Main.class
 ./com/Dame/Concepts/Game.class
+./com/Dame/Main.class
 ./com/Dame/Constances/Colors.class
 ./com/Dame/Constances/DefaultVBoard.class
 ./com/Dame/Constances/PieceImage.class
