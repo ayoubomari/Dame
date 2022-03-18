@@ -1,0 +1,13 @@
+./com/Dame/Main.class
+./com/Dame/Concepts/Game.class
+./com/Dame/Constances/Colors.class
+./com/Dame/Constances/DefaultVBoard.class
+./com/Dame/Constances/PieceImage.class
+./com/Dame/Constances/Sound.class
+./com/Dame/Constances/DefaultBGColorVBoard.class
+./com/Dame/GUI/PlayFrame.class
+./com/Dame/GUI/Tile.class
+./com/Dame/GUI/AboutPanel.class
+./com/Dame/GUI/IntroPanel.class
+./com/Dame/GUI/Menubar.class
+./com/Dame/GUI/Board.class
