@@ -1,4 +1,5 @@
 ./com/Dame/Concepts/Game.class
+./com/Dame/Concepts/Game$1.class
 ./com/Dame/Main.class
 ./com/Dame/Constances/Colors.class
 ./com/Dame/Constances/DefaultVBoard.class
