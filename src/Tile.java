@@ -15,6 +15,7 @@ public class Tile implements MouseListener {
     private JLabel label = new JLabel();
     private char carrentPieceChar = ' ';
     private char carrentBGColorChar = ' ';
+    PieceImage pieceImage = new PieceImage();
     private Game game;
 
     public Tile(Game game, int row, int column){
@@ -36,16 +37,16 @@ public class Tile implements MouseListener {
             label.setIcon(null);
         }else if(pieceName == 'a'){
             carrentPieceChar = 'a';
-            label.setIcon(PieceImage.NORMALYELLOW);
+            label.setIcon(pieceImage.getNORMALYELLOW());
         }else if(pieceName == 'b'){
             carrentPieceChar = 'b';
-            label.setIcon(PieceImage.NORMALBLACK);
+            label.setIcon(pieceImage.getNORMALBLACK());
         }else if(pieceName == 'A'){
             carrentPieceChar = 'A';
-            label.setIcon(PieceImage.KINGYELLOW);
+            label.setIcon(pieceImage.getKINGYELLOW());
         }else if(pieceName == 'B'){
             carrentPieceChar = 'B';
-            label.setIcon(PieceImage.KINGBLACK);
+            label.setIcon(pieceImage.getKINGBLACK());
         }
     }
 
