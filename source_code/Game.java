@@ -57,7 +57,16 @@ public class Game {
         this.playFrame = playFrame;
     }
 
-    //set
+    //setters
+    public void setPlayerOne(String playerOne){
+        this.playerOne = playerOne;
+    }
+    public void setPlayerTwo(String playerTwo){
+        this.playerTwo = playerTwo;
+    }
+    public void setRule(String rule){
+        this.rule = rule;
+    }
     public void setEatStrictMode(boolean eatStrictMode){
         this.eatStrictMode = eatStrictMode;
     }
@@ -65,6 +74,11 @@ public class Game {
     //draw the board
     public void drawBoard(char [][] board){
         this.playFrame.getBoard().charsToPieces(board);
+        try{
+            Thread.sleep(1000);
+        }catch(Exception e){
+
+        }
     }
 
     //coloring the board
