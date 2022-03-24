@@ -148,7 +148,7 @@ public class Game {
         
         board = newBoard;
         drawBoard(board);
-        coloringBoard(coloringListOfTilesCanMove(board, player));
+        coloringBoard(coloringListOfTilesCanMove(board, 1));
     }
 
 

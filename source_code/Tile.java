@@ -132,6 +132,9 @@ public class Tile implements MouseListener {
             game.swapCarrentPlayer(game.getCarrentPlayer());
 
 
+            //add the new board to the history in "allPreviousBoard" vector
+            game.addBoardToAllPreviousBoard(game.getBoard());
+
 
             if(game.getCarrentPlayerName() == "human"){
                 game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
