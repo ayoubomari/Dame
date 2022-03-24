@@ -74,11 +74,6 @@ public class Game {
     //draw the board
     public void drawBoard(char [][] board){
         this.playFrame.getBoard().charsToPieces(board);
-        try{
-            Thread.sleep(1000);
-        }catch(Exception e){
-
-        }
     }
 
     //coloring the board
