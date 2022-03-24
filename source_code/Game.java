@@ -3,6 +3,8 @@ package com.Dame.Concepts;
 
 import java.util.Vector;
 
+import javax.swing.border.Border;
+
 import com.Dame.Constances.DefaultVBoard;
 import com.Dame.Constances.DefaultBGColorVBoard;
 import com.Dame.GUI.Board;
@@ -20,6 +22,7 @@ public class Game {
     private int[] carrentSlotIndex = new int[2];
     private char carrentSlotChar = ' '; 
     private boolean eatStrictMode;
+    private Vector<char[][]> allPreviousBoard = new Vector<char[][]>();
 
     //getters
     public PlayFrame getPlayFrame(){
@@ -129,6 +132,23 @@ public class Game {
         }
         System.out.println("---------- end ---------");
         System.out.print("\n\n\n");
+    }
+
+
+    //add board to "allPreviousBoard" vector
+    public void addBoardToAllPreviousBoard(char[][] board){
+        char[][] newBoard = cloneBoard(board);
+
+        allPreviousBoard.addElement(newBoard);
+    }
+    //undo to the previous board
+    public void undoToPreviousBoard(){
+        allPreviousBoard.remove(allPreviousBoard.size() - 1);
+        char[][] newBoard = cloneBoard(allPreviousBoard.get(allPreviousBoard.size() - 1));
+        
+        board = newBoard;
+        drawBoard(board);
+        coloringBoard(coloringListOfTilesCanMove(board, player));
     }
 
 
@@ -3024,6 +3044,7 @@ public class Game {
         //reintitialase the board
         board = new DefaultVBoard().getDefaultVboad();
         BGColorBoard = new DefaultBGColorVBoard().getDefaultBGColorVBoard();
+        addBoardToAllPreviousBoard(board);
         drawBoard(board);
         coloringBoard(BGColorBoard);
 
