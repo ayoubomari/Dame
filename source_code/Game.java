@@ -77,7 +77,7 @@ public class Game {
         this.playFrame = playFrame;
     }
 
-    
+
 
     //draw the board
     public void drawBoard(char [][] board){
@@ -145,16 +145,22 @@ public class Game {
         char[][] newBoard = cloneBoard(board);
 
         allPreviousBoard.addElement(newBoard);
+
+        System.out.println(allPreviousBoard.size());
     }
     //undo to the previous board
     public void undoToPreviousBoard(){
         if(allPreviousBoard.size() > 1){
             allPreviousBoard.remove(allPreviousBoard.size() - 1);
             char[][] newBoard = cloneBoard(allPreviousBoard.get(allPreviousBoard.size() - 1));
-            
             board = newBoard;
+            
+            if(playerTwo == "human"){
+                swapCarrentPlayer(carrentPlayer);
+            }
+
             drawBoard(board);
-            coloringBoard(coloringListOfTilesCanMove(board, 1));
+            coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
         }else{
             System.out.println("YOu can't undo!");
         }
