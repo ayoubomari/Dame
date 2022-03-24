@@ -145,14 +145,13 @@ public class Game {
         char[][] newBoard = cloneBoard(board);
 
         allPreviousBoard.addElement(newBoard);
-
-        System.out.println(allPreviousBoard.size());
     }
     //undo to the previous board
     public void undoToPreviousBoard(){
-        if(allPreviousBoard.size() > 1){
-            allPreviousBoard.remove(allPreviousBoard.size() - 1);
-            char[][] newBoard = cloneBoard(allPreviousBoard.get(allPreviousBoard.size() - 1));
+        int allPreviousBoardLength = allPreviousBoard.size();
+        if(allPreviousBoardLength > 1){
+            allPreviousBoard.remove(allPreviousBoardLength - 1);
+            char[][] newBoard = cloneBoard(allPreviousBoard.get(allPreviousBoardLength - 2));
             board = newBoard;
             
             if(playerTwo == "human"){
