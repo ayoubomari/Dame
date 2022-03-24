@@ -55,9 +55,8 @@ public class Game {
     public boolean getEatStrictMode(){
         return eatStrictMode;
     }
-
-    public void setPlayFrame(PlayFrame playFrame){
-        this.playFrame = playFrame;
+    public Vector<char[][]> getAllPreviousBoard(){
+        return allPreviousBoard;
     }
 
     //setters
@@ -73,6 +72,12 @@ public class Game {
     public void setEatStrictMode(boolean eatStrictMode){
         this.eatStrictMode = eatStrictMode;
     }
+
+    public void setPlayFrame(PlayFrame playFrame){
+        this.playFrame = playFrame;
+    }
+
+    
 
     //draw the board
     public void drawBoard(char [][] board){
@@ -143,12 +148,16 @@ public class Game {
     }
     //undo to the previous board
     public void undoToPreviousBoard(){
-        allPreviousBoard.remove(allPreviousBoard.size() - 1);
-        char[][] newBoard = cloneBoard(allPreviousBoard.get(allPreviousBoard.size() - 1));
-        
-        board = newBoard;
-        drawBoard(board);
-        coloringBoard(coloringListOfTilesCanMove(board, 1));
+        if(allPreviousBoard.size() > 1){
+            allPreviousBoard.remove(allPreviousBoard.size() - 1);
+            char[][] newBoard = cloneBoard(allPreviousBoard.get(allPreviousBoard.size() - 1));
+            
+            board = newBoard;
+            drawBoard(board);
+            coloringBoard(coloringListOfTilesCanMove(board, 1));
+        }else{
+            System.out.println("YOu can't undo!");
+        }
     }
 
 
