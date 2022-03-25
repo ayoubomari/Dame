@@ -3,12 +3,13 @@ package com.Dame.Concepts;
 
 import java.util.Vector;
 
-import javax.swing.border.Border;
-
 import com.Dame.Constances.DefaultVBoard;
 import com.Dame.Constances.DefaultBGColorVBoard;
 import com.Dame.GUI.Board;
 import com.Dame.GUI.PlayFrame;
+
+
+import com.Dame.Constances.Sound;
 
 public class Game {
     private PlayFrame playFrame;
@@ -2744,6 +2745,8 @@ public class Game {
         //emit
         if(playFrame.getSon()){
             System.out.println("move sound");
+
+            Sound.EMIT("moving");
         }
         
 
@@ -2761,6 +2764,8 @@ public class Game {
                             //emit
                             if(playFrame.getSon()){
                                 System.out.println("be king sound");
+                                
+                                Sound.EMIT("beKing");
                             }
                         }
                     }else if(carrentSlotChar == 'a'){
@@ -2768,6 +2773,9 @@ public class Game {
                             //emit
                             if(playFrame.getSon()){
                                 System.out.println("be king sound");
+                                
+                                
+                                Sound.EMIT("beKing");
                             }
                         }
                     }
@@ -2776,6 +2784,8 @@ public class Game {
                         //emit
                         if(playFrame.getSon()){
                             System.out.println("eat sound");
+                            
+                            Sound.EMIT("eatting");
                         }
                     }
 
@@ -2806,6 +2816,8 @@ public class Game {
                                     //emit
                                     if(playFrame.getSon()){
                                         System.out.println("you miss to eat sound");
+                                        
+                                        Sound.EMIT("eatting");
                                     }
                                     
                                     board[listofChooses.get(j).get(k).get(0)[0]][listofChooses.get(j).get(k).get(0)[1]] = ' ';

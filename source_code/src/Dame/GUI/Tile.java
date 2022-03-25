@@ -2,10 +2,12 @@ package com.Dame.GUI;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 
 import com.Dame.Constances.PieceImage;
 import com.Dame.Constances.Colors;
+import com.Dame.Constances.Sound;
+
+import javax.swing.*;
 
 import com.Dame.Concepts.Game;
 
@@ -113,6 +115,8 @@ public class Tile implements MouseListener {
             //emit
             if(game.getPlayFrame().getSon()){
                 System.out.println("prohibated click sound");
+                
+                Sound.EMIT("prohibatedMove");
             }
 
 
@@ -160,6 +164,8 @@ public class Tile implements MouseListener {
                     //emit
                     if(game.getPlayFrame().getSon()){
                         System.out.println("You win.");
+                        
+                        Sound.EMIT("win");
                     }
                     
 
@@ -181,6 +187,8 @@ public class Tile implements MouseListener {
                     //emit
                     if(game.getPlayFrame().getSon()){
                         System.out.println("You lost.");
+                        
+                        Sound.EMIT("lost");
                     }
                     
 
@@ -199,6 +207,8 @@ public class Tile implements MouseListener {
                     //emit
                     if(game.getPlayFrame().getSon()){
                         System.out.println("You win.");
+                        
+                        Sound.EMIT("win");
                     }
                     
 
@@ -220,6 +230,8 @@ public class Tile implements MouseListener {
                     //emit
                     if(game.getPlayFrame().getSon()){
                         System.out.println("You lost.");
+                        
+                        Sound.EMIT("lost");
                     }
                     
 
@@ -238,6 +250,8 @@ public class Tile implements MouseListener {
                     //emit
                     if(game.getPlayFrame().getSon()){
                         System.out.println("You win.");
+                        
+                        Sound.EMIT("win");
                     }
                     
 
@@ -259,6 +273,8 @@ public class Tile implements MouseListener {
                     //emit
                     if(game.getPlayFrame().getSon()){
                         System.out.println("You lost.");
+                        
+                        Sound.EMIT("lost");
                     }
 
 
