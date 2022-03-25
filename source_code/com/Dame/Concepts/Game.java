@@ -5,7 +5,6 @@ import java.util.Vector;
 
 import com.Dame.Constances.DefaultVBoard;
 import com.Dame.Constances.DefaultBGColorVBoard;
-import com.Dame.GUI.Board;
 import com.Dame.GUI.PlayFrame;
 
 import com.Dame.Constances.Sound;
@@ -1339,8 +1338,6 @@ public class Game {
 
     //============================================= USA's rules =============================================//
     public void kingPieceMoveBeforEattingUSA(char[][] board, int player, Vector<Vector<int[]>> listChooses, Vector<int[]> comulPath, int row, int column, int rowDifferent, int columnDifferent, char slotChar){
-        char lastSlotChar = ' ';
-        char nextSlotChar;
         char[] carrentPlayerSlotChar = new char[2]; 
         char[] otherPlayerSlotChar = new char[2]; 
         if(slotChar == 'B'){
@@ -1469,8 +1466,6 @@ public class Game {
         }
     }
     public void kingPieceMoveInEattingUSA(char[][] board, int player, Vector<Vector<int[]>> listChooses, Vector<int[]> comulPath, int row, int column, int rowDifferent, int columnDifferent, char slotChar){
-        char lastSlotChar = 'a';
-        char nextSlotChar;
         char[] carrentPlayerSlotChar = new char[2]; 
         char[] otherPlayerSlotChar = new char[2]; 
         if(slotChar == 'B'){
@@ -1542,8 +1537,6 @@ public class Game {
         }
     }
     public void kingPieceMoveAfterEattingUSA(char[][] board, int player, Vector<Vector<int[]>> listChooses, Vector<int[]> comulPath, int row, int column, int rowDifferent, int columnDifferent, char slotChar){
-        char lastSlotChar = ' ';
-        char nextSlotChar;
         char[] carrentPlayerSlotChar = new char[2]; 
         char[] otherPlayerSlotChar = new char[2]; 
         if(slotChar == 'B'){
@@ -2842,14 +2835,11 @@ public class Game {
             if(fullPaths.get(i).get(0)[0] == firstRow && fullPaths.get(i).get(0)[1] == firstColumn && fullPaths.get(i).get(pathLong - 1)[0] == lastRow && fullPaths.get(i).get(pathLong - 1)[1] == lastColumn){
                 int carrentRow = firstRow;
                 int carrentColumn = firstColumn;
-                boolean eated = false;
-                char carrentSlotChar = getSlotChar(newBoard, carrentRow, carrentColumn);
                 for(int j = 0; j < fullPaths.get(i).size() - 1; j++){
                     newBoard = movePiecebyRowAndColumn(newBoard, carrentRow, carrentColumn, fullPaths.get(i).get(j + 1)[0], fullPaths.get(i).get(j + 1)[1]);
 
                     carrentRow = fullPaths.get(i).get(j + 1)[0];
                     carrentColumn = fullPaths.get(i).get(j + 1)[1];
-                    carrentSlotChar = getSlotChar(newBoard, carrentRow, carrentColumn);
                 }
                 break;
             }
@@ -2913,16 +2903,11 @@ public class Game {
         result[2] = 0;
         char[][] newBoard = cloneBoard(board);
 
-        int playerPiecesCanMove = getListOfPieceCanMove(board, 1).size();
-        int computerPiecesCanMove = getListOfPieceCanMove(board, 2).size();
-
-
         newBoard = movePiecebyRowAndColumnWithoutDisplay(newBoard, 2, fromTo[0], fromTo[1], fromTo[2], fromTo[3]);
         carrentPlayer = getSwapCarrentPlayer(carrentPlayer);
 
         Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 1);
         int[] numberOfpiece = getNumberOfPieceOfTwoPlayer(board);
-        int[] numberOfNormalPiece = getNumberOfNormalPieceOfTwoPlayer(board);
         int[] numberOfking = getNumberOfKingsOfTwoPlayer(board);
         int[] lastResult = new int[4];
         lastResult[0] = numberOfpiece[0];
