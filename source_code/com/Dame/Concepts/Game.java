@@ -8,7 +8,6 @@ import com.Dame.Constances.DefaultBGColorVBoard;
 import com.Dame.GUI.Board;
 import com.Dame.GUI.PlayFrame;
 
-
 import com.Dame.Constances.Sound;
 
 public class Game {

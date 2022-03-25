@@ -1,13 +1,11 @@
 package com.Dame.GUI;
 
-import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 import com.Dame.Constances.PieceImage;
 import com.Dame.Constances.Colors;
 import com.Dame.Constances.Sound;
-
-import javax.swing.*;
 
 import com.Dame.Concepts.Game;
 
@@ -149,8 +147,7 @@ public class Tile implements MouseListener {
     
                     System.out.println("The Player " + game.getCarrentPlayer() + " win.");
 
-                    //add dialog
-                    //if the user confirm
+                    //if the user confirm then restart the game with the same players and the same tools
                     int opt = JOptionPane.showConfirmDialog(game.getPlayFrame(), "Do you want to play again?", "The Player " + game.getCarrentPlayer() + " win.", JOptionPane.YES_NO_OPTION);
                     if(opt == 0){
                         game.init(game.getRule(), "human", "human", game.getEatStrictMode());
@@ -169,8 +166,7 @@ public class Tile implements MouseListener {
                     }
                     
 
-                    //add dialog
-                    //if the user confirm
+                    //if the user confirm then restart the game with the same players and the same tools
                     int opt = JOptionPane.showConfirmDialog(game.getPlayFrame(), "Do you want to play again?", "You win.", JOptionPane.YES_NO_OPTION);
                     if(opt == 0){
                         game.init(game.getRule(), "human", "random", game.getEatStrictMode());
@@ -192,8 +188,7 @@ public class Tile implements MouseListener {
                     }
                     
 
-                    //add dialog
-                    //if the user confirm
+                    //if the user confirm then restart the game with the same players and the same tools
                     int opt = JOptionPane.showConfirmDialog(game.getPlayFrame(), "Do you want to play again?", "You lost.", JOptionPane.YES_NO_OPTION);
                     if(opt == 0){
                         game.init(game.getRule(), "human", "random", game.getEatStrictMode());
@@ -212,8 +207,7 @@ public class Tile implements MouseListener {
                     }
                     
 
-                    //add dialog
-                    //if the user confirm
+                    //if the user confirm then restart the game with the same players and the same tools
                     int opt = JOptionPane.showConfirmDialog(game.getPlayFrame(), "Do you want to play again?", "You win.", JOptionPane.YES_NO_OPTION);
                     if(opt == 0){
                         game.init(game.getRule(), "human", "AI1", game.getEatStrictMode());
@@ -235,8 +229,7 @@ public class Tile implements MouseListener {
                     }
                     
 
-                    //add dialog
-                    //if the user confirm
+                    //if the user confirm then restart the game with the same players and the same tools
                     int opt = JOptionPane.showConfirmDialog(game.getPlayFrame(), "Do you want to play again?", "You lost.", JOptionPane.YES_NO_OPTION);
                     if(opt == 0){
                         game.init(game.getRule(), "human", "AI1", game.getEatStrictMode());
@@ -255,8 +248,7 @@ public class Tile implements MouseListener {
                     }
                     
 
-                    //add dialog
-                    //if the user confirm
+                    //if the user confirm then restart the game with the same players and the same tools
                     int opt = JOptionPane.showConfirmDialog(game.getPlayFrame(), "Do you want to play again?", "You win.", JOptionPane.YES_NO_OPTION);
                     if(opt == 0){
                         game.init(game.getRule(), "human", "AI2", game.getEatStrictMode());
@@ -278,8 +270,7 @@ public class Tile implements MouseListener {
                     }
 
 
-                    //add dialog
-                    //if the user confirm
+                    //if the user confirm then restart the game with the same players and the same tools
                     int opt = JOptionPane.showConfirmDialog(game.getPlayFrame(), "Do you want to play again?", "You lost.", JOptionPane.YES_NO_OPTION);
                     if(opt == 0){
                         game.init(game.getRule(), "human", "AI2", game.getEatStrictMode());
