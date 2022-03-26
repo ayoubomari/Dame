@@ -112,57 +112,47 @@ public class Menubar extends JMenuBar implements ActionListener{
     }
     
     public void actionPerformed(ActionEvent e) {
-    	
-    	if (e.getSource()== ONItem) {
+    	//eatting strict mode
+    	if (e.getSource() == ONItem) {
        		game.setEatStrictMode(true);
-       		return ;
        	}
-    	if (e.getSource()== OFFItem) {
+    	else if (e.getSource() == OFFItem) {
        		game.setEatStrictMode(false);
-       		return ;
        	}
     	
-    	if (e.getSource()== InternationalItem) {
+        //rules
+    	else if (e.getSource() == InternationalItem) {
        		game.setRule("International");
-       		return ;
        	}
-        	if (e.getSource()== SpainItem) {
-           		game.setRule("Spain");
-           		return ;
-           	}
-        	if (e.getSource()== USAItem) {
-           		game.setRule("USA");
-           		return ;
-           	}
-    	if (e.getSource()== HVHItem) {
-    		 game.init(game.getRule(), "human", "human", game.getEatStrictMode());
-    		return ;
-    	}
-    	if (e.getSource()== HVCEItem) {
-    		game.init(game.getRule(), "human", "random", game.getEatStrictMode());
-    		return ;
-    	}
-    	if (e.getSource()== HVCMItem) {
-    		game.init(game.getRule(), "human", "AI1",game.getEatStrictMode());
-    		return ;
-    	}
-    	if (e.getSource()== HVCHItem) {
-    		game.init(game.getRule(), "human", "AI2",game.getEatStrictMode());
-    		return ;
-    	}
-    	if (e.getSource()== undo) {
-    		game.undoToPreviousBoard();
-    		return;
-    	}
-    	if(e.getSource()== exitItem) {
-    		System.exit(0);
-    		
-    	}
-    }
-    
-    
+        else if (e.getSource() == SpainItem) {
+            game.setRule("Spain");
+        }
+        else if (e.getSource() == USAItem) {
+            game.setRule("USA");
+        }
 
-    public Game getGame(){
-        return game;
+        //new Game
+    	else if (e.getSource() == HVHItem) {
+    		 game.init(game.getRule(), "human", "human", game.getEatStrictMode());
+    	}
+    	else if (e.getSource() == HVCEItem) {
+    		game.init(game.getRule(), "human", "random", game.getEatStrictMode());
+    	}
+    	else if (e.getSource() == HVCMItem) {
+    		game.init(game.getRule(), "human", "AI1",game.getEatStrictMode());
+    	}
+    	else if (e.getSource() == HVCHItem) {
+    		game.init(game.getRule(), "human", "AI2",game.getEatStrictMode());
+    	}
+
+        //undo
+    	else if (e.getSource() == undo) {
+    		game.undoToPreviousBoard();
+    	}
+
+        //exit
+    	else if(e.getSource() == exitItem) {
+    		System.exit(0);
+    	}
     }
 }
