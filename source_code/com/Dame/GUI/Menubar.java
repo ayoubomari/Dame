@@ -131,9 +131,6 @@ public class Menubar extends JMenuBar implements ActionListener{
     }
 
     
-    public PlayFrame getPlayFrame(){
-        return playframe;
-    }
     public void actionPerformed(ActionEvent e) {
     	
     	if (e.getSource()== ONItem) {
@@ -152,6 +149,7 @@ public class Menubar extends JMenuBar implements ActionListener{
         else if (e.getSource()== USAItem) {
             game.setRule("USA");
         }
+
     	else if (e.getSource()== HVHItem) {
     		 game.init(game.getRule(), "human", "human", game.getEatStrictMode());
     	}
@@ -164,23 +162,21 @@ public class Menubar extends JMenuBar implements ActionListener{
     	else if (e.getSource()== HVCHItem) {
     		game.init(game.getRule(), "human", "AI2",game.getEatStrictMode());
     	}
+
     	else if (e.getSource()== undo) {
     		game.undoToPreviousBoard();
     		return;
     	}
-    	else if (e.getSource()== exitItem) {
-    		System.exit(0);
-    	}
-    	else if (e.getSource()== ONSoundItem) {
+
+        else if (e.getSource()== ONSoundItem) {
     		game.getPlayFrame().setSon(true);
     	}
-    	
     	else if (e.getSource()== OFFSoundItem) {
     		game.getPlayFrame().setSon(false);
     	}
-    
-    }
-    public Game getGame(){
-        return game;
+
+    	else if (e.getSource()== exitItem) {
+    		System.exit(0);
+    	}
     }
 }
