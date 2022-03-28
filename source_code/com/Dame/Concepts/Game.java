@@ -2809,7 +2809,7 @@ public class Game {
                                     if(playFrame.getSon()){
                                         System.out.println("you miss to eat sound");
                                         
-                                        Sound.EMIT("eatting");
+                                        Sound.EMIT("missToEat");
                                     }
                                     
                                     board[listofChooses.get(j).get(k).get(0)[0]][listofChooses.get(j).get(k).get(0)[1]] = ' ';

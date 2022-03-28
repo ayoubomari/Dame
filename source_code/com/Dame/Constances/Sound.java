@@ -11,6 +11,7 @@ public class Sound{
             case "moving": audioName = "moving"; break;
             case "beKing": audioName = "beKing"; break;
             case "eatting": audioName = "eatting"; break;
+            case "missToEat": audioName = "missToEat"; break;
             case "win": audioName = "win"; break;
             case "lost": audioName = "lost"; break;
             case "prohibatedMove": audioName = "prohibatedMove"; break;
