@@ -8,29 +8,28 @@ import com.Dame.Concepts.Game;
 
 public class Menubar extends JMenuBar implements ActionListener{
     private Game game;
-    JMenuBar menuBar;
-    JMenu NewGameMenu;
-    JMenu helpMenu;
-    JMenu rulesMenu;
-    JMenu EatstrictModeMenu;
-    JMenu SoundMenu;
-    JRadioButtonMenuItem HVHItem;
-    JRadioButtonMenuItem HVCEItem;
-    JRadioButtonMenuItem HVCMItem;
-    JRadioButtonMenuItem HVCHItem;
-    JMenuItem exitItem;
-    JRadioButtonMenuItem SpainItem;
-    JRadioButtonMenuItem USAItem;
-    JRadioButtonMenuItem InternationalItem;
-    JRadioButtonMenuItem ONItem;
-    JRadioButtonMenuItem OFFItem;
-    JRadioButtonMenuItem ONSoundItem;
-    JRadioButtonMenuItem OFFSoundItem;
-    JButton undo;
-    ButtonGroup Mode;
-    ButtonGroup Rules;
-    ButtonGroup Eatstrict;
-    ButtonGroup Sound;
+    private JMenuBar menuBar;
+    private JMenu NewGameMenu;
+    private JMenu rulesMenu;
+    private JMenu EatstrictModeMenu;
+    private JMenu SoundMenu;
+    private JRadioButtonMenuItem HVHItem;
+    private JRadioButtonMenuItem HVCEItem;
+    private JRadioButtonMenuItem HVCMItem;
+    private JRadioButtonMenuItem HVCHItem;
+    private JMenuItem exitItem;
+    private JRadioButtonMenuItem SpainItem;
+    private JRadioButtonMenuItem USAItem;
+    private JRadioButtonMenuItem InternationalItem;
+    private JRadioButtonMenuItem ONItem;
+    private JRadioButtonMenuItem OFFItem;
+    private JRadioButtonMenuItem ONSoundItem;
+    private JRadioButtonMenuItem OFFSoundItem;
+    private JButton undo;
+    private ButtonGroup Mode;
+    private ButtonGroup Rules;
+    private ButtonGroup Eatstrict;
+    private ButtonGroup Sound;
     
     
     Menubar(Game game){
@@ -131,7 +130,6 @@ public class Menubar extends JMenuBar implements ActionListener{
 
     
     public void actionPerformed(ActionEvent e) {
-    	
     	if (e.getSource()== ONItem) {
        		game.setEatStrictMode(true);
        	}
