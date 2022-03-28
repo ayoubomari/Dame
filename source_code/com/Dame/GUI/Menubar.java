@@ -7,7 +7,6 @@ import javax.swing.*;
 import com.Dame.Concepts.Game;
 
 public class Menubar extends JMenuBar implements ActionListener{
-	private PlayFrame playframe ;
     private Game game;
     JMenuBar menuBar;
     JMenu NewGameMenu;
