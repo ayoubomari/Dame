@@ -7,13 +7,14 @@ import javax.swing.*;
 import com.Dame.Concepts.Game;
 
 public class Menubar extends JMenuBar implements ActionListener{
-	
+	private PlayFrame playframe ;
     private Game game;
     JMenuBar menuBar;
     JMenu NewGameMenu;
     JMenu helpMenu;
     JMenu rulesMenu;
     JMenu EatstrictModeMenu;
+    JMenu SoundMenu;
     JRadioButtonMenuItem HVHItem;
     JRadioButtonMenuItem HVCEItem;
     JRadioButtonMenuItem HVCMItem;
@@ -24,21 +25,25 @@ public class Menubar extends JMenuBar implements ActionListener{
     JRadioButtonMenuItem InternationalItem;
     JRadioButtonMenuItem ONItem;
     JRadioButtonMenuItem OFFItem;
+    JRadioButtonMenuItem ONSoundItem;
+    JRadioButtonMenuItem OFFSoundItem;
     JButton undo;
     ButtonGroup Mode;
     ButtonGroup Rules;
     ButtonGroup Eatstrict;
+    ButtonGroup Sound;
     
     
     Menubar(Game game){
         this.game = game;
-
         menuBar = new JMenuBar();
         NewGameMenu = new JMenu("New Game");
         rulesMenu = new JMenu ("Rules");
         EatstrictModeMenu = new JMenu("Eat strict Mode");
-        
+        SoundMenu = new JMenu ("Sound");
         undo =new JButton ("Undo");
+        
+        
         Mode = new ButtonGroup();
         
         HVHItem = new JRadioButtonMenuItem ("Human vs Human");     
@@ -62,7 +67,18 @@ public class Menubar extends JMenuBar implements ActionListener{
         SpainItem.setSelected(true);
         Rules.add(SpainItem);
         Rules.add(USAItem);
-
+        
+        
+        
+        Sound = new ButtonGroup();
+        
+        ONSoundItem = new JRadioButtonMenuItem ("ON");
+        OFFSoundItem = new JRadioButtonMenuItem ("OFF");
+        
+        Sound.add(ONSoundItem);
+        ONSoundItem.setSelected(true);
+        Sound.add(OFFSoundItem);
+        
         
         Eatstrict = new ButtonGroup();
 
@@ -84,6 +100,8 @@ public class Menubar extends JMenuBar implements ActionListener{
         USAItem.addActionListener(this);
         ONItem.addActionListener(this);
         OFFItem.addActionListener(this);
+        ONSoundItem.addActionListener(this);
+        OFFSoundItem.addActionListener(this);
         
         
         NewGameMenu.add(HVHItem);
@@ -101,58 +119,68 @@ public class Menubar extends JMenuBar implements ActionListener{
         EatstrictModeMenu.add(ONItem);
         EatstrictModeMenu.add(OFFItem);
         
-        
+        SoundMenu.add(ONSoundItem);
+        SoundMenu.add(OFFSoundItem);
         
         menuBar.add(NewGameMenu);
         menuBar.add(rulesMenu);
         menuBar.add(EatstrictModeMenu);
+        menuBar.add(SoundMenu);
         menuBar.add(undo);
-        
         add(menuBar);
     }
+
     
+    public PlayFrame getPlayFrame(){
+        return playframe;
+    }
     public void actionPerformed(ActionEvent e) {
-    	//eatting strict mode
-    	if (e.getSource() == ONItem) {
+    	
+    	if (e.getSource()== ONItem) {
        		game.setEatStrictMode(true);
        	}
-    	else if (e.getSource() == OFFItem) {
+    	else if (e.getSource()== OFFItem) {
        		game.setEatStrictMode(false);
        	}
     	
-        //rules
-    	else if (e.getSource() == InternationalItem) {
+    	else if (e.getSource()== InternationalItem) {
        		game.setRule("International");
        	}
-        else if (e.getSource() == SpainItem) {
+        else if (e.getSource()== SpainItem) {
             game.setRule("Spain");
         }
-        else if (e.getSource() == USAItem) {
+        else if (e.getSource()== USAItem) {
             game.setRule("USA");
         }
-
-        //new Game
-    	else if (e.getSource() == HVHItem) {
+    	else if (e.getSource()== HVHItem) {
     		 game.init(game.getRule(), "human", "human", game.getEatStrictMode());
     	}
-    	else if (e.getSource() == HVCEItem) {
+    	else if (e.getSource()== HVCEItem) {
     		game.init(game.getRule(), "human", "random", game.getEatStrictMode());
     	}
-    	else if (e.getSource() == HVCMItem) {
+    	else if (e.getSource()== HVCMItem) {
     		game.init(game.getRule(), "human", "AI1",game.getEatStrictMode());
     	}
-    	else if (e.getSource() == HVCHItem) {
+    	else if (e.getSource()== HVCHItem) {
     		game.init(game.getRule(), "human", "AI2",game.getEatStrictMode());
     	}
-
-        //undo
-    	else if (e.getSource() == undo) {
+    	else if (e.getSource()== undo) {
     		game.undoToPreviousBoard();
+    		return;
     	}
-
-        //exit
-    	else if(e.getSource() == exitItem) {
+    	else if (e.getSource()== exitItem) {
     		System.exit(0);
     	}
+    	else if (e.getSource()== ONSoundItem) {
+    		game.getPlayFrame().setSon(true);
+    	}
+    	
+    	else if (e.getSource()== OFFSoundItem) {
+    		game.getPlayFrame().setSon(false);
+    	}
+    
+    }
+    public Game getGame(){
+        return game;
     }
 }
