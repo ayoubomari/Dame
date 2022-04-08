@@ -27,7 +27,7 @@ public class Sound{
                     clip.open(audioStream);
                     clip.start();
                 }catch(Exception err){
-                    System.err.println(err);
+                    //System.err.println(err);
                 }
             }
         }.start();

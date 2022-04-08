@@ -2736,8 +2736,6 @@ public class Game {
 
         //emit
         if(playFrame.getSon()){
-            System.out.println("move sound");
-
             Sound.EMIT("moving");
         }
         
@@ -2755,8 +2753,6 @@ public class Game {
                         if(fullPaths.get(i).get(j + 1)[0] == 7){
                             //emit
                             if(playFrame.getSon()){
-                                System.out.println("be king sound");
-                                
                                 Sound.EMIT("beKing");
                             }
                         }
@@ -2764,9 +2760,6 @@ public class Game {
                         if(fullPaths.get(i).get(j + 1)[0] == 0){
                             //emit
                             if(playFrame.getSon()){
-                                System.out.println("be king sound");
-                                
-                                
                                 Sound.EMIT("beKing");
                             }
                         }
@@ -2775,8 +2768,6 @@ public class Game {
                     if(eated){ 
                         //emit
                         if(playFrame.getSon()){
-                            System.out.println("eat sound");
-                            
                             Sound.EMIT("eatting");
                         }
                     }
@@ -2807,8 +2798,6 @@ public class Game {
                                 if(pathlength > pathLong){
                                     //emit
                                     if(playFrame.getSon()){
-                                        System.out.println("you miss to eat sound");
-                                        
                                         Sound.EMIT("missToEat");
                                     }
                                     
@@ -2865,88 +2854,157 @@ public class Game {
 
 
     //calculate utilites of specific move
-    public void getAllUtilites(char[][] board, Vector<Integer> minMaxList, int carrentPlayer, int[] lastResult, int depth){
-        int carrentPlayerPiecesCanMove = getListOfPieceCanMove(board, carrentPlayer).size();
-        if(carrentPlayerPiecesCanMove == 0){
-            if(carrentPlayer == 1){
-                minMaxList.addElement(100000 + depth);
-            }else {
-                minMaxList.addElement(-100000 - depth);
-            }
+    // public void getAllUtilites(char[][] board, Vector<Integer> minMaxList, int carrentPlayer, int[] lastResult, int depth){
+    //     int carrentPlayerPiecesCanMove = getListOfPieceCanMove(board, carrentPlayer).size();
+    //     if(carrentPlayerPiecesCanMove == 0){
+    //         if(carrentPlayer == 1){
+    //             minMaxList.addElement(100000 + depth);
+    //         }else {
+    //             minMaxList.addElement(-100000 - depth);
+    //         }
             
-            return;
-        }
+    //         return;
+    //     }
         
         
-        if(depth > 0){
-            Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, carrentPlayer);
-            for(int i = 0; i < listofChooses.size(); i++){
-                for(int j = 0; j < listofChooses.get(i).size(); j++){
-                    char[][] newBoard = cloneBoard(board);
-                    newBoard = movePiecebyRowAndColumnWithoutDisplay(newBoard, carrentPlayer, listofChooses.get(i).get(j).get(0)[0], listofChooses.get(i).get(j).get(0)[1], listofChooses.get(i).get(j).get( listofChooses.get(i).get(j).size() - 1 )[0], listofChooses.get(i).get(j).get( listofChooses.get(i).get(j).size() - 1 )[1]);
+    //     if(depth > 0){
+    //         Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, carrentPlayer);
+    //         for(int i = 0; i < listofChooses.size(); i++){
+    //             for(int j = 0; j < listofChooses.get(i).size(); j++){
+    //                 char[][] newBoard = cloneBoard(board);
+    //                 newBoard = movePiecebyRowAndColumnWithoutDisplay(newBoard, carrentPlayer, listofChooses.get(i).get(j).get(0)[0], listofChooses.get(i).get(j).get(0)[1], listofChooses.get(i).get(j).get( listofChooses.get(i).get(j).size() - 1 )[0], listofChooses.get(i).get(j).get( listofChooses.get(i).get(j).size() - 1 )[1]);
 
-                    getAllUtilites(newBoard, minMaxList, getSwapCarrentPlayer(carrentPlayer), lastResult, depth - 1);
+    //                 getAllUtilites(newBoard, minMaxList, getSwapCarrentPlayer(carrentPlayer), lastResult, depth - 1);
+    //             }
+    //         }
+    //     }else{
+    //         int[] numberOfNormalPiece = getNumberOfNormalPieceOfTwoPlayer(board);
+    //         int[] numberOfking = getNumberOfKingsOfTwoPlayer(board);
+
+    //         int result = (numberOfNormalPiece[1] + (numberOfking[1])) - (numberOfNormalPiece[0] + (numberOfking[0]));
+            
+    //         minMaxList.addElement(result);
+    //     }
+    // }
+    // public int[] getScoreOfOneMove(char[][] board, int carrentPlayer, int[] fromTo, int depth){
+    //     int[] result = new int[4];
+    //     result[1] = 0;
+    //     result[2] = 0;
+    //     char[][] newBoard = cloneBoard(board);
+    
+    //     newBoard = movePiecebyRowAndColumnWithoutDisplay(newBoard, 2, fromTo[0], fromTo[1], fromTo[2], fromTo[3]);
+    //     carrentPlayer = getSwapCarrentPlayer(carrentPlayer);
+
+    //     Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 1);
+    //     int[] numberOfpiece = getNumberOfPieceOfTwoPlayer(board);
+    //     int[] numberOfking = getNumberOfKingsOfTwoPlayer(board);
+    //     int[] lastResult = new int[4];
+    //     lastResult[0] = numberOfpiece[0];
+    //     lastResult[1] = numberOfpiece[1];
+    //     lastResult[2] = numberOfking[0];
+    //     lastResult[3] = numberOfking[1];
+    //     for(int i = 0; i < listofChooses.size(); i++){
+    //         for(int j = 0; j < listofChooses.get(i).size(); j++){
+    //             Vector<Integer> minMaxList = new Vector<Integer>();
+    //             getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, depth - 1);
+    //             int minScore = Integer.MAX_VALUE;
+    //             int maxScore = Integer.MIN_VALUE;
+    //             for(int k = 0; k < minMaxList.size(); k++){
+    //                 int minmax = minMaxList.get(k);
+    //                 if(minmax < minScore){
+    //                     minScore = minmax;
+    //                     result[0] = minmax;
+    //                 }
+    //                 if(minmax > maxScore){
+    //                     maxScore = minmax;
+    //                     result[3] = minmax;
+    //                 }
+    //                 if(minmax < 0){
+    //                     result[1] += minmax;
+    //                     //result[1]--;
+    //                 }else if(minmax >= 0){
+    //                     result[2] += minmax;
+    //                     //result[2]++;
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     return result;
+    // }
+    //calculate utilites of specific move
+    public void getAllUtilites(char[][] board, int carrentPlayer, int depth, Vector<Integer> lastUtilities){
+        Vector<Integer> utilities = new Vector<Integer>();
+        if(depth > 0){
+            int carrentPlayerPiecesCanMove = getListOfPieceCanMove(board, carrentPlayer).size();
+            if(carrentPlayerPiecesCanMove == 0){
+                if(carrentPlayer == 1){
+                    utilities.addElement(100000 + depth);
+                }else {
+                    utilities.addElement(-100000 - depth);
+                }
+            }else{
+                Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, carrentPlayer);
+                for(int i = 0; i < listofChooses.size(); i++){
+                    for(int j = 0; j < listofChooses.get(i).size(); j++){
+                        char[][] newBoard = cloneBoard(board);
+                        newBoard = movePiecebyRowAndColumnWithoutDisplay(newBoard, carrentPlayer, listofChooses.get(i).get(j).get(0)[0], listofChooses.get(i).get(j).get(0)[1], listofChooses.get(i).get(j).get( listofChooses.get(i).get(j).size() - 1 )[0], listofChooses.get(i).get(j).get( listofChooses.get(i).get(j).size() - 1 )[1]);
+
+                        getAllUtilites(newBoard, getSwapCarrentPlayer(carrentPlayer), depth - 1, utilities);
+                    }
                 }
             }
         }else{
             int[] numberOfNormalPiece = getNumberOfNormalPieceOfTwoPlayer(board);
             int[] numberOfking = getNumberOfKingsOfTwoPlayer(board);
 
-            int result = (numberOfNormalPiece[1] + (numberOfking[1])) - (numberOfNormalPiece[0] + (numberOfking[0]));
+            int result = (numberOfNormalPiece[1] + (numberOfking[1] * 2)) - (numberOfNormalPiece[0] + (numberOfking[0] * 2));
             
-            minMaxList.addElement(result);
+            utilities.addElement(result);
         }
-    }
-    public int[] getScoreOfOneMove(char[][] board, int carrentPlayer, int[] fromTo, int depth){
-        int[] result = new int[4];
-        result[1] = 0;
-        result[2] = 0;
-        char[][] newBoard = cloneBoard(board);
 
-        newBoard = movePiecebyRowAndColumnWithoutDisplay(newBoard, 2, fromTo[0], fromTo[1], fromTo[2], fromTo[3]);
-        carrentPlayer = getSwapCarrentPlayer(carrentPlayer);
 
-        Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, 1);
-        int[] numberOfpiece = getNumberOfPieceOfTwoPlayer(board);
-        int[] numberOfking = getNumberOfKingsOfTwoPlayer(board);
-        int[] lastResult = new int[4];
-        lastResult[0] = numberOfpiece[0];
-        lastResult[1] = numberOfpiece[1];
-        lastResult[2] = numberOfking[0];
-        lastResult[3] = numberOfking[1];
-        for(int i = 0; i < listofChooses.size(); i++){
-            for(int j = 0; j < listofChooses.get(i).size(); j++){
-                Vector<Integer> minMaxList = new Vector<Integer>();
-                getAllUtilites(newBoard, minMaxList, carrentPlayer, lastResult, depth - 1);
-                int minScore = Integer.MAX_VALUE;
-                int maxScore = Integer.MIN_VALUE;
-                for(int k = 0; k < minMaxList.size(); k++){
-                    int minmax = minMaxList.get(k);
-                    if(minmax < minScore){
-                        minScore = minmax;
-                        result[0] = minmax;
-                    }
-                    if(minmax > maxScore){
-                        maxScore = minmax;
-                        result[3] = minmax;
-                    }
-                    if(minmax < 0){
-                        result[1] += minmax;
-                        //result[1]--;
-                    }else if(minmax >= 0){
-                        result[2] += minmax;
-                        //result[2]++;
-                    }
+        int minMax;
+        if(carrentPlayer == 1){
+            minMax = Integer.MAX_VALUE;
+            for(int i = 0; i < utilities.size(); i++){
+                if(utilities.get(i) < minMax){
+                    minMax = utilities.get(i);
+                }
+            }
+        }else{
+            minMax = Integer.MIN_VALUE;
+            for(int i = 0; i < utilities.size(); i++){
+                if(utilities.get(i) > minMax){
+                    minMax = utilities.get(i);
                 }
             }
         }
-
-        return result;
+        lastUtilities.addElement(minMax);
     }
+    public int getScoreOfOneMove(char[][] board, int carrentPlayer, int[] fromTo, int depth){
+        char[][] newBoard = cloneBoard(board);
+    
+        newBoard = movePiecebyRowAndColumnWithoutDisplay(newBoard, carrentPlayer, fromTo[0], fromTo[1], fromTo[2], fromTo[3]);
+        carrentPlayer = getSwapCarrentPlayer(carrentPlayer);
+        
+        Vector<Integer> utilities = new Vector<Integer>();
+        getAllUtilites(newBoard, carrentPlayer, depth - 1, utilities);
+
+        int minMax = Integer.MAX_VALUE;
+        for(int i = 0; i < utilities.size(); i++){
+            if(utilities.get(i) < minMax){
+                minMax = utilities.get(i);
+            }
+        }
+
+        return minMax;
+    }
+
     //computer AI slot choose
     public void computerAIchoose(char[][] board, int player, int depth){
         Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(board, player);
-        Vector<int[]> utilites = new Vector<int[]>();
+        Vector<Integer> utilites = new Vector<Integer>();
         Vector<int[]> fromToList = new Vector<int[]>();
 
         for(int i = 0; i < listofChooses.size(); i++){
@@ -2964,75 +3022,25 @@ public class Game {
             }
         }
 
-        int computerPiecesCanMove = getListOfPieceCanMove(board, 2).size();
         int minMax = 0;
 
         try{
-            if(computerPiecesCanMove == 1){
-                int minScore = utilites.get(0)[0];
-                int someOfLoses = utilites.get(0)[1];
-                int someOfWines = utilites.get(0)[2];
-                int maxScore = utilites.get(0)[3];
-                for(int i = 1; i < utilites.size(); i++){
-                    int[] utility = utilites.get(i);
-                    if(utility[0] > minScore){
-                        minScore = utility[0];
+            int minScore = utilites.get(0);
+            for(int i = 1; i < utilites.size(); i++){
+                int utility = utilites.get(i);
+                if(utility > minScore){
+                    minScore = utility;
+                    minMax = i;
+                }else if(utility == minScore){
+                    int rand = ((int) (Math.random() * 10)) % 2;
+                    if(rand == 0){
+                        minScore = utility;
                         minMax = i;
-                    }else if(utility[0] == minScore){
-                        if(utility[1] > someOfLoses){
-                            someOfLoses = utility[1];
-                            minMax = i;
-                        }else if(utility[1] == someOfLoses){
-                            if(utility[2] > someOfWines){
-                                someOfWines = utility[2];
-                                minMax = i;
-                            }else if(utility[2] == someOfWines){
-                                if(utility[3] > maxScore){
-                                    maxScore = utility[3];
-                                    minMax = i;
-                                }else if(utility[3] == maxScore){
-                                    int rand = ((int) (Math.random() * 10)) % 2;
-                                    if(rand == 0){
-                                        maxScore = utility[4];
-                                        minMax = i;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }else{
-                int minScore = utilites.get(0)[0];
-                int someOfLoses = utilites.get(0)[1];
-                int someOfWines = utilites.get(0)[2];
-                int maxScore = utilites.get(0)[3];
-                for(int i = 1; i < utilites.size(); i++){
-                    int[] utility = utilites.get(i);
-                    if(utility[0] > minScore){
-                        minScore = utility[0];
-                        minMax = i;
-                    }else if(utility[0] == minScore){
-                            if(utility[2] + utility[1] > someOfWines + someOfLoses){
-                                someOfLoses = utility[1];
-                                someOfWines = utility[2];
-                                minMax = i;
-                            }else if(utility[2] + utility[1] == someOfWines + someOfLoses){
-                                if(utility[3] > maxScore){
-                                    maxScore = utility[3];
-                                    minMax = i;
-                                }else if(utility[3] == maxScore){
-                                    int rand = ((int) (Math.random() * 10)) % 2;
-                                    if(rand == 0){
-                                        maxScore = utility[3];
-                                        minMax = i;
-                                    }
-                                }
-                            }
                     }
                 }
             }
         }catch(Exception e){
-
+            System.err.println(e.toString());
         }
         
         
@@ -3050,6 +3058,9 @@ public class Game {
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         this.eatStrictMode = eatStrictMode;
+
+        //clear all previos Borad vector
+        this.allPreviousBoard.clear();
 
         //reintitialase the board
         board = new DefaultVBoard().getDefaultVboad();

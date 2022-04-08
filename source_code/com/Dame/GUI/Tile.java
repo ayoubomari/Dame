@@ -112,8 +112,6 @@ public class Tile implements MouseListener {
         if(carrentBGColorChar != 'y' && carrentBGColorChar != 'g'){
             //emit
             if(game.getPlayFrame().getSon()){
-                System.out.println("prohibated click sound");
-                
                 Sound.EMIT("prohibatedMove");
             }
 
@@ -160,8 +158,6 @@ public class Tile implements MouseListener {
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
                     if(game.getPlayFrame().getSon()){
-                        System.out.println("You win.");
-                        
                         Sound.EMIT("win");
                     }
                     
@@ -182,8 +178,6 @@ public class Tile implements MouseListener {
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
                     if(game.getPlayFrame().getSon()){
-                        System.out.println("You lost.");
-                        
                         Sound.EMIT("lost");
                     }
                     
@@ -201,8 +195,6 @@ public class Tile implements MouseListener {
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
                     if(game.getPlayFrame().getSon()){
-                        System.out.println("You win.");
-                        
                         Sound.EMIT("win");
                     }
                     
@@ -223,8 +215,6 @@ public class Tile implements MouseListener {
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
                     if(game.getPlayFrame().getSon()){
-                        System.out.println("You lost.");
-                        
                         Sound.EMIT("lost");
                     }
                     
@@ -242,8 +232,6 @@ public class Tile implements MouseListener {
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
                     if(game.getPlayFrame().getSon()){
-                        System.out.println("You win.");
-                        
                         Sound.EMIT("win");
                     }
                     
@@ -258,14 +246,12 @@ public class Tile implements MouseListener {
                     return;
                 }
 
-                game.computerAIchoose(game.getBoard(), game.getCarrentPlayer(), 3);
+                game.computerAIchoose(game.getBoard(), game.getCarrentPlayer(), 5);
                 game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
 
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     //emit
                     if(game.getPlayFrame().getSon()){
-                        System.out.println("You lost.");
-                        
                         Sound.EMIT("lost");
                     }
 
