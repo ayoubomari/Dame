@@ -2887,6 +2887,7 @@ public class Game {
 
         int minMax;
         if(carrentPlayer == 1){
+            //minimaze
             minMax = Integer.MAX_VALUE;
             for(int i = 0; i < utilities.size(); i++){
                 if(utilities.get(i) < minMax){
@@ -2894,6 +2895,7 @@ public class Game {
                 }
             }
         }else{
+            //maximaze
             minMax = Integer.MIN_VALUE;
             for(int i = 0; i < utilities.size(); i++){
                 if(utilities.get(i) > minMax){
@@ -2914,6 +2916,7 @@ public class Game {
 
         int minMax = Integer.MAX_VALUE;
         for(int i = 0; i < utilities.size(); i++){
+            //minimaze
             if(utilities.get(i) < minMax){
                 minMax = utilities.get(i);
             }
