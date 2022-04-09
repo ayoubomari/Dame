@@ -8,15 +8,16 @@ import com.Dame.Concepts.Game;
 
 public class Menubar extends JMenuBar implements ActionListener{
     private Game game;
+    
     private JMenuBar menuBar;
     private JMenu NewGameMenu;
     private JMenu rulesMenu;
     private JMenu EatstrictModeMenu;
     private JMenu SoundMenu;
-    private JRadioButtonMenuItem HVHItem;
-    private JRadioButtonMenuItem HVCEItem;
-    private JRadioButtonMenuItem HVCMItem;
-    private JRadioButtonMenuItem HVCHItem;
+    private JRadioButtonMenuItem humanVsHuman;
+    private JRadioButtonMenuItem easyLavel;
+    private JRadioButtonMenuItem mediumLavel;
+    private JRadioButtonMenuItem hardLavel;
     private JMenuItem exitItem;
     private JRadioButtonMenuItem SpainItem;
     private JRadioButtonMenuItem USAItem;
@@ -26,7 +27,7 @@ public class Menubar extends JMenuBar implements ActionListener{
     private JRadioButtonMenuItem ONSoundItem;
     private JRadioButtonMenuItem OFFSoundItem;
     private JButton undo;
-    private ButtonGroup Mode;
+    private ButtonGroup lavel;
     private ButtonGroup Rules;
     private ButtonGroup Eatstrict;
     private ButtonGroup Sound;
@@ -34,6 +35,7 @@ public class Menubar extends JMenuBar implements ActionListener{
     
     Menubar(Game game){
         this.game = game;
+        
         menuBar = new JMenuBar();
         NewGameMenu = new JMenu("New Game");
         rulesMenu = new JMenu ("Rules");
@@ -42,18 +44,20 @@ public class Menubar extends JMenuBar implements ActionListener{
         undo =new JButton ("Undo");
         
         
-        Mode = new ButtonGroup();
         
-        HVHItem = new JRadioButtonMenuItem ("Human vs Human");     
-        HVCEItem = new JRadioButtonMenuItem ("Human vs Computer (easy)");
-        HVCMItem = new JRadioButtonMenuItem ("Human vs Computer (medium)");
-        HVCHItem = new JRadioButtonMenuItem ("Human vs Computer (hard)");
-        HVCHItem.setSelected(true);
+        lavel = new ButtonGroup();
+        
+        humanVsHuman = new JRadioButtonMenuItem ("Human vs Human");     
+        easyLavel = new JRadioButtonMenuItem ("Human vs Computer (easy)");
+        mediumLavel = new JRadioButtonMenuItem ("Human vs Computer (medium)");
+        hardLavel = new JRadioButtonMenuItem ("Human vs Computer (hard)");
+        hardLavel.setSelected(true);
         exitItem = new JMenuItem ("Exit");
-        Mode.add(HVHItem);
-        Mode.add(HVCEItem);
-        Mode.add(HVCMItem);
-        Mode.add(HVCHItem);
+        lavel.add(humanVsHuman);
+        lavel.add(easyLavel);
+        lavel.add(mediumLavel);
+        lavel.add(hardLavel);
+        
         
         
         Rules = new ButtonGroup();
@@ -68,14 +72,16 @@ public class Menubar extends JMenuBar implements ActionListener{
         
         
         
+        
         Sound = new ButtonGroup();
         
-        ONSoundItem = new JRadioButtonMenuItem ("ON");
-        OFFSoundItem = new JRadioButtonMenuItem ("OFF");
+        ONSoundItem = new JRadioButtonMenuItem ("ON 🔊");
+        OFFSoundItem = new JRadioButtonMenuItem ("OFF 🔇");
         
         Sound.add(ONSoundItem);
         ONSoundItem.setSelected(true);
         Sound.add(OFFSoundItem);
+        
         
         
         Eatstrict = new ButtonGroup();
@@ -87,12 +93,13 @@ public class Menubar extends JMenuBar implements ActionListener{
         ONItem.setSelected(true);
         Eatstrict.add(OFFItem);
         
+        
         undo.addActionListener(this);
         exitItem.addActionListener(this);
-        HVHItem.addActionListener(this);
-        HVCEItem.addActionListener(this);
-        HVCMItem.addActionListener(this);
-        HVCHItem.addActionListener(this);
+        humanVsHuman.addActionListener(this);
+        easyLavel.addActionListener(this);
+        mediumLavel.addActionListener(this);
+        hardLavel.addActionListener(this);
         InternationalItem.addActionListener(this);
         SpainItem.addActionListener(this);
         USAItem.addActionListener(this);
@@ -102,10 +109,10 @@ public class Menubar extends JMenuBar implements ActionListener{
         OFFSoundItem.addActionListener(this);
         
         
-        NewGameMenu.add(HVHItem);
-        NewGameMenu.add(HVCEItem);
-        NewGameMenu.add(HVCMItem);
-        NewGameMenu.add(HVCHItem);
+        NewGameMenu.add(humanVsHuman);
+        NewGameMenu.add(easyLavel);
+        NewGameMenu.add(mediumLavel);
+        NewGameMenu.add(hardLavel);
         NewGameMenu.add(exitItem);
         
         
@@ -130,13 +137,21 @@ public class Menubar extends JMenuBar implements ActionListener{
 
     
     public void actionPerformed(ActionEvent e) {
-    	if (e.getSource()== ONItem) {
-       		game.setEatStrictMode(true);
-       	}
-    	else if (e.getSource()== OFFItem) {
-       		game.setEatStrictMode(false);
-       	}
-    	
+        //new game
+        if (e.getSource() == humanVsHuman) {
+    		game.init(game.getRule(), "human", "human", game.getEatStrictMode());
+    	}
+    	else if (e.getSource()== easyLavel) {
+    		game.init(game.getRule(), "human", "random", game.getEatStrictMode());
+    	}
+    	else if (e.getSource()== mediumLavel) {
+    		game.init(game.getRule(), "human", "AI1",game.getEatStrictMode());
+    	}
+    	else if (e.getSource()== hardLavel) {
+    		game.init(game.getRule(), "human", "AI2",game.getEatStrictMode());
+    	}
+
+        //rule
     	else if (e.getSource()== InternationalItem) {
        		game.setRule("International");
        	}
@@ -146,25 +161,16 @@ public class Menubar extends JMenuBar implements ActionListener{
         else if (e.getSource()== USAItem) {
             game.setRule("USA");
         }
+        
+        //eatting strinct mode
+        else if (e.getSource()== ONItem) {
+       		game.setEatStrictMode(true);
+       	}
+    	else if (e.getSource()== OFFItem) {
+       		game.setEatStrictMode(false);
+       	}
 
-    	else if (e.getSource()== HVHItem) {
-    		 game.init(game.getRule(), "human", "human", game.getEatStrictMode());
-    	}
-    	else if (e.getSource()== HVCEItem) {
-    		game.init(game.getRule(), "human", "random", game.getEatStrictMode());
-    	}
-    	else if (e.getSource()== HVCMItem) {
-    		game.init(game.getRule(), "human", "AI1",game.getEatStrictMode());
-    	}
-    	else if (e.getSource()== HVCHItem) {
-    		game.init(game.getRule(), "human", "AI2",game.getEatStrictMode());
-    	}
-
-    	else if (e.getSource()== undo) {
-    		game.undoToPreviousBoard();
-    		return;
-    	}
-
+        //son
         else if (e.getSource()== ONSoundItem) {
     		game.getPlayFrame().setSon(true);
     	}
@@ -172,6 +178,13 @@ public class Menubar extends JMenuBar implements ActionListener{
     		game.getPlayFrame().setSon(false);
     	}
 
+        //undo
+    	else if (e.getSource()== undo) {
+    		game.undoToPreviousBoard();
+    		return;
+    	}
+
+        //exit
     	else if (e.getSource()== exitItem) {
     		System.exit(0);
     	}
