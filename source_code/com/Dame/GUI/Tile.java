@@ -142,8 +142,6 @@ public class Tile implements MouseListener {
                 if(game.getListOfPieceCanMove(game.getBoard(), game.getCarrentPlayer()).size() == 0){
                     game.swapCarrentPlayerName(game.getCarrentPlayer());
                     game.swapCarrentPlayer(game.getCarrentPlayer());
-    
-                    System.out.println("The Player " + game.getCarrentPlayer() + " win.");
 
                     //if the user confirm then restart the game with the same players and the same tools
                     int opt = JOptionPane.showConfirmDialog(game.getPlayFrame(), "Do you want to play again?", "The Player " + game.getCarrentPlayer() + " win.", JOptionPane.YES_NO_OPTION);

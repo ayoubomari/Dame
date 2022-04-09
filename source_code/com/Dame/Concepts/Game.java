@@ -159,8 +159,6 @@ public class Game {
 
             drawBoard(board);
             coloringBoard(coloringListOfTilesCanMove(board, carrentPlayer));
-        }else{
-            System.out.println("YOu can't undo!");
         }
     }
 
