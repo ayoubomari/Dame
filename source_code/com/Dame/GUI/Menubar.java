@@ -185,8 +185,11 @@ public class Menubar extends JMenuBar implements ActionListener{
     	}
 
         //exit
-    	else if (e.getSource()== exitItem) {
-    		System.exit(0);
+    	else if (e.getSource() == exitItem) {
+    		int opt = JOptionPane.showConfirmDialog(game.getPlayFrame(), "Do you really want to exit?", "Exit", JOptionPane.YES_NO_OPTION);
+            if(opt == 0){
+                System.exit(0);
+            }
     	}
     }
 }
