@@ -2,7 +2,7 @@
 ## Checker game by java
 
 <p align="center">
-	<img src="preview/Screenshot-1.png" style="width: 100%;"></img>
+	<img src="preview/Screenshot-1.png"></img>
 </p>
 
 
