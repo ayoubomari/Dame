@@ -7,9 +7,9 @@
 
 
 <p align="center">
-        <img src="preview/Screenshot-2.png" style="width: 100%;"></img>
+        <img src="preview/Screenshot-2.png"></img>
 </p>
 
 <p align="center">
-        <img src="preview/Screenshot-3.png" style="width: 100%;"></img>
+        <img src="preview/Screenshot-3.png"></img>
 </p>
