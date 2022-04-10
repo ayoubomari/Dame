@@ -1,0 +1,11 @@
+./com/dame/concepts/Game.java
+./com/dame/gui/PlayFrame.java
+./com/dame/gui/Menubar.java
+./com/dame/gui/Board.java
+./com/dame/gui/Tile.java
+./com/dame/Main.java
+./com/dame/constances/Colors.java
+./com/dame/constances/DefaultBGColorVBoard.java
+./com/dame/constances/PieceImage.java
+./com/dame/constances/DefaultVBoard.java
+./com/dame/constances/Sound.java
