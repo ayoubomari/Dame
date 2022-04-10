@@ -1,2 +1,2 @@
 # Dame
-Checker game by java
+## Checker game by java
