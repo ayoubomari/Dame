@@ -1,0 +1,12 @@
+./com/dame/concepts/Game.class
+./com/dame/gui/PlayFrame.class
+./com/dame/gui/Tile.class
+./com/dame/gui/Menubar.class
+./com/dame/gui/Board.class
+./com/dame/Main.class
+./com/dame/constances/Colors.class
+./com/dame/constances/DefaultVBoard.class
+./com/dame/constances/Sound$1.class
+./com/dame/constances/PieceImage.class
+./com/dame/constances/Sound.class
+./com/dame/constances/DefaultBGColorVBoard.class
