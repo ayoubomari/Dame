@@ -15,7 +15,7 @@ public class Tile implements MouseListener {
     private JLabel label = new JLabel();
     private char carrentPieceChar = ' ';
     private char carrentBGColorChar = ' ';
-    PieceImage pieceImage = new PieceImage();
+    private PieceImage pieceImage = new PieceImage();
     private Game game;
 
     public Tile(Game game, int row, int column){
@@ -117,6 +117,8 @@ public class Tile implements MouseListener {
 
 
             if(carrentBGColorChar != 'b'){
+                //last
+                game.coloringBoard(game.coloringListOfTilesCanMove(game.getBoard(), game.getCarrentPlayer()));
                 label.setBackground(Colors.RED);
             }
         }
