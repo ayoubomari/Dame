@@ -1,5 +1,5 @@
 # Dame
-## Checker game by java
+## Checker game made using java
 
 <p align="center">
 	<img src="preview/Screenshot-1.png"></img>
