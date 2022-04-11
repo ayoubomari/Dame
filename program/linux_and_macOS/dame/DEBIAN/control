@@ -1,0 +1,8 @@
+Package: dame
+Version: 1.0
+Architecture: all
+Essential: no
+Priority: optional
+Depends: 
+MainTainer: OMARI Ayoub
+Description: Dame checkers game.

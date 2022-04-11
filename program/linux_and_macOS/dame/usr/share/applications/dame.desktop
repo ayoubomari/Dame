@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Dame
+GenericName=Dame
+Comment=Dame checkers game.
+Exec=env java -jar /usr/bin/dame.jar
+Icon=/usr/share/icons/dame.xpm
+Terminal=false
+Type=Application
+Categories=Game;
+Keywords=Dame,dame,checkers,dama;
