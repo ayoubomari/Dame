@@ -75,8 +75,8 @@ public class Menubar extends JMenuBar implements ActionListener{
         
         Sound = new ButtonGroup();
         
-        ONSoundItem = new JRadioButtonMenuItem ("ON 🔊");
-        OFFSoundItem = new JRadioButtonMenuItem ("OFF 🔇");
+        ONSoundItem = new JRadioButtonMenuItem ("ON");
+        OFFSoundItem = new JRadioButtonMenuItem ("OFF");
         
         Sound.add(ONSoundItem);
         ONSoundItem.setSelected(true);
