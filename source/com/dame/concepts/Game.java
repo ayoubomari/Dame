@@ -2825,7 +2825,8 @@ public class Game {
     }
     public char[][] movePiecebyRowAndColumnWithoutDisplay(char[][] board, int player, int firstRow, int firstColumn, int lastRow, int lastColumn){
         char[][] newBoard = cloneBoard(board);
-        Vector<Vector<int[]>> fullPaths = traceFullPaths(board, player, firstRow, firstColumn);
+        Vector<Vector<int[]>> fullPaths = traceFullPaths(newBoard, player, firstRow, firstColumn);
+        
 
         int pathLong;
         for(int i = 0; i < fullPaths.size(); i++){
@@ -2838,7 +2839,29 @@ public class Game {
 
                     carrentRow = fullPaths.get(i).get(j + 1)[0];
                     carrentColumn = fullPaths.get(i).get(j + 1)[1];
+                    carrentSlotChar = getSlotChar(newBoard, carrentRow, carrentColumn);
                 }
+
+                if(eatStrictMode == false){
+                    //delete piece that has beggest path length then this carrent piece if the eat strict mode equals false
+                    Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(newBoard, player);
+                    for(int j = 0; j < listofChooses.size(); j++){
+                        for(int k = 0; k < listofChooses.get(j).size(); k++){
+
+                                int pathlength = listofChooses.get(j).get(k).size();
+                                if(pathlength > pathLong){        
+                                    //if the current piece is missed to eat
+                                    if(firstRow == listofChooses.get(j).get(k).get(0)[0] && firstColumn == listofChooses.get(j).get(k).get(0)[1]){
+                                        newBoard[lastRow][lastColumn] = ' ';
+                                    }else{
+                                        newBoard[listofChooses.get(j).get(k).get(0)[0]][listofChooses.get(j).get(k).get(0)[1]] = ' ';
+                                    }
+                                }
+                            
+                        }
+                    }   
+                }
+
                 break;
             }
         }
