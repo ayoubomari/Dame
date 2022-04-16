@@ -2734,7 +2734,7 @@ public class Game {
     }
 
     public void movePiecebyRowAndColumnSlowlyWithDisplay(int player, int firstRow, int firstColumn, int lastRow, int lastColumn){
-        char[][] clonedBoard = cloneBoard(board);
+        char[][] newBoard = cloneBoard(board);
         Vector<Vector<int[]>> fullPaths = traceFullPaths(board, player, firstRow, firstColumn);
 
         //emit
@@ -2793,7 +2793,7 @@ public class Game {
 
                 if(eatStrictMode == false){
                     //delete piece that has beggest path length then this carrent piece if the eat strict mode equals false
-                    Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(clonedBoard, player);
+                    Vector<Vector<Vector<int[]>>> listofChooses = getListofChooses(newBoard, player);
                     for(int j = 0; j < listofChooses.size(); j++){
                         for(int k = 0; k < listofChooses.get(j).size(); k++){
 
@@ -2804,7 +2804,13 @@ public class Game {
                                         Sound.EMIT("missToEat");
                                     }
                                     
-                                    board[listofChooses.get(j).get(k).get(0)[0]][listofChooses.get(j).get(k).get(0)[1]] = ' ';
+                                    //if the current piece is missed to eat
+                                    if(firstRow == listofChooses.get(j).get(k).get(0)[0] && firstColumn == listofChooses.get(j).get(k).get(0)[1]){
+                                        board[lastRow][lastColumn] = ' ';
+                                    }else{
+                                        board[listofChooses.get(j).get(k).get(0)[0]][listofChooses.get(j).get(k).get(0)[1]] = ' ';
+                                    }
+
                                     drawBoard(board);
                                 }
                             
