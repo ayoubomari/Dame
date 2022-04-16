@@ -1187,7 +1187,9 @@ public class Game {
                     
                     //the piece can't go backward
                     if(rowDifferent >= 1 && columnDifferent >= 1){//the backward is top left
-                        kingPieceMoveInEattingSpain(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                        if(!(getSlotChar(board, row + 1, column + 1) != ' ')){
+                            kingPieceMoveInEattingSpain(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                        }
                     }
                     ////////////
                     else if(rowDifferent >= 1 && columnDifferent <= -1){//the backward is top right
@@ -1839,7 +1841,9 @@ public class Game {
                     
                     //the piece can't go backward
                     if(rowDifferent >= 1 && columnDifferent >= 1){//the backward is top left
-                        kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                        if(!(getSlotChar(board, row + 1, column + 1) != ' ')){
+                            kingPieceMoveInEattingUSA(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                        }
                     }
                     ////////////
                     else if(rowDifferent >= 1 && columnDifferent <= -1){//the backward is top right
@@ -2318,7 +2322,9 @@ public class Game {
                     
                     //the piece can't go backward
                     if(rowDifferent >= 1 && columnDifferent >= 1){//the backward is top left
-                        kingPieceMoveInEattingSpain(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                        if(!(getSlotChar(board, row + 1, column + 1) != ' ')){
+                            kingPieceMoveInEattingSpain(board, player, listChooses, comulPath, row, column, 1, 1, 'A');
+                        }
                     }
                     ////////////
                     else if(rowDifferent >= 1 && columnDifferent <= -1){//the backward is top right
